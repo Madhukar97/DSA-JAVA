@@ -30,6 +30,8 @@ public class SetMissMatch {
                 }
             } else i++;
         }
+        missingSet.add(-1);
+        missingSet.add(-1);
         return missingSet;
     }
 }
