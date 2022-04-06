@@ -1,9 +1,10 @@
 package com.dsa.strings;
 
-//Print inverted triangle pattern
+
 public class Pattern3 {
     public static void main(String[] args) {
-        pattern3(5);
+        pattern4(5);
+
     }
 
     static void pattern3(int n) {
@@ -12,6 +13,22 @@ public class Pattern3 {
                 System.out.print("* ");
             }
             System.out.println();
+        }
+    }
+
+    static void pattern4(int n) {
+        for (int row = 1; row < 2*n; row++) {
+            if ( row <= n) {
+                for (int col1 = 1; col1 <= row; col1++) {
+                    System.out.print("* ");
+                }
+                System.out.println("");
+            } else {
+                for (int col2 = 0; col2 < 2*n - row; col2++) {
+                    System.out.print("* ");
+                }
+                System.out.println("");
+            }
         }
     }
 }
