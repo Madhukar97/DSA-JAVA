@@ -1,6 +1,6 @@
 package com.dsa.strings;
 
-//To check weather the given string is palindrome or not 
+//To check weather the given string is palindrome or not
 public class StringPalindrome {
 
     public static void main(String[] args) {
