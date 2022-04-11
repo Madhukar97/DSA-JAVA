@@ -7,7 +7,7 @@ public class SquareRoot {
         System.out.println(squareRoot2(n, precision));
     }
 
-    // (log(n))^p time complexity
+    // log(n) time complexity
     static double squareRoot(int n, int p) {
         double start=0;
         double end=n;
