@@ -31,7 +31,6 @@ public class SquareRoot {
                     start = mid + 1/Math.pow(10, i);
                 }else end = mid - 1/Math.pow(10, i);
             }
-            //mid = start + (end-start)/2;
             mid = end;
         }
         return mid;
