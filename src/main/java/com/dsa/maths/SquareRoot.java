@@ -2,9 +2,9 @@ package com.dsa.maths;
 
 public class SquareRoot {
     public static void main(String[] args) {
-        int n = 36;
+        int n = 90;
         int precision = 3;
-        System.out.println(squareRoot2(n, precision));
+        System.out.println(squareRoot(n, precision));
     }
 
     // log(n) time complexity
@@ -24,14 +24,15 @@ public class SquareRoot {
             start=mid;
             end=start+10/(Math.pow(10, i));
             while ( start <= end ) {
-                mid = Double.valueOf(String.format("%." + i + "f", start + (end-start)/2));
+                double value = start + (end-start)/2 ;
+                mid = value - (value*Math.pow(10, i) - (int)(value*Math.pow(10, i)))/Math.pow(10, i);
                 if (mid * mid == n) return mid;
                 if (mid * mid < n) {
                     start = mid + 1/Math.pow(10, i);
                 }else end = mid - 1/Math.pow(10, i);
             }
             //mid = start + (end-start)/2;
-            mid = Double.valueOf(String.format("%." + i+1 + "f", start + (end-start)/2));
+            mid = end;
         }
         return mid;
     }
