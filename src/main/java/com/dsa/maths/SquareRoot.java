@@ -3,7 +3,7 @@ package com.dsa.maths;
 //square root of a number using binary search
 public class SquareRoot {
     public static void main(String[] args) {
-        int n = 40;
+        int n = 90;
         int precision = 3;
         System.out.println(squareRoot(n, precision));
     }
@@ -19,7 +19,7 @@ public class SquareRoot {
             if ( mid*mid < n) start = mid+1;
             if ( mid*mid > n ) end = mid-1;
         }
-        mid = (int)(start + (end-start)/2);
+        mid = end;
 
         for (int i = 1; i <= p ; i++) {
             start=mid;
