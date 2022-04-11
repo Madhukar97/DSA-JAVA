@@ -1,5 +1,6 @@
 package com.dsa.maths;
 
+//square root of a number using binary search
 public class SquareRoot {
     public static void main(String[] args) {
         int n = 90;
