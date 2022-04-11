@@ -36,7 +36,7 @@ public class SquareRoot {
         return mid;
     }
 
-    // n*log(log(n)) time complexity DSA video solution
+    // log(n) time complexity DSA video solution
     static double squareRoot2(int n, int p) {
         int start = 0;
         int end = n;
