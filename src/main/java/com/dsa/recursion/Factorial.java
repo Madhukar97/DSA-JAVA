@@ -6,7 +6,7 @@ public class Factorial {
     }
 
     static int factorialOfNum(int n) {
-        if ( n == 1) return 1;
+        if ( n <= 1) return 1;
         return n * factorialOfNum( n-1 );
     }
 }
