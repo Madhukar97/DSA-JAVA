@@ -18,12 +18,7 @@ public class RotatedBinarySearch {
         if ( arr[start] > arr[mid] && arr[start] <= target  ) {
             return rotatedBinarySearch(arr, target, start, mid-1);
         }
-        if ( arr[mid] < arr[end] && arr[mid] < target && target <= arr[end] ) {
-            return rotatedBinarySearch(arr, target, mid+1, end);
-        }
-        else {
-            return rotatedBinarySearch(arr, target, mid+1, end);
-        }
+        return rotatedBinarySearch(arr, target, mid+1, end);
 
     }
 }
