@@ -3,12 +3,12 @@ package com.dsa.recursion;
 // Print triangle pattern using recursion
 public class TrianglePattern {
     public static void main(String[] args) {
-        pattern2(4,0);
+        pattern1(4,0);
     }
 
     static void pattern1(int r, int c) {
-        if (r < 0) return;
-        if ( c <= r) {
+        if (r == 0) return;
+        if ( c < r) {
             System.out.print("* ");
             pattern1( r, c+1);
         }else {
@@ -18,8 +18,8 @@ public class TrianglePattern {
     }
 
     static void pattern2(int r, int c) {
-        if (r < 0) return;
-        if ( c <= r) {
+        if (r == 0) return;
+        if ( c < r) {
             pattern2( r, c+1);
             System.out.print("* ");
         }else {
