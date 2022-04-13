@@ -17,9 +17,7 @@ public class SelectionSort {
     static void sort(int[] arr, int i, int maxIndex, int lastIndex) {
         if ( lastIndex == 0 ) return;
         if ( i <= lastIndex ) {
-            if ( arr[i] > arr[maxIndex] ) {
-                maxIndex = i;
-            }
+            if ( arr[i] > arr[maxIndex] ) maxIndex = i;
             sort(arr, i+1, maxIndex, lastIndex);
         } else {
             int temp = arr[lastIndex];
