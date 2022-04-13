@@ -12,13 +12,13 @@ public class RotatedBinarySearch {
         if ( start > end ) return -1;
         int mid = start + ( end-start )/2;
         if ( target == arr[mid] ) return mid;
-        if ( arr[start] < arr[mid] && arr[start] < target && target < arr[mid] ) {
+        if ( arr[start] < arr[mid] && arr[start] <= target && target < arr[mid] ) {
             return rotatedBinarySearch(arr, target, start, mid-1);
         }
-        if ( arr[start] > arr[mid] && arr[start] < target  ) {
+        if ( arr[start] > arr[mid] && arr[start] <= target  ) {
             return rotatedBinarySearch(arr, target, start, mid-1);
         }
-        if ( arr[mid] < arr[end] && arr[mid] < target && target < arr[end] ) {
+        if ( arr[mid] < arr[end] && arr[mid] < target && target <= arr[end] ) {
             return rotatedBinarySearch(arr, target, mid+1, end);
         }
         else {
