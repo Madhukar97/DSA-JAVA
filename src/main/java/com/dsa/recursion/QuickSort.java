@@ -18,8 +18,8 @@ public class QuickSort {
         int pivot = arr[mid];
 
         while ( s <= e ) {
-             /*In case if there is any violation, by the end of while loops
-              s will be at its violation index left of pivot and e will be at its violation index on the right hand side
+             /*In case if there is any violation, by the end of while loops s will be at its violation index
+              left of pivot and e will be at its violation index on the right-hand side
               */
             while ( arr[s] < pivot ) {
                 s++;
