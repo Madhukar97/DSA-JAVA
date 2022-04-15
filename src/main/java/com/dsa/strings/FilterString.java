@@ -8,14 +8,13 @@ public class FilterString {
         System.out.println(processString2(str));
     }
 
-    static void processString(String processed, String unProcesses) {
-        if ( unProcesses.length() == 0 ) {
+    static void processString(String processed, String unProcessed) {
+        if ( unProcessed.length() == 0 ) {
             System.out.println(processed);
             return;
         }
-        char c = unProcesses.charAt(0);
-        if ( c == 'a') processString(processed, unProcesses.substring(1));
-        else processString( processed + c , unProcesses.substring(1));
+        if ( unProcessed.startsWith("a")) processString(processed, unProcessed.substring(1));
+        else processString( processed + unProcessed.charAt(0) , unProcessed.substring(1));
     }
 
     static String processString2(String str) {
