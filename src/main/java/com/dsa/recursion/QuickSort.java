@@ -18,8 +18,8 @@ public class QuickSort {
         int pivot = arr[mid];
 
         while ( s <= e ) {
-             /*In case if there is any violation, by the end of while loops
-              s will be at its violation index left of pivot and e will be at its violation index on the right hand side
+             /*In case if there is any violation, by the end of while loops s will be at its violation index
+              left of pivot and e will be at its violation index on the right-hand side
               */
             while ( arr[s] < pivot ) {
                 s++;
@@ -36,7 +36,7 @@ public class QuickSort {
             s++;
             e--;
         }
-        // Once the pivot is at the correct index, make recursion calls on the left and right sub arrays
+        // After the pivot is at the correct index, make recursion calls on the left and right sub arrays
         quickSort(arr, low, e);
         quickSort(arr, s, high);
     }
