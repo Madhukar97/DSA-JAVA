@@ -3,7 +3,7 @@ package com.linkedlistproblems;
 // 83. Remove Duplicates from Sorted List leetcode easy
 public class RemoveDuplicatesSortedList {
 
-    public void main(String[] args) {
+    public static void main(String[] args) {
 
     }
 
