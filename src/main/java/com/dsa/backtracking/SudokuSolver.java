@@ -117,6 +117,16 @@ public class SudokuSolver {
         }
     }
 
+    private static void display2(int[][] sudoku) {
+        String[][] ans = new String[sudoku.length][sudoku.length];
+        for (int i = 0; i < sudoku.length; i++) {
+            for (int j = 0; j < sudoku[0].length; j++) {
+                ans[i][j] = "\""+String.valueOf(sudoku[i][j])+"\"";
+            }
+        }
+        System.out.println(Arrays.deepToString(ans));
+    }
+
     private static boolean checkIfFilled(int[][] sudoku) {
         for (int i = 0; i < sudoku.length; i++) {
             for (int j = 0; j < sudoku[0].length; j++) {
