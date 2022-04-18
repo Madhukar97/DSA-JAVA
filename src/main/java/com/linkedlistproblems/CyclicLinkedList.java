@@ -14,6 +14,7 @@ public class CyclicLinkedList {
         ListNode(int val) { this.val = val; }
         ListNode(int val, CyclicLinkedList.ListNode next) { this.val = val; this.next = next; }
     }
+
     public boolean hasCycle(ListNode head) {
         if(head == null) return false;
         ListNode slow = head;
