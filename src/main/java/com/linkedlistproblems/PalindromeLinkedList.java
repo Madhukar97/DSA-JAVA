@@ -5,9 +5,13 @@ package com.linkedlistproblems;
 // Google, Microsoft, Facebook, LinkedIn, Apple, Amazon
 public class PalindromeLinkedList {
     public static void main(String[] args) {
-
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next = new ListNode(2);
+        head.next = new ListNode(1);
+        System.out.println(isPalindrome(head));
     }
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next;
         ListNode() {}
@@ -15,17 +19,20 @@ public class PalindromeLinkedList {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
 
-    public boolean isPalindrome(ListNode head) {
+    public static boolean isPalindrome(ListNode head) {
         if(head == null || head.next == null) return true;
-        return recFunc(head, 0, 0);
+        ListNode left = new ListNode(0);
+        ListNode right = new ListNode(0);
+        return recFunc(head, left, right);
 
     }
-    static boolean recFunc(ListNode pointer, int normal, int reverse) {
-        if(pointer == null) return false;
-        normal = normal*10+pointer.val;
+    static boolean recFunc(ListNode pointer, ListNode normal, ListNode reverse) {
+        if(pointer == null) return true;
+
+        normal.val = normal.val*10+pointer.val;
         recFunc(pointer.next, normal, reverse);
-        reverse = reverse*10+pointer.val;
-        if(normal == reverse) return true;
+        reverse.val = reverse.val*10+pointer.val;
+        if(normal.val == reverse.val) return true;
         else return false;
     }
 }
