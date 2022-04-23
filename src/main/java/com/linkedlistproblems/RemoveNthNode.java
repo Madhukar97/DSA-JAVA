@@ -4,7 +4,7 @@ package com.linkedlistproblems;
 //https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 public class RemoveNthNode {
     public static void main(String[] args) {
-
+        System.out.println((long)-2147483648/-1);
     }
     public class ListNode {
         int val;
@@ -14,7 +14,7 @@ public class RemoveNthNode {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        if (head == null || head.next == null && n == 1) return null;
+        if (head == null || head.next == null && n ==1) return null;
         ListNode pointer = head;
         int length = 0;
         while(pointer != null){
