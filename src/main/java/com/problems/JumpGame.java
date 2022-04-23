@@ -9,12 +9,10 @@ public class JumpGame {
     }
     //Sliding window method
     public static boolean canJump(int[] nums) {
-        int left = 0;
         int right = 0;
-        for ( int i =0; i < nums.length; i++){
+        for( int i=0; i < nums.length; i++) {
             if(i > right) return false;
-            if(right > i+nums[i]) left = right+1;
-            right = Math.max(right, i+nums[i]);
+            right = Math.max(right, nums[i] +i);
         }
         return true;
     }
