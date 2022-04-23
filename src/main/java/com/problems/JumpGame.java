@@ -7,7 +7,7 @@ public class JumpGame {
         int[] nums = {3,2,1,0,4};
         System.out.println(canJump(nums));
     }
-    //Sliding window method
+
     public static boolean canJump(int[] nums) {
         int right = 0;
         for( int i=0; i < nums.length; i++) {
