@@ -7,6 +7,7 @@ public class JumpGame2 {
         int[] nums = {2,3,1,1,4};
         System.out.println(jump(nums));
     }
+    //Breadth first search method (BFS)
     public static int jump(int[] nums) {
         if(nums.length == 1 ) return 0;
         int jumps = 0;
