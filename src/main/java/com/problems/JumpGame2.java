@@ -8,15 +8,18 @@ public class JumpGame2 {
         System.out.println(jump(nums));
     }
     public static int jump(int[] nums) {
+        if(nums.length == 1 ) return 0;
         int jumps = 0;
         int left = 0;
         int right = 0;
-        for( int i=0; i < nums.length; i++) {
-            if(right >= nums.length) return jumps;
-            //if(right > nums[i] + 1) left = right+1;
-            right = Math.max(right, nums[i] +i);
+        int farthest = 0;
+        while(right < nums.length-1) {
+            for(int i = left; i <= right; i++) {
+                farthest = Math.max(farthest, nums[i] + i);
+            }
+            left = right+1;
+            right = farthest;
             jumps++;
-            i=right;
         }
         return jumps;
     }
