@@ -3,7 +3,7 @@ package com.dsa.backtracking;
 // Find all the possible combinations of placing N queens in a given matrix without queens not cancelling each other
 public class NQueens {
     public static void main(String[] args) {
-        boolean[][] maze = new boolean[12][12];
+        boolean[][] maze = new boolean[4][4];
         System.out.println(allCombinations(maze, 0));
 
     }

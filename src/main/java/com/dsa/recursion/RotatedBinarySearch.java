@@ -3,7 +3,7 @@ package com.dsa.recursion;
 // Binary search in rotated sorted array using recursion
 public class RotatedBinarySearch {
     public static void main(String[] args) {
-        int[] arr = {5,6,1,2,3,4};
+        int[] arr = {5,1,2,3,4};
         int target = 4;
         System.out.println(rotatedBinarySearch(arr, target, 0, arr.length-1));
     }
@@ -16,6 +16,9 @@ public class RotatedBinarySearch {
             return rotatedBinarySearch(arr, target, start, mid-1);
         }
         if ( arr[start] > arr[mid] && arr[start] <= target  ) {
+            return rotatedBinarySearch(arr, target, start, mid-1);
+        }
+        if ( arr[start] > arr[mid] && target < arr[mid]   ) {
             return rotatedBinarySearch(arr, target, start, mid-1);
         }
         return rotatedBinarySearch(arr, target, mid+1, end);
