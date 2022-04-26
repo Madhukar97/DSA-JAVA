@@ -8,7 +8,6 @@ public class FindDuplicateNumber {
     public static void main(String[] args) {
 
     }
-
     // dynamic programming method O(n) time complexity O(n) space complexity
     public int findDuplicate(int[] nums) {
         HashMap<Integer, Integer> map = new HashMap<>();
