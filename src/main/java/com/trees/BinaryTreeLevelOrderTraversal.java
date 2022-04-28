@@ -4,17 +4,17 @@ import java.util.*;
 
 //102. Binary Tree Level Order Traversal
 //https://leetcode.com/problems/binary-tree-level-order-traversal/
-public class LevelOrderTraversal {
+public class BinaryTreeLevelOrderTraversal {
     public static void main(String[] args) {
 
     }
     public class TreeNode {
         int val;
-        LevelOrderTraversal.TreeNode left;
-        LevelOrderTraversal.TreeNode right;
+        BinaryTreeLevelOrderTraversal.TreeNode left;
+        BinaryTreeLevelOrderTraversal.TreeNode right;
         TreeNode() {}
         TreeNode(int val) { this.val = val; }
-        TreeNode(int val, LevelOrderTraversal.TreeNode left, LevelOrderTraversal.TreeNode right) {
+        TreeNode(int val, BinaryTreeLevelOrderTraversal.TreeNode left, BinaryTreeLevelOrderTraversal.TreeNode right) {
             this.val = val;
             this.left = left;
             this.right = right;
