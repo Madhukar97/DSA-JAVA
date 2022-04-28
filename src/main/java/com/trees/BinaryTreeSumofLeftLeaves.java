@@ -6,6 +6,13 @@ public class BinaryTreeSumofLeftLeaves {
     public static void main(String[] args) {
 
     }
+    static int sum;
+    public int sumOfLeftLeaves(TreeNode root) {
+        sum = 0;
+        if(root.left == null && root.right == null) return 0;
+        recFunc(root);
+        return sum;
+    }
     public class TreeNode {
         int val;
         BinaryTreeSumofLeftLeaves.TreeNode left;
@@ -17,13 +24,6 @@ public class BinaryTreeSumofLeftLeaves {
             this.left = left;
             this.right = right;
         }
-    }
-    static int sum;
-    public int sumOfLeftLeaves(TreeNode root) {
-        sum = 0;
-        if(root.left == null && root.right == null) return 0;
-        recFunc(root);
-        return sum;
     }
     static void recFunc(TreeNode root) {
         if(root == null) return;
