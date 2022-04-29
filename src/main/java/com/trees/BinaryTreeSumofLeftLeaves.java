@@ -2,21 +2,9 @@ package com.trees;
 
 //404. Sum of Left Leaves
 //https://leetcode.com/problems/sum-of-left-leaves/
-public class SumofLeftLeaves {
+public class BinaryTreeSumofLeftLeaves {
     public static void main(String[] args) {
 
-    }
-    public class TreeNode {
-        int val;
-        SumofLeftLeaves.TreeNode left;
-        SumofLeftLeaves.TreeNode right;
-        TreeNode() {}
-        TreeNode(int val) { this.val = val; }
-        TreeNode(int val, SumofLeftLeaves.TreeNode left, SumofLeftLeaves.TreeNode right) {
-            this.val = val;
-            this.left = left;
-            this.right = right;
-        }
     }
     static int sum;
     public int sumOfLeftLeaves(TreeNode root) {
@@ -24,6 +12,18 @@ public class SumofLeftLeaves {
         if(root.left == null && root.right == null) return 0;
         recFunc(root);
         return sum;
+    }
+    public class TreeNode {
+        int val;
+        BinaryTreeSumofLeftLeaves.TreeNode left;
+        BinaryTreeSumofLeftLeaves.TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, BinaryTreeSumofLeftLeaves.TreeNode left, BinaryTreeSumofLeftLeaves.TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
     }
     static void recFunc(TreeNode root) {
         if(root == null) return;
