@@ -6,8 +6,11 @@ import java.util.Arrays;
 public class MergeSortInPlace {
     public static void main(String[] args) {
         int[] arr = {5,4,2,3,1};
+        int[] arr2 = {4,1,3,9,7};
         mergeSort(arr, 0, arr.length);
+        mergeSort(arr2, 0, arr2.length);
         System.out.println(Arrays.toString(arr));
+        System.out.println(Arrays.toString(arr2));
     }
 
     static void mergeSort(int[] arr, int s, int e) {
