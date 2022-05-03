@@ -6,6 +6,7 @@ public class CreateTargetArrayintheGivenOrder {
     public static void main(String[] args) {
 
     }
+
     public int[] createTargetArray(int[] nums, int[] index) {
         int[] ans = new int[nums.length];
         int nextIndex = 0;
