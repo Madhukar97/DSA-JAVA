@@ -18,6 +18,7 @@ public class PalindromePartitioning {
         return outer;
     }
 
+    // Method for getting all possible permutations
 //     void recFunc(String pross, String source) {
 //         if(source.length() == 0 ){
 //             boolean b = isPalindrome(pross, 0, pross.length()-1);
