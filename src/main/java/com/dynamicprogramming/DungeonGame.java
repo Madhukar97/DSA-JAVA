@@ -1,5 +1,7 @@
 package com.dynamicprogramming;
 
+import java.util.Arrays;
+
 //174. Dungeon Game
 //https://leetcode.com/problems/dungeon-game/
 public class DungeonGame {
@@ -30,6 +32,36 @@ public class DungeonGame {
         if(r < dungeon.length-1) recFunc(dungeon, health, r+1,c, min);
     }
 
-    // Method using DP
+    // Method using DP (3ms)
+    public int calcMinHealth(int[][] dungeon){
+        int[][] minHealthsDP = new int[dungeon.length][dungeon[0].length];
+        for(int[] row : minHealthsDP) Arrays.fill(row,Integer.MAX_VALUE);
+
+        for(int c=dungeon[0].length-1;c>=0;c--){
+            for(int r=dungeon.length-1;r>=0;r--){
+                int right = 0;
+                int down = 0;
+                int nextMin=0;
+
+                if(c+1<dungeon[0].length) right = minHealthsDP[r][c+1];
+                if(r+1<dungeon.length) down = minHealthsDP[r+1][c];
+                if(right > 0 && down > 0) nextMin = Math.min(right, down);
+                else nextMin = Math.max(right,down);
+
+                if(nextMin==0) nextMin = 1;
+                int requiredHealth = 0;
+
+                if(dungeon[r][c] < 0) {
+                    requiredHealth = nextMin + (-1)*dungeon[r][c];
+                }else if(dungeon[r][c] >= 0){
+                    requiredHealth = nextMin - dungeon[r][c];
+                }
+                if(dungeon[r][c] > nextMin || requiredHealth==0) requiredHealth = 1 ;
+                if(requiredHealth < minHealthsDP[r][c]) minHealthsDP[r][c] = requiredHealth;
+
+            }
+        }
+        return minHealthsDP[0][0];
+    }
 
 }
