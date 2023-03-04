@@ -29,4 +29,30 @@ public class StringCompression {
         return str.length();
 
     }
+
+    //optimized sol with timeComplexity O(n) and spaceComplexity O(1) 1ms
+    public int compress2(char[] chars) {
+        int count = 0;
+        int p1 = 0;
+        int j = 0;
+
+        while(p1 < chars.length){
+            count=1;
+            while(p1+1 < chars.length && chars[p1]==chars[p1+1]){
+                count++;
+                p1++;
+            }
+
+            chars[j] = chars[p1];
+            j++;
+            if(count > 1) {
+                String num = String.valueOf(count);
+                for(int k=0; k<num.length();k++){
+                    chars[j++] = num.charAt(k);
+                }
+            }
+            p1++;
+        }
+        return j;
+    }
 }
