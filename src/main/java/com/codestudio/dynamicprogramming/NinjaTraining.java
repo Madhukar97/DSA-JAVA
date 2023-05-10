@@ -1,4 +1,4 @@
-package com.codestudio;
+package com.codestudio.dynamicprogramming;
 
 import java.util.Arrays;
 
