@@ -18,6 +18,7 @@ public class NinjaTraining {
     }
 
     // giving stack over flow error for Memoization in java, same logic working in c++
+    // TC = O(n*4)*3 and SC = O(n) + O(n*4)
     public static int trainRecursionMemoizationSolution(int day, int last, int points[][], int dp[][]) {
         if(day == 0) {
             int maxTask = 0;
@@ -40,6 +41,7 @@ public class NinjaTraining {
         return maxP;
     }
 
+    //Tabulation sol with TC = O(n*4)*3 and SC = O(n*4)
     public static int tabulationSolution(int n, int[][] points){
         int dp[][] = new int[n][4];
         dp[0][0] = Math.max(points[0][1], points[0][2]);
@@ -64,5 +66,31 @@ public class NinjaTraining {
 
     }
 
+    //Tabulation with SpaceOptimization sol with TC = O(n*4)*3 and SC = O(1)
+    public static int tabulationWithSpaceOptimization(int n, int[][] points){
+        int[] dp = new int[4];
+        int[] currDay = new int[4];
 
+        dp[0] = Math.max(points[0][1], points[0][2]);
+        dp[1] = Math.max(points[0][0], points[0][2]);
+        dp[2] = Math.max(points[0][0], points[0][1]);
+        dp[3] = Math.max(points[0][0], Math.max(points[0][1], points[0][2]));
+
+        for(int day=1; day<n; day++){
+            for(int last=0; last<4; last++){
+
+                int maxP=0;
+                for(int task=0; task<3; task++){
+                    if(task != last){
+                        maxP = Math.max(maxP, points[day][task] + dp[task]);
+
+                    }
+                }
+                currDay[last] = maxP;
+            }
+            dp = currDay;
+            currDay = new int[4];
+        }
+        return dp[3];
+    }
 }
