@@ -23,7 +23,7 @@ public class Triangle {
         return rec(0,0,triangle,dp);
     }
 
-    //Recursion with Memoization solution TC = O(i*j), SC = O(i-1+j-1) + dp[i][j]
+    //Recursion with Memoization solution TC = O(i*j), SC = O(i) + dp[i][j]
     public int rec(int i, int j, List<List<Integer>> triangle, List<List<Integer>> dp){
         if(i == triangle.size()-1) return triangle.get(i).get(j);
         if(i >= triangle.size() || j >= triangle.get(i).size()) return Integer.MAX_VALUE;
