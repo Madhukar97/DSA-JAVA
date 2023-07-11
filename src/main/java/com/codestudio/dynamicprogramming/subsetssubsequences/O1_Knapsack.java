@@ -72,7 +72,7 @@ public class O1_Knapsack {
         return dp[n-1][maxWeight];
     }
 
-    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*maxWeight) , SC = dp[maxWeight+1]
+    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*maxWeight) , SC = 2*dp[maxWeight+1]
     static int knapsackTabulationWithSpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
         int[] prev = new int[maxWeight+1];
         int[] curr = new int[maxWeight+1];
@@ -90,6 +90,25 @@ public class O1_Knapsack {
             }
             prev = curr;
             curr = new int[maxWeight+1];
+        }
+
+        return prev[maxWeight];
+    }
+
+    //Tabulation(Bottom-up approach) with 1 Array space optimization solution TC = O(n*maxWeight) , SC = 1*dp[maxWeight+1]
+    static int knapsackTabulationWith1ArraySpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
+        int[] prev = new int[maxWeight+1];
+        for(int w=weight[0];w<maxWeight+1;w++) prev[w] = value[0];
+
+        for(int ind=1;ind<n;ind++){
+            for(int w=maxWeight; w>=0;w--){
+                int notPick = 0 + prev[w];
+                int pick = Integer.MIN_VALUE;
+                if(weight[ind] <= w) {
+                    pick = value[ind] + prev[w-weight[ind]];
+                }
+                prev[w] = Math.max(notPick, pick);
+            }
         }
 
         return prev[maxWeight];
