@@ -8,7 +8,7 @@ public class O1_Knapsack {
         return rec(n-1, maxWeight, value, weight);
     }
 
-    //Normal recursion solution with TC = O(2^n) and SC = O(n)
+    //Normal recursion solution with TC = O(2^n) and SC = O(w)
     public static int rec(int ind, int w, int[] vals, int[] wts){
         if(ind == 0){
             if(wts[ind] <= w) return vals[0];
@@ -35,7 +35,7 @@ public class O1_Knapsack {
         return recMem(n-1, maxWeight, value, weight, dp);
     }
 
-    //Recursion with Memoization(Top-Down approach) solution TC = O(n*maxWeight) , SC = O(n) + dp[n][maxWeight+1]
+    //Recursion with Memoization(Top-Down approach) solution TC = O(n*maxWeight) , SC = O(w) + dp[n][maxWeight+1]
     public static int recMem(int ind, int w, int[] vals, int[] wts, int[][] dp){
         if(ind == 0){
             if(wts[ind] <= w) return vals[0];
