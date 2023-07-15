@@ -1,5 +1,6 @@
 package com.codestudio.dynamicprogramming.strings;
 
+//Striver DP series 27 vid
 //Longest Common Substring
 //https://www.codingninjas.com/studio/problems/longest-common-substring_1235207
 public class LongestCommonSubstring {
