@@ -62,7 +62,7 @@ public class LongestPalindromicSubsequence {
         return dp[s.length()][s.length()];
     }
 
-    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*m) , SC = 2*dp[m+1]=
+    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*m) , SC = 2*dp[m+1]
     public static int longestPalindromeSubsequenceTabWithSpaceOptimization(String s) {
         int[] prev = new int[s.length()+1];
         int[] curr = new int[s.length()+1];
