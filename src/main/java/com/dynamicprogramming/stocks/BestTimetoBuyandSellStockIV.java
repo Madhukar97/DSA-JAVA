@@ -34,7 +34,7 @@ public class BestTimetoBuyandSellStockIV {
         }
         return recMem(0,1,k,prices,dp);
     }
-    //Recursion with Memoization(Top-Down approach) solution TC = O(n*2*2) , SC = O(n) + dp[n][2][2]
+    //Recursion with Memoization(Top-Down approach) solution TC = O(n*2*k) , SC = O(n) + dp[n][2][k]
     public static int recMem(int i, int buy, int trans, int[] prices, int[][][] dp){
         if(i == prices.length || trans == 0) return 0;
 
@@ -49,7 +49,7 @@ public class BestTimetoBuyandSellStockIV {
         dp[i][buy][trans-1] = profit;
         return dp[i][buy][trans-1];
     }
-    //Tabulation(Bottom-up approach) solution TC = O(n*2*2) , SC = dp[n+1][2][3]
+    //Tabulation(Bottom-up approach) solution TC = O(n*2*k) , SC = dp[n+1][2][k]
     public int maxProfitTabulation(int k,int[] prices) {
         int n=prices.length;
         int[][][] dp = new int[n+1][2][k+1];
@@ -69,7 +69,7 @@ public class BestTimetoBuyandSellStockIV {
         }
         return dp[0][1][k];
     }
-    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*2*2) , SC = 2*dp[2][3]
+    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*2*k) , SC = 2*dp[2][k+1]
     public int maxProfitTabulationWithSpaceOptimization(int k, int[] prices) {
         int n=prices.length;
         int[][] prev = new int[2][k+1];
@@ -91,5 +91,26 @@ public class BestTimetoBuyandSellStockIV {
             curr = new int[2][k+1];
         }
         return prev[1][k];
+    }
+    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*2*k) , SC = 2*dp[2*k+1]
+    public int maxProfitTabulationWithSpaceOptimization2(int k, int[] prices) {
+        int n=prices.length;
+        int[] prev = new int[2*k+1];
+        int[] curr = new int[2*k+1];
+
+        for(int i=n-1;i>=0;i--){
+            for(int trans=2*k-1;trans>=0;trans--){
+                int profit = 0;
+                if(trans%2 == 0){
+                    profit = Math.max(-prices[i] + prev[trans+1], 0+prev[trans]);
+                }else{
+                    profit = Math.max(prices[i] + prev[trans+1], 0+prev[trans]);
+                }
+                curr[trans] = profit;
+            }
+            prev = curr;
+            curr = new int[2*k+1];
+        }
+        return prev[0];
     }
 }
