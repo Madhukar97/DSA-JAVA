@@ -8,7 +8,7 @@ public class O1_Knapsack {
         return rec(n-1, maxWeight, value, weight);
     }
 
-    //Normal recursion solution with TC = O(2^n) and SC = O(n)
+    //Normal recursion solution with TC = O(2^n) and SC = O(w)
     public static int rec(int ind, int w, int[] vals, int[] wts){
         if(ind == 0){
             if(wts[ind] <= w) return vals[0];
@@ -35,7 +35,7 @@ public class O1_Knapsack {
         return recMem(n-1, maxWeight, value, weight, dp);
     }
 
-    //Recursion with Memoization(Top-Down approach) solution TC = O(n*maxWeight) , SC = O(n) + dp[n][maxWeight+1]
+    //Recursion with Memoization(Top-Down approach) solution TC = O(n*maxWeight) , SC = O(w) + dp[n][maxWeight+1]
     public static int recMem(int ind, int w, int[] vals, int[] wts, int[][] dp){
         if(ind == 0){
             if(wts[ind] <= w) return vals[0];
@@ -72,7 +72,7 @@ public class O1_Knapsack {
         return dp[n-1][maxWeight];
     }
 
-    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*maxWeight) , SC = dp[maxWeight+1]
+    //Tabulation(Bottom-up approach) with space optimization solution TC = O(n*maxWeight) , SC = 2*dp[maxWeight+1]
     static int knapsackTabulationWithSpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
         int[] prev = new int[maxWeight+1];
         int[] curr = new int[maxWeight+1];
@@ -90,6 +90,25 @@ public class O1_Knapsack {
             }
             prev = curr;
             curr = new int[maxWeight+1];
+        }
+
+        return prev[maxWeight];
+    }
+
+    //Tabulation(Bottom-up approach) with 1 Array space optimization solution TC = O(n*maxWeight) , SC = 1*dp[maxWeight+1]
+    static int knapsackTabulationWith1ArraySpaceOptimization(int[] weight, int[] value, int n, int maxWeight) {
+        int[] prev = new int[maxWeight+1];
+        for(int w=weight[0];w<maxWeight+1;w++) prev[w] = value[0];
+
+        for(int ind=1;ind<n;ind++){
+            for(int w=maxWeight; w>=0;w--){
+                int notPick = 0 + prev[w];
+                int pick = Integer.MIN_VALUE;
+                if(weight[ind] <= w) {
+                    pick = value[ind] + prev[w-weight[ind]];
+                }
+                prev[w] = Math.max(notPick, pick);
+            }
         }
 
         return prev[maxWeight];
