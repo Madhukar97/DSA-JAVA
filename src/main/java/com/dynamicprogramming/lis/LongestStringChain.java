@@ -25,7 +25,7 @@ public class LongestStringChain {
         }
         return maxi;
     }
-    //Special solution DP(Bottom-up approach) with DP solution TC = O(n*n) , SC = dp[n+1]
+    //Special solution DP(Bottom-up approach) with DP solution TC = O(n*n*L) , SC = dp[n+1]
     public boolean check(String s1, String s2){
         // System.out.println(s1 + ", " + s2);
         int i1=0;
