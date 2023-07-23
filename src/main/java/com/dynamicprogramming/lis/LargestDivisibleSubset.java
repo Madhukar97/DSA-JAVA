@@ -36,7 +36,7 @@ public class LargestDivisibleSubset {
         }
         return rec(i+1, prevInd, nums, sub, ans);
     }
-    //Special solution DP(Bottom-up approach) with DP solution TC = O(n*Log(n) + n*n + n) , SC = dp[n]
+    //Special solution DP(Bottom-up approach) with DP solution TC = O(n*Log(n) + n*n + n) , SC = dp[n+1]
     public List<Integer> largestDivisibleSubsetDP(int[] nums) {
         int[] dp = new int[nums.length+1];
         for(int i=1;i<nums.length;i++){
