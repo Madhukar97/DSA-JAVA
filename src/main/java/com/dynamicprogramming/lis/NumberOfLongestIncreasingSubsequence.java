@@ -21,7 +21,6 @@ public class NumberOfLongestIncreasingSubsequence {
                 if(nums[j] < nums[i]){
                     if(1+dp[j] > dp[i]){
                         count[i]=count[j];
-
                     }else if(1+dp[j] == dp[i]) {
                         count[i]+=count[j];
                     }
