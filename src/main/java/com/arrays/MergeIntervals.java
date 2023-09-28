@@ -60,4 +60,29 @@ public class MergeIntervals {
         }
         return list;
     }
+
+    public int[][] mergeSol2(int[][] intervals) {
+        int n = intervals.length;
+        List<List<Integer>> ansList = new ArrayList<>();
+        Arrays.sort(intervals, (a,b) -> a[0]-b[0]);
+        for(int i=0;i<n;i++){
+            if(ansList.size()==0 || ansList.get(ansList.size()-1).get(1) < intervals[i][0]){
+                List<Integer> list = new ArrayList<>();
+                list.add(intervals[i][0]);
+                list.add(intervals[i][1]);
+                ansList.add(list);
+            }else{
+                ansList.get(ansList.size()-1).set(1, Math.max(intervals[i][1], ansList.get(ansList.size()-1).get(1)));
+            }
+        }
+
+        int[][] ans = new int[ansList.size()][2];
+        int i=0;
+        for(List<Integer> list: ansList){
+            int[] interval = {list.get(0),list.get(1)};
+            ans[i] = interval;
+            i++;
+        }
+        return ans;
+    }
 }
