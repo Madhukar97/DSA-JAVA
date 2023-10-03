@@ -1,5 +1,6 @@
 package com.arrays;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 //1. Two Sum
@@ -19,6 +20,28 @@ public class TwoSum {
                 ans[1] = i;
             }
             else map.put(target-nums[i], i);
+        }
+        return ans;
+    }
+
+    public int[] twoSumGreedy2PointersMethod(int[] nums, int target) {
+        int[] old = Arrays.copyOf(nums, nums.length);
+        Arrays.sort(nums);
+        int left=0;
+        int right=nums.length-1;
+        int[] ans = new int[2];
+        // System.out.println(Arrays.toString(old));
+        while(left < right){
+            if(nums[left]+nums[right] == target){
+                for(int i=0;i<nums.length;i++){
+                    if(nums[left] == old[i]) ans[0]=i;
+                }
+                for(int i=nums.length-1;i>=0;i--){
+                    if(nums[right] == old[i]) ans[1]=i;
+                }
+                return ans;
+            }else if(nums[left]+nums[right] < target) left++;
+            else right--;
         }
         return ans;
     }
