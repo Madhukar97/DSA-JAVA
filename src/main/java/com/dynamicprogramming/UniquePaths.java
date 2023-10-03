@@ -50,4 +50,16 @@ public class UniquePaths {
 
         return dp[m-1][n-1];
     }
+
+    //nCr Combinations solution
+    public int uniquePathsNcRCombinations(int m, int n) {
+        int N = m+n-2;
+        int R = n-1;
+        double ans = 1;
+
+        for(int r=1;r<=R;r++){
+            ans = ans*(N-R+r)/r;
+        }
+        return (int)ans;
+    }
 }
