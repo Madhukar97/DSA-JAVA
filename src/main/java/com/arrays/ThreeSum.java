@@ -6,10 +6,39 @@ import java.util.*;
 //https://leetcode.com/problems/3sum/
 public class ThreeSum {
     public static void main(String[] args) {
-        List<List<Integer>> ans = threeSum(new int[]{1,2,-2,-1});
+        List<List<Integer>> ans = threeSumOptimal(new int[]{1,2,-2,-1});
         System.out.println(ans);
     }
-    static public List<List<Integer>> threeSum(int[] nums) {
+    //Better sol using Hashing with time O(n^2) and space O(m)
+    public List<List<Integer>> threeSum(int[] nums) {
+        Set<List<Integer>> set = new HashSet<>();
+
+        for(int i=0;i<nums.length-2;i++){
+            int n1=nums[i];
+            List<Integer> triplet = new ArrayList<>();
+            Set<Integer> hashSet = new HashSet<>();
+            for(int j=i+1;j<nums.length;j++){
+                int n2 = nums[j];
+                if(hashSet.contains(-(n1+n2))){
+                    triplet.add(n1);
+                    triplet.add(n2);
+                    triplet.add(-(n1+n2));
+                    triplet.sort((o1,o2) -> o1-o2);
+                    set.add(triplet);
+                    triplet = new ArrayList<>();
+                }
+                hashSet.add(n2);
+            }
+        }
+        List<List<Integer>> ans = new ArrayList<>();
+        for(List<Integer> list : set){
+            ans.add(list);
+        }
+        return ans;
+    }
+
+    //Most optimal sol using 2 pointers with time O(n^2) and space O(1)
+    static public List<List<Integer>> threeSumOptimal(int[] nums) {
         Arrays.sort(nums);
         Set<Integer> set  = new HashSet<>();
         List<List<Integer>> outer = new ArrayList<>();
