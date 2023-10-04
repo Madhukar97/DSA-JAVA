@@ -9,7 +9,7 @@ public class ThreeSum {
         List<List<Integer>> ans = threeSumOptimal(new int[]{1,2,-2,-1});
         System.out.println(ans);
     }
-    //Better sol using Hashing with time O(n^2) and space O(m)
+    //Better sol using Hashing with time O(n^2) and space O(m)+O(no of triplets)
     public List<List<Integer>> threeSum(int[] nums) {
         Set<List<Integer>> set = new HashSet<>();
 
@@ -37,7 +37,7 @@ public class ThreeSum {
         return ans;
     }
 
-    //Most optimal sol using 2 pointers with time O(n^2) and space O(1)
+    //Most optimal sol using 2 pointers with time O(n^2) and space O(no of triplets)
     static public List<List<Integer>> threeSumOptimal(int[] nums) {
         Arrays.sort(nums);
         Set<Integer> set  = new HashSet<>();
@@ -72,7 +72,7 @@ public class ThreeSum {
         }
     }
 
-    //Most optimal sol using 2 pointers with time O(n^2) and space O(1)
+    //Most optimal sol using 2 pointers with time O(nlog(n)) + O(n^2) and space O(no of triplets)
     public List<List<Integer>> threeSumOptimal2(int[] nums) {
         Arrays.sort(nums);
         int n=nums.length;
