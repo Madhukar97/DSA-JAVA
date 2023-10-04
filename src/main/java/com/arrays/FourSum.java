@@ -5,7 +5,7 @@ import java.util.*;
 //18. 4Sum
 //https://leetcode.com/problems/4sum/description/
 public class FourSum {
-    //optimal solution using hashing with time complexity O(n^3) and space O(2*(no of quads)) + O(m)
+    //Better solution using hashing with time complexity O(n^3) and space O(2*(no of quads)) + O(m)
     public List<List<Integer>> fourSum(int[] nums, int target) {
         int n=nums.length;
         Set<List<Integer>> quads = new HashSet<>();
