@@ -7,6 +7,7 @@ import java.util.Map;
 //Longest Subarray Zero Sum
 //https://www.codingninjas.com/studio/problems/920321?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
 public class LongestSubarrayZeroSum {
+    //Most optimal sol when -1000 <= arr[i] <= 1000, time O(n) and space O(n)
     public static int LongestSubsetWithZeroSum(ArrayList<Integer> arr) {
         int n=arr.size();
         Map<Integer,Integer> prefixSumMap = new HashMap<>();
