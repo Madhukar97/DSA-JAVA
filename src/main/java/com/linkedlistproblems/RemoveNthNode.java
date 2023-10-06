@@ -14,22 +14,21 @@ public class RemoveNthNode {
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
     public ListNode removeNthFromEnd(ListNode head, int n) {
-        int count=0;
+        int len=0;
         ListNode curr=head;
 
         while(curr != null){
             curr=curr.next;
-            count++;
+            len++;
         }
 
-        int i=1;
         curr=head;
-        while(i < count-n ){
+        for(int i=1;i<len-n;i++){
             curr=curr.next;
-            i++;
         }
-        if(n==count) return curr.next;
-        if(curr.next != null)curr.next=curr.next.next;
+
+        if(n==len) return head.next;
+        if(curr.next != null) curr.next=curr.next.next;
         return head;
     }
 }
