@@ -13,6 +13,7 @@ public class RemoveNthNode {
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) { this.val = val; this.next = next; }
     }
+    //Optimal sol with time O(2n) and space O(1)
     public ListNode removeNthFromEnd(ListNode head, int n) {
         int len=0;
         ListNode curr=head;
