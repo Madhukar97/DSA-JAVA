@@ -32,4 +32,34 @@ public class UniquePaths {
 
         return result;
     }
+
+    public int uniquePathsTabulation(int m, int n) {
+        int[][] dp = new int[m][n];
+        dp[0][0] = 1;
+
+        for(int i=0;i<m;i++){
+            for(int j=0;j<n;j++){
+                if(i==0 && j==0 ) continue;
+                int up = 0;
+                int left = 0;
+                if(i > 0) up = dp[i-1][j];
+                if(j > 0) left = dp[i][j-1];
+                dp[i][j] = up+left;
+            }
+        }
+
+        return dp[m-1][n-1];
+    }
+
+    //nCr Combinations solution
+    public int uniquePathsNcRCombinations(int m, int n) {
+        int N = m+n-2;
+        int R = n-1;
+        double ans = 1;
+
+        for(int r=1;r<=R;r++){
+            ans = ans*(N-R+r)/r;
+        }
+        return (int)ans;
+    }
 }

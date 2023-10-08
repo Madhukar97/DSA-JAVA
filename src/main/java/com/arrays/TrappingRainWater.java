@@ -6,6 +6,7 @@ public class TrappingRainWater {
     public static void main(String[] args) {
 
     }
+    //Better sol using array with time O(n) and space O(2n)
     public int trap(int[] height) {
         int n = height.length;
         int[] leftMax = new int[n];
@@ -27,5 +28,27 @@ public class TrappingRainWater {
             ans+= Math.min(leftMax[i], rightMax[i]) - height[i];
         }
         return ans;
+    }
+    //Optimal sol using 2 pointer method with time O(n) and space O(1)
+    public int trap2(int[] height) {
+        int vol=0;
+        int left=0;
+        int right=height.length-1;
+        int leftMax=0;
+        int rightMax=0;
+
+        while(left <= right){
+            if(height[left] < height[right]){
+                if(height[left] > leftMax) leftMax=height[left];
+                else vol+=leftMax-height[left];
+                left++;
+            }
+            else{
+                if(height[right]>rightMax) rightMax=height[right];
+                else vol+=rightMax-height[right];
+                right--;
+            }
+        }
+        return vol;
     }
 }
