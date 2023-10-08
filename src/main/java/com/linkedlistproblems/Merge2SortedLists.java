@@ -49,7 +49,7 @@ public class Merge2SortedLists {
         return newList;
     }
 
-    //sol 2 with time O(n1 + n2) and space O(1)
+    //sol 2 using 3 pointer and swapping(not recommended) with time O(n1 + n2) and space O(1)
     public ListNode mergeTwoListsSol2(ListNode list1, ListNode list2) {
         if(list1 == null) return list2;
         if(list2==null) return list1;
@@ -76,5 +76,30 @@ public class Merge2SortedLists {
             l1=temp2;
         }
         return head;
+    }
+    //sol 3 using 3 pointer with time O(n1 + n2) and space O(1)
+    public ListNode mergeTwoListssol3(ListNode list1, ListNode list2) {
+        if(list1 == null) return list2;
+        if(list2 == null) return list1;
+
+        ListNode temp=new ListNode();
+        ListNode res=temp;
+        ListNode a=list1;
+        ListNode b=list2;
+        while(a != null && b!= null){
+            if(a.val < b.val){
+                temp.next=a;
+                a=a.next;
+                temp=temp.next;
+            }else{
+                temp.next=b;
+                b=b.next;
+                temp=temp.next;
+            }
+        }
+
+        if(a != null) temp.next=a;
+        else if(b!=null) temp.next = b;
+        return res.next;
     }
 }
