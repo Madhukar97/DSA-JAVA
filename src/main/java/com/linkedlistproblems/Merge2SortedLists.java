@@ -99,7 +99,7 @@ public class Merge2SortedLists {
         }
 
         if(a != null) temp.next=a;
-        else if(b!=null) temp.next = b;
+        else temp.next = b;
         return res.next;
     }
 }
