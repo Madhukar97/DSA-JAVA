@@ -78,7 +78,7 @@ public class Merge2SortedLists {
         return head;
     }
     //sol 3 using 3 pointer with time O(n1 + n2) and space O(1)
-    public ListNode mergeTwoListssol3(ListNode list1, ListNode list2) {
+    public ListNode mergeTwoListsSol3(ListNode list1, ListNode list2) {
         if(list1 == null) return list2;
         if(list2 == null) return list1;
 
