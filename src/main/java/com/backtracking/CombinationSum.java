@@ -65,4 +65,28 @@ public class CombinationSum {
         inner.remove(inner.size()-1);
         recFunc2(candidates, target, inner, index+1, currentSum);
     }
+
+    //Most optimized sol 2
+    public List<List<Integer>> combinationSumSol2(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        recFuncSol2(0,candidates,target,new ArrayList<>(), ans);
+        return ans;
+    }
+
+    public void recFuncSol2(int i, int[] candidates, int target, List<Integer> comb, List<List<Integer>> ans){
+        if(i >= candidates.length) return;
+
+        if(target == 0){
+            List<Integer> inner = new ArrayList<>(comb);
+            ans.add(inner);
+            return;
+        }
+
+        //pick
+        comb.add(candidates[i]);
+        if(candidates[i] <= target)recFuncSol2(i,candidates,target-candidates[i],comb,ans);
+        comb.remove(comb.size()-1);
+        //not pick
+        recFuncSol2(i+1,candidates,target,comb,ans);
+    }
 }
