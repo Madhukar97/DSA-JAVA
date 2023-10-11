@@ -1,5 +1,8 @@
 package com.dsa.backtracking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 // Find all the possible combinations of placing N queens in a given matrix without queens not cancelling each other
 public class NQueens {
     public static void main(String[] args) {
@@ -57,5 +60,58 @@ public class NQueens {
             }
             System.out.println();
         }
+    }
+
+    //Slightly Optimal sol
+    public List<List<String>> solveNQueens(int n) {
+        List<List<String>> ans = new ArrayList<>();
+        int[][] board = new int[n][n];
+        recFunc(board, 0, 0, ans);
+        return ans;
+    }
+
+    public void recFunc(int[][] board, int i, int j, List<List<String>> ans){
+        if(i == board.length){
+            // System.out.println("ANS : " + Arrays.deepToString(board));
+            List<String> ans1 = new ArrayList<>();
+            for(int[] row : board){
+                String s = "";
+                for(int q : row){
+                    s+=q==1 ? "Q" : ".";
+                }
+                ans1.add(s);
+            }
+            ans.add(ans1);
+            return;
+        }
+
+        for(int c=j;c<board.length;c++){
+            if(validPosition(board, i, c)){
+                board[i][c] = 1;
+                recFunc(board, i+1, 0, ans);
+                board[i][c] = 0;
+            }
+        }
+    }
+
+    public boolean validPosition(int[][] board, int i, int j){
+        for(int r=i-1;r>=0;r--){
+            if(board[r][j] == 1) return false;
+        }
+        int r=i;
+        int c=j;
+        while(r >= 0 && c >= 0){
+            if(board[r][c] == 1) return false;
+            r--;
+            c--;
+        }
+        r=i;
+        c=j;
+        while(r >=0 && c < board.length){
+            if(board[r][c] == 1) return false;
+            r--;
+            c++;
+        }
+        return true;
     }
 }
