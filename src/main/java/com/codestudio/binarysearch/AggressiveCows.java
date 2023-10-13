@@ -5,6 +5,7 @@ import java.util.Arrays;
 //Aggressive Cows
 //https://www.codingninjas.com/studio/problems/aggressive-cows_1082559?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
 public class AggressiveCows {
+    //Most optimal binary search sol with time O(nlog(n) + log(n)*n) and space O(1)
     public static int aggressiveCows(int []stalls, int k) {
         Arrays.sort(stalls);
         int min=1;
