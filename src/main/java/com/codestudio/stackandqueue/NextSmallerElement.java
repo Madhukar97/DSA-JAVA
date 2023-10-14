@@ -9,7 +9,8 @@ import java.util.Stack;
 public class NextSmallerElement {
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
-        list.
+        list.set(1, 5); // for updating element at index i
+        list.add(1,5); // not useful for updating element at index i
     }
     //Optimal sol using stack with time O(n) and space O(2n)
     static ArrayList<Integer> nextSmallerElement(ArrayList<Integer> arr, int n){
