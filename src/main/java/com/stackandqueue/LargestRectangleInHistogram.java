@@ -5,7 +5,7 @@ import java.util.Stack;
 //84. Largest Rectangle in Histogram
 //https://leetcode.com/problems/largest-rectangle-in-histogram/description/
 public class LargestRectangleInHistogram {
-    //Most Optimal sol using stack and Next Smaller Element method with time O(2n+2n+n) and space O(n+n+n)
+    //Better sol using stack and Next Smaller Element method with time O(2n+2n+n) and space O(n+n+n)
     public int largestRectangleArea(int[] heights) {
         int n = heights.length;
         int[] nseLeft = new int[n];
