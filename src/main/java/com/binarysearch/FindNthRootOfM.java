@@ -1,4 +1,4 @@
-package com.arrays.binarysearch;
+package com.binarysearch;
 
 //Find Nth Root Of M
 //https://www.codingninjas.com/studio/problems/1062679?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
