@@ -121,7 +121,7 @@ public class ImplementQueueUsingStacks {
 
         public boolean empty()
         {
-            return first.isEmpty() && second.isEmpty();
+            return first.isEmpty();
         }
     }
 
