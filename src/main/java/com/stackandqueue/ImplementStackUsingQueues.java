@@ -8,11 +8,11 @@ import java.util.Queue;
 public class ImplementStackUsingQueues {
     public static void main(String[] args) {
         Queue<Integer> queue = new LinkedList<>();
-        queue.add(1);
-        queue.remove();
+        queue.add(1);   //adds new element at end of queue
+        queue.remove(); //removes head of queue
         queue.size();
-        queue.peek();
-        queue.poll();
+        queue.peek();   //retrieves head of queue
+        queue.poll();   //removes head of queue without exception
         queue.isEmpty();
     }
     class MyStack {
