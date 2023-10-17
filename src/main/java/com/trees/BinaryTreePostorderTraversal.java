@@ -61,4 +61,32 @@ public class BinaryTreePostorderTraversal {
         Collections.reverse(ans);
         return ans;
     }
+    //Morris Preorder Traversal with time O(n) and space O(1)
+    //Most Optimal
+    public List<Integer> postorderTraversalMorris(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        TreeNode curr = root;
+
+        while(curr != null ){
+            if(curr.right == null){
+                ans.add(curr.val);
+                curr=curr.left;
+            }else{
+                TreeNode prev = curr.right;
+                while(prev.left != null && prev.left != curr){
+                    prev=prev.left;
+                }
+                if(prev.left == curr){
+                    prev.left=null;
+                    curr=curr.left;
+                }else{
+                    prev.left=curr;
+                    ans.add(curr.val);
+                    curr=curr.right;
+                }
+            }
+        }
+        Collections.reverse(ans);
+        return ans;
+    }
 }
