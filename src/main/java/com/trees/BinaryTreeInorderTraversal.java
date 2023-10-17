@@ -63,5 +63,32 @@ public class BinaryTreeInorderTraversal {
         }
         return ans;
     }
+    //Morris Inorder Traversal with time O(n) and space O(1)
+    //Most Optimal
+    public List<Integer> inorderTraversalMorris(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        TreeNode curr = root;
+
+        while(curr != null ){
+            if(curr.left == null){
+                ans.add(curr.val);
+                curr=curr.right;
+            }else{
+                TreeNode prev = curr.left;
+                while(prev.right != null && prev.right != curr){
+                    prev=prev.right;
+                }
+                if(prev.right == curr){
+                    prev.right=null;
+                    ans.add(curr.val);
+                    curr=curr.right;
+                }else{
+                    prev.right=curr;
+                    curr=curr.left;
+                }
+            }
+        }
+        return ans;
+    }
 
 }
