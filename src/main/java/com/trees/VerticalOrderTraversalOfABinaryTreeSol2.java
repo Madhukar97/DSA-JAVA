@@ -47,4 +47,49 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
         rec(root.left, map, h-1,v+1);
         rec(root.right, map, h+1,v+1);
     }
+
+    //Sol 2 using queue
+    public List<List<Integer>> verticalTraversalSol2(TreeNode root) {
+        List<List<Integer>> ans = new ArrayList<>();
+        Map<Integer, TreeMap<Integer, PriorityQueue<Integer>>> map = new TreeMap<>();
+        Queue<Tuple> q = new LinkedList<>();
+        q.add(new Tuple(0,0,root));
+
+        while(!q.isEmpty()){
+            Tuple tuple = q.poll();
+            TreeNode node = tuple.node;
+            int h=tuple.h;
+            int v=tuple.v;
+
+            map.putIfAbsent(h, new TreeMap<>());
+            map.get(h).putIfAbsent(v, new PriorityQueue<>());
+            map.get(h).get(v).add(node.val);
+
+            if(node.left != null) q.add(new Tuple(h-1,v+1,node.left));
+            if(node.right != null) q.add(new Tuple(h+1,v+1,node.right));
+        }
+
+        for(int key : map.keySet()){
+            TreeMap<Integer, PriorityQueue<Integer>> tmap = map.get(key);
+            List<Integer> subList = new ArrayList<>();
+            for(int key2 : tmap.keySet()){
+                PriorityQueue<Integer> pq = tmap.get(key2);
+                while(!pq.isEmpty()) subList.add(pq.poll());
+            }
+            ans.add(subList);
+        }
+        return ans;
+    }
+
+    class Tuple{
+        int h;
+        int v;
+        TreeNode node;
+
+        public Tuple(int h, int v, TreeNode node){
+            this.h=h;
+            this.v=v;
+            this.node=node;
+        }
+    }
 }
