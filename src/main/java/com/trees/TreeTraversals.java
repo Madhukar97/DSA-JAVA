@@ -30,8 +30,7 @@ public class TreeTraversals {
         List<Integer> inOrder = new ArrayList<>();
         List<Integer> preOrder = new ArrayList<>();
         List<Integer> postOrder = new ArrayList<>();
-        inOrder(root, inOrder);
-        pre(root, preOrder);
+        inOrderPreOrder(root, inOrder, preOrder);
         post(root, postOrder);
         Collections.reverse(postOrder);
 
@@ -42,20 +41,13 @@ public class TreeTraversals {
         return ans;
     }
 
-    public static void inOrder(TreeNode node, List<Integer> ans){
+    public static void inOrderPreOrder(TreeNode node, List<Integer> ans, List<Integer> ans2){
         if(node == null) return;
 
-        inOrder(node.left, ans);
+        ans2.add(node.data);
+        inOrderPreOrder(node.left, ans, ans2);
         ans.add(node.data);
-        inOrder(node.right, ans);
-    }
-
-    public static void pre(TreeNode node, List<Integer> ans){
-        if(node == null) return;
-
-        ans.add(node.data);
-        pre(node.left, ans);
-        pre(node.right, ans);
+        inOrderPreOrder(node.right, ans, ans2);
     }
 
     public static void post(TreeNode node, List<Integer> ans){
