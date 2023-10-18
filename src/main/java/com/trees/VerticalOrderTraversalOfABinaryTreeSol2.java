@@ -48,7 +48,7 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
         rec(root.right, map, h+1,v+1);
     }
 
-    //Sol 2 using queue
+    //Sol 2 using queue and level order traversal
     public List<List<Integer>> verticalTraversalSol2(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
         Map<Integer, TreeMap<Integer, PriorityQueue<Integer>>> map = new TreeMap<>();
