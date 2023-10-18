@@ -2,25 +2,23 @@ package com.trees;
 
 import java.util.*;
 
-//Bottom View Of Binary Tree
-//https://www.codingninjas.com/studio/problems/bottom-view-of-binary-tree_893110?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
-//https://practice.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1
-public class BottomViewOfBinaryTree {
-//    Following is the TreeNode class structure
-
+//Top View Of Binary Tree
+//https://www.codingninjas.com/studio/problems/top-view-of-binary-tree_799401?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
+//https://practice.geeksforgeeks.org/problems/top-view-of-binary-tree/1
+public class TopViewOfBinaryTree {
     class TreeNode {
-        int val;
+        int data;
         TreeNode left;
         TreeNode right;
 
-        TreeNode(int val) {
-            this.val = val;
+        TreeNode(int data) {
+            this.data = data;
             this.left = null;
             this.right = null;
         }
     }
     //Sol using level order traversal
-    public static List<Integer> bottomView(TreeNode root) {
+    public static List<Integer> getTopView(TreeNode root) {
         List<Integer> ans = new ArrayList<>();
         Map<Integer, TreeNode> map = new TreeMap<>();
         Queue<Tuple> q = new LinkedList<>();
@@ -31,14 +29,14 @@ public class BottomViewOfBinaryTree {
             TreeNode node = tuple.node;
             int h=tuple.h;
 
-            map.put(h, node);
+            map.putIfAbsent(h, node);
 
-            if(node.left != null) q.add(new Tuple(h-1, node.left));
-            if(node.right != null) q.add(new Tuple(h+1, node.right));
+            if(node.left != null) q.add(new Tuple(h-1,node.left));
+            if(node.right != null) q.add(new Tuple(h+1,node.right));
         }
 
         for(int key : map.keySet()){
-            ans.add(map.get(key).val);
+            ans.add(map.get(key).data);
         }
         return ans;
     }
