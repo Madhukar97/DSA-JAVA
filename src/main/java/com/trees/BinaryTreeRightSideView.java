@@ -43,4 +43,19 @@ public class BinaryTreeRightSideView {
         if(root.left != null) recFunc(root.left, map, level+1);
         if(root.right != null) recFunc(root.right, map, level+1);
     }
+
+    //Optimal sol using arraylist
+    public List<Integer> rightSideViewSol2(TreeNode root) {
+        List<Integer> ans =  new ArrayList<>();
+        rec(root,ans,0);
+        return ans;
+    }
+
+    public void rec(TreeNode root, List<Integer> ans, int lvl){
+        if(root == null) return;
+
+        if(lvl == ans.size()) ans.add(root.val);
+        rec(root.right,ans,lvl+1);
+        rec(root.left,ans,lvl+1);
+    }
 }
