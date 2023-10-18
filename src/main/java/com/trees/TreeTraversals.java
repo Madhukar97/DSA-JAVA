@@ -27,25 +27,21 @@ public class TreeTraversals {
     }
     public static List<List<Integer>> getTreeTraversal(TreeNode root) {
         List<List<Integer>> ans = new ArrayList<>();
-        List<Integer> inOrder = new ArrayList<>();
-        List<Integer> preOrder = new ArrayList<>();
-        List<Integer> postOrder = new ArrayList<>();
-        inOrderPreOrderPostOrder(root, inOrder, preOrder, postOrder);
+        ans.add(new ArrayList<>()); //InOrder
+        ans.add(new ArrayList<>()); //PreOrder
+        ans.add(new ArrayList<>()); //PostOrder
 
-        ans.add(inOrder);
-        ans.add(preOrder);
-        ans.add(postOrder);
+        inOrderPreOrderPostOrder(root, ans);
 
         return ans;
     }
-
-    public static void inOrderPreOrderPostOrder(TreeNode node, List<Integer> ans, List<Integer> ans2, List<Integer> ans3){
+    public static void inOrderPreOrderPostOrder(TreeNode node, List<List<Integer>> ans){
         if(node == null) return;
 
-        ans2.add(node.data);
-        inOrderPreOrderPostOrder(node.left, ans, ans2, ans3);
-        ans.add(node.data);
-        inOrderPreOrderPostOrder(node.right, ans, ans2, ans3);
-        ans3.add(node.data);
+        ans.get(1).add(node.data);
+        inOrderPreOrderPostOrder(node.left, ans);
+        ans.get(0).add(node.data);
+        inOrderPreOrderPostOrder(node.right, ans);
+        ans.get(2).add(node.data);
     }
 }
