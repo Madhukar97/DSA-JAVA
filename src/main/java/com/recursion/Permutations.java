@@ -38,4 +38,29 @@ public class Permutations {
         nums[l] = nums[i];
         nums[i] = temp;
     }
+
+    //Similar optimal solution without swapping or modifying the array
+    //Time O(n!) and Space O(n!)
+    public List<List<Integer>> permute2(int[] nums) {
+        List<List<Integer>> ans= new ArrayList<>();
+        List<Integer> sub = new ArrayList<>();
+        recFunc2(nums, 0, sub,ans);
+        return ans;
+    }
+
+    public void recFunc2(int[] nums, int i, List<Integer> sub, List<List<Integer>> ans){
+        if(i >= nums.length) {
+            if(sub.size() == nums.length) ans.add(new ArrayList<>(sub));
+            return;
+        }
+
+        //pick
+        if(!sub.contains(nums[i])) {
+            sub.add(nums[i]);
+            recFunc2(nums, 0, sub, ans);
+            sub.remove(sub.size()-1);
+        }
+        //not pick
+        recFunc2(nums, i+1, sub, ans);
+    }
 }
