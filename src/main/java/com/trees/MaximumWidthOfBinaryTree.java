@@ -17,7 +17,7 @@ public class MaximumWidthOfBinaryTree {
             this.right = right;
         }
     }
-    //Level Order Traversal sol
+    //Level Order Traversal sol with time O(n) and space O(n)
     public int widthOfBinaryTree(TreeNode root) {
         Map<Integer, TreeNode> map = new TreeMap<>();
         Queue<Tuple> q = new LinkedList<>();
