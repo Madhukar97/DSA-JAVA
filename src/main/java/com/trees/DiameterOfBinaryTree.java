@@ -40,7 +40,7 @@ public class DiameterOfBinaryTree {
         return Math.max(l,r) +1;
     }
 
-    //Sol without global variable
+    //Sol without global variable and time O(n) and space O(n)
     public int diameterOfBinaryTreeSol2(TreeNode root) {
         int[] ans = new int[1];
         rec(root,ans);
