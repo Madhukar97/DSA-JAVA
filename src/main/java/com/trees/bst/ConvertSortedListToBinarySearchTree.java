@@ -22,6 +22,7 @@ public class ConvertSortedListToBinarySearchTree {
             this.right = right;
         }
     }
+
     //use DFS and recursion start with mid as root and keep returning left and right nodes
     public TreeNode sortedListToBST(ListNode head) {
         ListNode curr = head;
