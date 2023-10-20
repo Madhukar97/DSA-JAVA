@@ -3,6 +3,18 @@ package com.trees;
 //101. Symmetric Tree
 //https://leetcode.com/problems/symmetric-tree/description/
 public class SymmetricTree {
+    class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+        TreeNode() {}
+        TreeNode(int val) { this.val = val; }
+        TreeNode(int val, TreeNode left, TreeNode right) {
+            this.val = val;
+            this.left = left;
+            this.right = right;
+        }
+    }
     //do inorder traversal with two nodes : root-left-right and root-right-left and compare and return ans
     public boolean isSymmetric(TreeNode root) {
         return rec(root,root);
@@ -18,17 +30,5 @@ public class SymmetricTree {
         if(node1.val != node2.val) return false;
         boolean right = rec(node1.right, node2.left);
         return left && right;
-    }
-}
-class TreeNode {
-    int val;
-    TreeNode left;
-    TreeNode right;
-    TreeNode() {}
-    TreeNode(int val) { this.val = val; }
-    TreeNode(int val, TreeNode left, TreeNode right) {
-        this.val = val;
-        this.left = left;
-        this.right = right;
     }
 }
