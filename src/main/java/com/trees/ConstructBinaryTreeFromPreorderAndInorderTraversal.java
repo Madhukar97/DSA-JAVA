@@ -17,6 +17,8 @@ public class ConstructBinaryTreeFromPreorderAndInorderTraversal {
             this.right = right;
         }
     }
+    //do inorder traversal and use a map to store inorder indexes and create and return the node :
+    // the 1st element in every preorder traversal will be root and left and right parts of this root in inorder[] will be left and right subtrees
     public TreeNode buildTree(int[] preorder, int[] inorder) {
         Map<Integer,Integer> imap = new HashMap<>();
         for(int i=0;i<inorder.length;i++) imap.put(inorder[i], i);
