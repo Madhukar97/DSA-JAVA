@@ -4,7 +4,6 @@ package com.trees.bst;
 public class FloorInBST {
     class TreeNode<T>
     {
-        public:
         T data;
         TreeNode<T> left;
         TreeNode<T> right;
