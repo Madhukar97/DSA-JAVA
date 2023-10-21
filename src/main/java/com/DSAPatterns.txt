@@ -1,0 +1,174 @@
+DSA patterns :
+
+Arrays :
+1. Kadanes Algorithm - maxSubArray sum	- carryforward prev sum if sum > 0 else reset to 0
+2. Dutch National Flag Algorithm - three pointer sorting
+3. Rotate Image/Matrix - Transpose the upper half and reverse each row in matrix
+4. Merge 2 sorted arrays in place - sort from right to left
+5. Find the duplicate number - Floyed's Tortoise Algo/Linked-List/ Fast and slow pointer
+6. Count Inversions/Global inversions - Use Merge sort and count while merging 2 sorted arrays
+7. Search in 2D matrix - imagine 2D array as 1D array and do Binary Search
+8. Search in 2D matrix II - start from right top or left bottom where the row & col are in sorted order and keep eliminating the row/col
+9. pow(x,n) - try to reduce the number of multiplications required by modifying number
+10. Majority Element(>n/2) - Moore's Voting Algorithm
+11.Majority Element(>n/3) - Modified Moore's Voting Algorithm - max 2 elements possible
+12.Unique Paths - rec, mem, tab, nCr Combinations formula
+13.2-sum - nested loops, hashing, greedy 2 pointer
+14.3-sum - nested loops, hashing, greedy 2 pointer
+15.4-sum - nested loops, hashing, greedy 2 pointer
+16.Longest Consecutive Sequence - brute force using nested loops, greedy 2 pointer
+17.Longest sub array sum equals K - nested loops, hashing
+18.Count Subarray Sum Equals K - nested loops, hashing
+19.Count No of Subarray with given xor K - nested loops, hashing
+20.Longest Substring without repeat - nested loops, hashing
+--Rotate Array by k times - reverse arr(0,n-1),arr(0,k-1),arr(k,n-1)
+21.Trapping rain water - nested loops, prefix and sufix sum arrays, 2 pointer using leftMax and RightMax
+22.Remove Duplicates from Sorted Array - hashing, 2 pointer method
+23.Max Consecutive Ones - 1 pointer track max Count
+
+Linked-List :
+1.Reverse a LL - 3 pointer prev, curr, next
+2.Middle of LL - slow and fast pointer
+3.Merge 2 sorted LL - 3 pointer swap method (similar to merge sort)
+4.Remove nth node from back of LL - O(2n) sol, O(n) using fast and slow pointers
+5.Add two numbers as LL - create a new LL and add digits
+6.Delete node when node ref is given - change the value and reference
+7.Find Interesection point y of 2 LL - brute force nested loops, hashing, traverse n1 and n2 and start from n1~n2
+8.Detect cycle in LL - brute force hashing, slow and fast pointer
+9.Reverse Nodes in K-groups - only sol reverse LL whike count >= k
+10.Palindrome LL - hashing, recursion, reverse right half of LL
+11.Find start of loop in LL - hashing, slow and fast pointers
+12.Flatten a LL - recursively merge 2 sorted LL from end, loop from start and merge 2 sorted LL
+13.Rotate LL - rotate by k%length
+14.Clone a Linked-List with Random and Next Pointer - hashing, 3 step(3 iterations )cloning
+15.
+
+Greedy:
+1.N Meetings in one room - Create Meeting object and sort is based on end time and count the possible no.of meetings
+2.Minimum Number Of Platforms required for railway - sort arraivals and departures seperately and use 2 pointer to calc max no.of platforms
+3.Job Sequencing Problem - sort the jobs on descending order of profits and perform every job on deadline day or last possible day
+4.Fractional Knapsack - sort the Items in descending value/weight(most valuable) ratio using comparator(custom double function) and calc max value
+5.Find Minimum Number Of Coins - start from the largest coin and calc the no.of coins that can be used and carryforward the remainder until amount > 0
+
+Recursion:
+1.Subset Sums - recursively generate all sub set sums possible
+2.Subset-II - recursively generate all subsets and sort it and check for duplicate before adding it to ans, sort the given array and recursively generate subsets by skipping duplicate elements
+3.Combination Sum-I - recursively generate all possible combinations by pick and notPick approach
+4.Combination Sum-II - recursively generate all possible combinations by pick and notPick approach(TLE), sort the given array and recursively generate subsets by skipping duplicate elements
+5.Palindrome Partitioning - (Partition DP) Recursively  partition the given string only if the left subString is palindrome and keep solving for the right substring as current string till the end
+6.Permutation Sequence - recursively generate and store all permutations in order and return (k-1)th permutation, take an list of 1 to n numbers and find the exact digit in list for remaining no.on permutations and repeat process till list is empty
+
+Backtracking:
+1.Permutations - recursively generate all permutations
+2.N Queens - recursively try all positions with backtracking
+3.Sudoku - recursively try all possible numbers in all positions using backtracking
+4.M-coloring - Graphs ??
+5.Rat in a Maze - recursively try all ways(U,D,L,R)
+6.Word Break - recursively try all valid permutations
+
+Binary Search:
+1.Find Nth Root Of M - do Binary Search from 1 to M while s<=e
+2.Matrix Median - brute force : create 1D array sort it and return middle element, optimal : use binary search and upper bound
+3.Search Single Element in a sorted array - brute force nested loops, hashing, xor, binary search the array based on even or odd indexes nums[i] == nums[i^1] and low will end up just right of the left half
+4.Search in Rotated Sorted Array - binary search : always compare target in the sorted half of array
+5.Median of 2 sorted arrays - merge two sorted arrays into 3 array and calc median, do binary search on smaller array and find the no.of elements that can be taken from smaller array based on condition(l1<=r2 && l2<= r1)
+6.K-th element of two Arrays - similar to Median of 2 sorted arrays just add the edge cases(search the smaller array in the possible valid range) and search for k elements in left half
+7.Allocate Books - do binary search on [0, sum(arr)] till s<=e and return the minimum value of max secs student studied across all days
+8.Aggressive Cows - min(max) binary search pattern : do binary search from min dist 1 to max dist stalls[n-1]-stalls[0] and try to place all cows for a givin dist
+
+Stack and Queue:
+1.Stack Implementation Using Array : use array of size capacity
+2.Implement Queue using Arrays : use array of size (total queue operations), if array is fixed size use it as a circular array by doing front%n and rear%n
+3.Implement Stack using Queues - use two queues to implement stack and copy from Q1 to Q2 and swap Q1=Q2, use single queue by pushing it into the queue and pop and push all elements before curr (size-1) into same queue
+4.Implement Queue Using Stacks - optimal_1 : use two stacks and push in stack_1, for peek and pop, push all the elements into stack_2 peek or pop it and push back into stack_1,(Not valid answers): better : after adding new element into stack just remove(0) and add back into stack for size()-1 elements, optimal_2 O(1) : add directly to stack and pop from front using stack.remove(0) and peek using stack.get(0)
+5.Valid Parentheses - use stack
+6.Next Greater Element - use stack, interate from n-1 to 0 and keep pushing the elements to stack and pop the elements which are less than equal to nums[i]
+7.Next Greater Element I - use stack and HashMap, interate from n2-1 to 0 and keep pushing the elements to stack and remove the elements which are less than equal to nums2[i] and store the nge[] array in a hashMap and find the final ans for nums1[]
+8.Next Greater Element II - use stack, since we should find the next greater in circular array, iterate from 2n-1 to 0 and keep pushing elements into stack and pop elements which are less than equal to nums[i%n] and form the nge[]
+9.Next Smaller Element - use stack, iterate from n-1 to 0 and keep pushing elements into stack and pop elements which are greater than equal to nums[i] and form the nse[]
+10.Final Prices With a Special Discount in a Shop - use stack, iterate from n-1 to 0 and keep pushing elements into stack and pop elements which are greater than nums[i] and form the nse[]
+11.Sort A Stack - use recursion : recursively pop all elements from stack and sort from bottom using top and temp stack while coming out of recursive calls
+12.LRU Cache - implement using HashMap and DoublyLinkedList
+13.LFU Cache - implement using two HashMaps (cacheMap and freqMap) and DoublyLinkedList and DLLNode
+14.Largest Rectangle in Histogram - find nseLeft[] and nseRight and store indexes instead of values and calc area using hirght*(rightSmaller-leftSmaller+1), optimal sol: single pass by nse : iterate from 0 to n and calc height=stack.peek() pop it and width=i or i-stack.peek()-1
+15.Sliding Window Maximum - using Deque iterate from 0 to n-1 and store in deque the next largest element and pop all the out of range indexes and smaller elements
+16.Min Stack - sol_1 : use Stack and Pair class to store val, min , use Stack and modified values formula 2*val-min to store and 2*min-top to get back to prev min
+17.Rotting Oranges - use BFS and Queue and vis[][] matrix to find the max time
+
+Strings:
+1.Reverse Words in a String - brute force split all words and append from end, optimal : traverse from 0 to n-1 and use temp string to append into ans
+2.Longest Palindromic Substring - for every char in given string check if its palindrome by taking it as middle and expanding left and right, and check for both odd and even palindromes
+3.Roman to Integer - intuition : in roman numerals when small values appears before large value it subtraction and viceversa
+4.Integer to Roman - take arrays of all roman symbols 1s,10s,100s,1000s and convert number by dividing 1000s,100s,10s,1s
+5.String to Integer (atoi) - clear all leading white spaces and if the left string before any digit contains '.' or both '+' and '-' or any letter return 0 else compute the int ans using Double
+6.Longest Common Prefix - brute force : compare all strings, optimal : sort the given array and compare first and last strings
+7.Repeated String Match (Rabin Karp) - string b can present in string a as (n*b) or (prefix + n*b) or (prefix + n*b + suffix)
+8.Z-Function - ??
+9.KMP Algorithm - ??
+10.Minimum Characters For Palindrome - since the characters should be added only in front, check the longest palindromic subString starting from index 0 and return s.length()-maxLen
+11.Valid Anagram - hashing using hashmap, sorting using arrays, optimal sol : take an char[26] and count the freq of each char in s1 and decrement the freq using s2 and check for non-zero values in char[]
+12.Count and Say - use loops and StringBuilder
+13.Compare Version Numbers - Better : split the string using regex with escabe sequence at "\\." and parse every version into int and compare, optimal : do not use parseInt, compare manually
+
+Trees:
+(Inorder : left-root-right, Preorder : root-left-right, Postorder : left-right-root)
+1.Inorder Traversal - recursion : traverse left, add curr val, traverse right, iteration(BFS) : use stack to store the left most nodes and pop them, add curr val and traverse right
+2.Preorder Traversal - recursion : add curr val, traverse left, traverse right, iteration(BFS) : add curr val, use stack to store the left most nodes  and pop them and traverse right
+3.Postorder Traversal - recursion : traverse left, traverse right, add curr val, iteration(BFS) : add curr val, use stack to store the right most nodes  and pop them and traverse left and finally reverse the ans and return
+4.Left View Of Binary Tree - do traversal from left to right and carry ans and level, and add first occurence of node in every level
+5.Right View Of Binary Tree - do traversal from right to left and carry ans and level, and add first occurence of node in every level
+6.Level Order Traversal - using Queue: start by adding root and null to differentiate between levels and keep iterating till node = null and queue.isEmpty(), add both left and right nodes of curr node into queue
+7.Vertical Order Traversal of a Binary Tree - Sol using dfs and recursion or level order traversal using queue: use outer map to store horizontal.dist , TreeMap to store levels in ascending order, PriorityQueue to store values of overlapping h,v in ascending order
+8.Bottom View Of Binary Tree - do level order traversal using queue and carry a map<h,TreeNode> and keep replacing the node at h in every level till q is empty, Recursion doesnt work
+9.Top View of Binary Tree - do level order traversal using queue and carry a map<h,TreeNode> and add into map only if absent at h in every level till q is empty, Recursion doesnt work
+10.All Root to Leaf Paths In Binary Tree - do preOrder recursive traversal and keep adding node.val to list when node.left == null && node.right == null add the path to ans and remove the node.val while coming out of recursion
+11.Maximum Width of Binary Tree - do level order traversal using queue and iterate through all nodes in a level and pop each and assign index(2*(h-min)+1, 2*(h-min)+2) to left and right childs and add them in queue
+12.Maximum Depth(Height) of Binary Tree - do inorder traversal and return 0 at base case and return max(1+left,1+right)
+13.Minimum Depth of Binary Tree - do inorder traversal and return 0 at base case and return 1+right if left =0 , 1+left if right=0 or max(1+left,1+right)
+14.Diameter of Binary Tree - do inorder traversal and update the ans with left+rigth length at every node and return Math.max(left,right)+1
+15.Balanced Binary Tree - do inorder traversal and update ans to false if abs(left-right)>1 and return max(left,right)+1
+16.Lowest Common Ancestor of a Binary Tree - do inorder traversal if(root = null or p or q) return root and if left = null return right, right = null return left else return root
+17.Same Tree - do inorder traversal if(p and q) are not same return false and return left && right
+18.Binary Tree Zigzag Level Order Traversal - do level order traversal using queue and boolean flag and do Collection.reverse(list) for alternating levels
+19.Boundary Traversal of Binary Tree - 1st travel left half using iteration till before leaf node, 2nd do inorder traversal and add all leaf nodes, 3rd travel the right half using iteration till the leaf node and reverse the result and add to ans
+20.Binary Tree Maximum Path Sum - do inorder traversal and consider all possible cases (node.val, node.val+leftPath, node.val+rightPath, node.val+leftPath+rightPath) and return max(node.val,node.val+leftPath,node.val+rightPath) cannot return both because path will end
+21.Construct Binary Tree from Preorder and Inorder Traversal - do inorder traversal and use a map to store inorder indexes and create and return the node : the 1st element in every preorder traversal will be root and left and right parts of this root in inorder[] will be left and right subtrees
+22.Construct Binary Tree from Inorder and Postorder Traversal - do inorder traversal and use a map to store inorder indexes and create and return the node : the last element in every postorder[] traversal will be root and left and right parts of this root in inorder[] will be left and right subtrees
+23.Symmetric Tree - do inorder traversal with two nodes : root-left-right and root-right-left and compare and return ans
+24.Flatten Binary Tree to Linked List - recursively traverse right then left and declare prev node and update node.right=prev, node.left=prev, prev=node
+25.Reverse Odd Levels of Binary Tree - use BFS (Level order traversal) using queue : if(level is odd) store all nodes vals into nums[] and update the nodes in reverse order
+26.Verify Preorder Serialization of a Binary Tree - for valid BT # of node = # of edges+1, every node consumes one edge and produces 2 edges, traverse all the nodes and check if edges go less than 0
+27.Children Sum Property - use DFS and recursion and check for non-leaf nodes if (node.val = node.left.val+node.right.val) return true/false
+28.Populating Next Right Pointers in Each Node - use BFS(Level order traversal) using iteration and queue : point every curr node to next node and keep adding childs to q
+
+BST:
+1.Search in a Binary Search Tree - use DFS with recursion : return node if found else null
+2.Convert Sorted Array to Binary Search Tree - using DFS with recursion : start with mid as root and keep returning left and right nodes
+3.Convert Sorted List to Binary Search Tree - using DFS with recursion : start with mid as root and keep returning left and right nodes, use DFS with recursion and array[]
+4.Create Binary Tree From Descriptions - sol using HashMap and HashSet : form all child and parent nodes and update and store in map
+5.Construct Binary Search Tree from Preorder Traversal - use DFS and recursion : first node of preOrder will be root and solve for left subtree range and right subtree range
+6.Validate Binary Search Tree - use DFS and recursion : take range(min,max) and keep updating it and check if every node is present in the range else return false
+7.Lowest Common Ancestor of a Binary Search Tree - use DFS and recursion : return node if found else return null
+8.Predecessor And Successor In BST - ??
+9.Floor in BST - do binary search using recursion/iteration : if(x < node.data) go left and node.data cannot be your ans, if(x > node.data) node.data can be your potential ans so update ans[0]
+10.Ceil from BST - do binary search using recursion/iteration : if(x < node.data) node.data can be your potential ans and go left, if(x > node.data) node.data cannot be your ans and go node.right
+11.K-th Smallest Element in a BST - do inorder traversal and store the sorted vals into arr and return arr[k-1] as ans; use DFS inorder traversal and carry count, when count == k return ans
+12.K-th largest Number BST - do inorder traversal and store the sorted vals into arr and return arr[n-k] as ans; use DFS inorder traversal calc n and carry count, when count == n-k+1 return ans
+13.Binary Search Tree Iterator - take a stack to store all left nodes for inorder traversal, for next() func pop the stack and go to right and push all left nodes, for hasNext() func return stack.isEmpty()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
