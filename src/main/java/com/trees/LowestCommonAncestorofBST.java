@@ -35,4 +35,20 @@ public class LowestCommonAncestorofBST {
 
         return root;
     }
+
+    //DFS using recursion
+    public TreeNode lowestCommonAncestorSol2(TreeNode root, TreeNode p, TreeNode q) {
+        return rec(root,p,q);
+    }
+
+    public TreeNode rec(TreeNode node, TreeNode p, TreeNode q){
+        if(node == null) return null;
+        if(node == p || node == q) return node;
+
+        TreeNode left = rec(node.left, p, q);
+        TreeNode right = rec(node.right, p, q);
+        if(left == null) return right;
+        if(right == null) return left;
+        return node;
+    }
 }
