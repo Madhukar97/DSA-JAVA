@@ -5,7 +5,7 @@ import java.util.*;
 //Count Distinct Element in Every K Size Window
 //https://www.codingninjas.com/studio/problems/920336?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
 public class CountDistinctElementInEveryKSizeWindow {
-    //using HashMap : store the frequency of every element in window and remove out of range elements if freq == 1
+    //using HashMap : store/update the frequency of every element in window and remove out of range elements if freq == 1
     public static ArrayList<Integer> countDistinctElements(ArrayList<Integer> arr, int k) {
         Map<Integer,Integer> map = new HashMap<>();
         ArrayList<Integer> ans = new ArrayList();
