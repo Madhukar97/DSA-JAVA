@@ -87,4 +87,37 @@ public class DetectCycleInUndirectedGraph {
         }
     }
 
+    //Cycle Detection In Disconnected Undirected Graph using DFS
+    //Time O(N + 2*E) and space O(N
+    public static String cycleDetectionSol2(int[][] edges, int n, int m) {
+        int[] vis = new int[n+1];
+        List<List<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<=n;i++) adj.add(new ArrayList<>());
+        for(int[] edge : edges){
+            int x1 = edge[0];
+            int x2 = edge[1];
+            adj.get(x1).add(x2);
+            adj.get(x2).add(x1);
+        }
+
+        for(int i=1;i<=n;i++){
+            if(vis[i] == 0){
+                if(dfsDetectCycle(adj, i, -1, vis)) return "Yes";
+            }
+        }
+        return "No";
+    }
+
+    public static boolean dfsDetectCycle(List<List<Integer>> adj, int index, int parent, int[] vis){
+        vis[index] = 1;
+
+        for(int neighbour : adj.get(index)){
+            if(vis[neighbour] == 0){
+                if(dfsDetectCycle(adj, neighbour, index, vis)) return true;
+            }else if(neighbour != parent){
+                return true;
+            }
+        }
+        return false;
+    }
 }
