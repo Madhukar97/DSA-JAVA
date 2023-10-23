@@ -41,7 +41,7 @@ Linked-List :
 12.Flatten a LL - recursively merge 2 sorted LL from end, loop from start and merge 2 sorted LL
 13.Rotate LL - rotate by k%length
 14.Clone a Linked-List with Random and Next Pointer - hashing, 3 step(3 iterations )cloning
-15.
+15.Merge k SortedLists : iteratively take 2 heads and merge 2 sorted lists into 1 and return final head
 
 Greedy:
 1.N Meetings in one room - Create Meeting object and sort is based on end time and count the possible no.of meetings
@@ -135,7 +135,7 @@ Trees:
 21.Construct Binary Tree from Preorder and Inorder Traversal - do inorder traversal and use a map to store inorder indexes and create and return the node : the 1st element in every preorder traversal will be root and left and right parts of this root in inorder[] will be left and right subtrees
 22.Construct Binary Tree from Inorder and Postorder Traversal - do inorder traversal and use a map to store inorder indexes and create and return the node : the last element in every postorder[] traversal will be root and left and right parts of this root in inorder[] will be left and right subtrees
 23.Symmetric Tree - do inorder traversal with two nodes : root-left-right and root-right-left and compare and return ans
-24.Flatten Binary Tree to Linked List - recursively traverse right then left and declare prev node and update node.right=prev, node.left=prev, prev=node
+24.Flatten Binary Tree to Linked List - recursively traverse right then left and declare prev node and update node.right=prev, node.left=null, prev=node
 25.Reverse Odd Levels of Binary Tree - use BFS (Level order traversal) using queue : if(level is odd) store all nodes vals into nums[] and update the nodes in reverse order
 26.Verify Preorder Serialization of a Binary Tree - for valid BT # of node = # of edges+1, every node consumes one edge and produces 2 edges, traverse all the nodes and check if edges go less than 0
 27.Children Sum Property - use DFS and recursion and check for non-leaf nodes if (node.val = node.left.val+node.right.val) return true/false
@@ -155,20 +155,31 @@ BST:
 11.K-th Smallest Element in a BST - do inorder traversal and store the sorted vals into arr and return arr[k-1] as ans; use DFS inorder traversal and carry count, when count == k return ans
 12.K-th largest Number BST - do inorder traversal and store the sorted vals into arr and return arr[n-k] as ans; use DFS inorder traversal calc n and carry count, when count == n-k+1 return ans
 13.Binary Search Tree Iterator - take a stack to store all left nodes for inorder traversal, for next() func pop the stack and go to right and push all left nodes, for hasNext() func return stack.isEmpty()
+14.Two Sum IV - Input is a BST - Brute : store inorder traversal into array and do 2 pointer search on array; Better : do DFS inorder and hashset to find the 2nd node; Optimal : use BST Iterators next and prev and do 2 pointer search
+15.Maximum Sum BST in Binary Tree - use DFS postorder traversal and take pojo of{min,max,sum} : for a valid bst the largest of left-subtree should be less than root and root should be less than the smallest of right-subtree
+16.Serialize and Deserialize Binary Tree - solve using level order traversal (Iteration and Queue) : serealization : append n for null in string
+17.Serialize and Deserialize BST - solve using level order traversal (Iteration and Queue) : serealization : append n for null in string
+18.Convert A Given Binary Tree To Doubly Linked List - use DFS (inorder) and prev Node and recursively traverse left and update the node.left=prev, prev.right=node and prev=node and traverse right
+19.Flood Fill - use dfs and recursion and travel all 4 directions
 
+Heaps:
+1.Find Median from Data Stream - Heaps : solve using max and min heaps median will be maxHeap.peek() + minHeap.peek() / 2
+2.Kth Largest Element in a Stream - Heaps : take a minHeap and maxSize K, keep adding all the elements and minHeap.pop() the smallest if (minHeap,size() > k) so that 1st element in minHeap will be kth largest
+3.Kth Largest Element in an Array - use minHeap (PriorityQueue) and take size k : insert all elements into minHeap and poll() if minHeap.size() > k, return minHeap.peek() as ans
+4.Count Distinct Element in Every K Size Window - use HashMap : store/update the frequency of every element in window and remove out of range elements if freq == 1
+5.Third Distinct Maximum Number - use minHeap : add all nums into minHeap and poll() if minHeap.size() > 3, return minHeap.peek() ,if(minHeap.size() < 3) return the last element in minHeap
+6.Neither Minimum nor Maximum - use minHeap : poll() the 1st element and return 2nd using minHeap.peek()
+7.Merge K Sorted Arrays - use minHeap
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+Graphs:
+1.DFS of Graph (connected undirected graph) - use DFS and recursion and visited[] arr : do dfs on all elements in every index
+2.DFS of Graph (disconnected and undirected graph) - If adjacency list is not given create it using edges list, if graph is disconnected do dfs for every index in adj list and store the graphs into ans
+3.BFS in Graph - use iteration and Queue - If adjacency list is not given create it using edges list, if graph is disconnected do bfs for every index in adj list and store the graphs into ans
+4.Cycle Detection In Undirected Graph Using BFS(iteration and Queue and Pair(node, parent) class) - If adjacency list is not given create it using edges list, if graph is disconnected do bfs for every index in adj list, and check for every index if its neighbours is already visited and not equal to node.parent then return true
+5.Cycle Detection In Undirected Graph Using DFS(recursion) - If adjacency list is not given create it using edges list, if graph is disconnected do DFS for every index in adj list, and check for every index, parent if its neighbours are already visited and not equal to parent then return true
+6.Detect Cycle In Directed Graph using DFS(recursion) - If adjacency list is not given create it using edges list, carry two arrays vis[] and dfsVis[] and do dfs for every index in adj list, and check for every index if its neighbour is already visited and part of current dfs path then return true
+7.Topological sort(only valid for DAG) using DFS(recursion) - use DFS(recursion) and stack and vis[], If adjacency list is not given create it using edges list, for every index do dfs and for every neighbour do dfs and after coming out of recursion add index to stack and return the ans popping the stack
+8.Topological sort(only valid for DAG) using BFS(iteration) (Kahn's Algo) - use BFS(iteration) and stack and inDegree[], If adjacency list is not given create it using edges list, Use iteration and inDegree[] array, form the inDegree array using adj list, add all nodes with inDegree=0 to q and for every node in q(add node to topoSort[]) iterate all neighbours and decrement the inDegree of each neighbour by 1 and if for any neighbour inDegree==0 add neighbour node to q
+9.Detect Cycle In Directed Graph using BFS - use Iteration and Queue and TopoSort with BFS, inDegree[]: If adjacency list is not given create it using edges list, create inDegree[] and add all nodes with inDegree=0 to q and for every node in q (add it to topoSort[]) iterate all neighbours and decrement the inDegree[neighbour] by 1 and if for any neighbour inDegree==0 add that neighbour to q and finally if topoSort[].size() < n cycle is present else not
 
 
