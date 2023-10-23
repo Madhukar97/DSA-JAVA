@@ -7,6 +7,18 @@ import java.util.*;
 public class CourseScheduleII {
     //Return TopoSort if there is no Cycle present in Directed graph else empty array
     //Using BFS toposort and detect cycle
+    /*
+    Approach
+    Using BFS toposort and detect cycle algorithm :
+
+    1.Convert the given edges into adjacency matrix
+    2.Take indegree[] to detect the cycle
+    3.Take a Queue to do BFS and add all nodes with indegree=0 into q initally
+    3.Take topoList to store the topological sort order
+    4.For every index/course in queue add it to topoList
+    5.For every index iterate all the neighbours and decrement the indegree[neighbour] by 1 and if for any neighbour indegree==0 add it to the queue
+    6.And finally if topoList.size()<cources it means cycle is present so return empty array else return topoList
+     */
     public int[] findOrder(int numCourses, int[][] prerequisites) {
         //Return TopoSort using BFS and Detect Cycle in Direceted Graph
         List<List<Integer>> adj = new ArrayList<>();
@@ -46,6 +58,17 @@ public class CourseScheduleII {
 
     //Return TopoSort if there is no Cycle present in Directed graph else empty array
     //Using DFS toposort and detect cycle
+    /*
+    Approach
+    Using DFS Toposort and detect cycle algorithm :
+
+    1.Convert the given edges into adjacency matrix
+    2.Take vis[] array and dfsVis[] array to detect the cycle
+    3.Take topoList to store the topological sort order
+    4.For every index/course(1 to n-1) do dfs
+    5.For every index check if neighbours are already visited as part of current dfsvis path if yes return empty array, else while coming out of recursion reset the dfsvis[index]=0 (not part of current path) and add the current index to topoList
+    6.Return the topoList
+     */
     public int[] findOrderSol2(int numCourses, int[][] prerequisites) {
         List<List<Integer>> adj = new ArrayList<>();
         for(int i=0;i<numCourses;i++) adj.add(new ArrayList<>());
