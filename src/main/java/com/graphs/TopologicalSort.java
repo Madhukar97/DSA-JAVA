@@ -1,7 +1,6 @@
 package com.graphs;
 
-import java.util.ArrayList;
-import java.util.Stack;
+import java.util.*;
 
 //Topological sort
 //https://practice.geeksforgeeks.org/problems/topological-sort/1
@@ -40,5 +39,41 @@ public class TopologicalSort {
             }
         }
         stack.push(v);
+    }
+
+    //https://www.codingninjas.com/studio/problems/982938?topList=striver-sde-sheet-problems&utm_source=striver&utm_medium=website&leftPanelTab=0
+    //Topological sort using DFS and stack
+    //use DFS(recursion) and stack and vis[], If adjacency list is not given create it using edges list,
+    // for every index do dfs and for every neighbour do dfs and after coming out of recursion add index to stack and return the ans popping the stack
+    public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) {
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<v;i++) adj.add(new ArrayList<>());
+        for(List<Integer> edge : edges){
+            int x = edge.get(0);
+            int y = edge.get(1);
+            adj.get(x).add(y);
+        }
+        int[] vis = new int[v];
+        ArrayList<Integer> ans = new ArrayList<>();
+        Stack<Integer> stack = new Stack<>();
+
+        for(int i=0;i<v;i++){
+            if(vis[i]==0){
+                dfsTopoSort(adj,i,vis,stack);
+            }
+        }
+        while(!stack.isEmpty()) ans.add(stack.pop());
+        return ans;
+    }
+
+    public static void dfsTopoSort(ArrayList<ArrayList<Integer>> adj, int index, int[] vis, Stack<Integer> stack){
+        vis[index] = 1;
+
+        for(int neighbour : adj.get(index)){
+            if(vis[neighbour] == 0){
+                dfsTopoSort(adj,neighbour,vis,stack);
+            }
+        }
+        stack.push(index);
     }
 }
