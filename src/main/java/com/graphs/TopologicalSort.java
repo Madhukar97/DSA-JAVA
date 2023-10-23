@@ -77,4 +77,43 @@ public class TopologicalSort {
         }
         stack.push(index);
     }
+
+    //Topological sort using BFS and queue
+    //Use iteration and inDegree[] array, form the inDegree array, add all nodes with inDegree=0 to q and
+    //for every node in q iterate all neighbours and decrement the inDegree of each neighbour by 1
+    // and if for any neighbour inDegree==0 add neighbour node to q
+    public static ArrayList<Integer> topologicalSortSol2(ArrayList<ArrayList<Integer>> edges, int v, int e) {
+        ArrayList<Integer> ans = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+        for(int i=0;i<v;i++) adj.add(new ArrayList<>());
+        for(List<Integer> edge : edges){
+            int x = edge.get(0);
+            int y = edge.get(1);
+            adj.get(x).add(y);
+        }
+
+        int[] inDegree = new int[v];
+
+        for(int i=0;i<v;i++){
+            for(int node : adj.get(i)){
+                inDegree[node]+=1;
+            }
+        }
+
+        Queue<Integer> q = new LinkedList<>();
+        for(int i=0;i<v;i++){
+            if(inDegree[i]==0) q.add(i);
+        }
+
+        while(!q.isEmpty()){
+            int node = q.poll();
+            ans.add(node);
+
+            for(int neighbour : adj.get(node)){
+                inDegree[neighbour]-=1;
+                if(inDegree[neighbour] == 0) q.add(neighbour);
+            }
+        }
+        return ans;
+    }
 }
