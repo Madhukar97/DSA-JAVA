@@ -79,6 +79,7 @@ public class TopologicalSort {
     }
 
     //Topological sort using BFS and queue
+    //Kahn's Algorithm
     //Use iteration and inDegree[] array, form the inDegree array, add all nodes with inDegree=0 to q and
     //for every node in q iterate all neighbours and decrement the inDegree of each neighbour by 1
     // and if for any neighbour inDegree==0 add neighbour node to q
