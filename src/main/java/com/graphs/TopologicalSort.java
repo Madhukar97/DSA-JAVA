@@ -45,6 +45,7 @@ public class TopologicalSort {
     //Topological sort using DFS and stack
     //use DFS(recursion) and stack and vis[], If adjacency list is not given create it using edges list,
     // for every index do dfs and for every neighbour do dfs and after coming out of recursion add index to stack and return the ans popping the stack
+    //Time complexity O(n + E) for directed graphs and space O(n + n)
     public static ArrayList<Integer> topologicalSort(ArrayList<ArrayList<Integer>> edges, int v, int e) {
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
         for(int i=0;i<v;i++) adj.add(new ArrayList<>());
