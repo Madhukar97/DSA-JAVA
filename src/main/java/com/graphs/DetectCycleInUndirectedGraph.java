@@ -37,6 +37,7 @@ public class DetectCycleInUndirectedGraph {
     }
 
     //Cycle Detection In Disconnected Undirected Graph using BFS
+    //Time O(N + 2*E) and space O(N)
     public static String cycleDetection(int[][] edges, int n, int m) {
         int[] vis = new int[n+1];
         List<List<Integer>> adj = new ArrayList<>();
