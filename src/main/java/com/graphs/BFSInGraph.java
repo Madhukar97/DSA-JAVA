@@ -7,6 +7,7 @@ import java.util.*;
 //https://practice.geeksforgeeks.org/problems/bfs-traversal-of-graph/1
 public class BFSInGraph {
     //BFS using iteration and Queue
+    //BFS of Directed graph  ---adj = {{1,2,3},{},{4},{},{}}
     public static List<Integer> bfsTraversal(int n, List<List<Integer>> adj){
         ArrayList<Integer> ans = new ArrayList<>();
         int[] vis = new int[n];
