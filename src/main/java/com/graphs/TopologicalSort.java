@@ -82,6 +82,7 @@ public class TopologicalSort {
     //Use iteration and inDegree[] array, form the inDegree array, add all nodes with inDegree=0 to q and
     //for every node in q iterate all neighbours and decrement the inDegree of each neighbour by 1
     // and if for any neighbour inDegree==0 add neighbour node to q
+    //Time complexity O(n + E) for directed graphs and space O(n + n)
     public static ArrayList<Integer> topologicalSortSol2(ArrayList<ArrayList<Integer>> edges, int v, int e) {
         ArrayList<Integer> ans = new ArrayList<>();
         ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
