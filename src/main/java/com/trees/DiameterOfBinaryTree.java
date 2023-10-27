@@ -39,4 +39,20 @@ public class DiameterOfBinaryTree {
         ans = Math.max(ans, 1+l+r);
         return Math.max(l,r) +1;
     }
+
+    //Sol without global variable and time O(n) and space O(n)
+    public int diameterOfBinaryTreeSol2(TreeNode root) {
+        int[] ans = new int[1];
+        rec(root,ans);
+        return ans[0];
+    }
+
+    public int rec(TreeNode node, int[] ans){
+        if(node == null) return 0;
+
+        int left = rec(node.left,ans);
+        int right = rec(node.right,ans);
+        ans[0]=Math.max(ans[0],left+right);
+        return Math.max(left,right)+1;
+    }
 }

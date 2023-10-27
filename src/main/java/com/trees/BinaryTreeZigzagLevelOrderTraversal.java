@@ -62,4 +62,30 @@ public class BinaryTreeZigzagLevelOrderTraversal {
         }
         return outer;
     }
+
+    //Sol2 using less code with time O(n) and space O(n)
+    public List<List<Integer>> zigzagLevelOrderSol2(TreeNode root) {
+        if(root == null) return new ArrayList<>();
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        boolean flag = true;
+
+        while(!q.isEmpty()){
+            List<Integer> list = new ArrayList<>();
+            int size =q.size();
+            for(int i=0;i<size;i++){
+                TreeNode node = q.poll();
+                list.add(node.val);
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+            }
+            if(flag == false){
+                Collections.reverse(list);
+            }
+            ans.add(list);
+            flag=!flag;
+        }
+        return ans;
+    }
 }

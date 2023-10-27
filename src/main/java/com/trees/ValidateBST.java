@@ -30,4 +30,15 @@ public class ValidateBST {
         return isValidBST(root.right);
 
     }
+    //sol 2 using DFS and min and max range
+    public boolean isValidBSTSol2(TreeNode root) {
+        return rec(root, Long.MIN_VALUE, Long.MAX_VALUE);
+    }
+
+    public boolean rec(TreeNode node, long min, long max){
+        if(node == null) return true;
+        if(node.val <= min || node.val >= max) return false;
+
+        return rec(node.left, min, node.val) && rec(node.right, node.val, max);
+    }
 }
