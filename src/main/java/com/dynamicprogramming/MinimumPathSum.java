@@ -1,5 +1,7 @@
 package com.dynamicprogramming;
 
+import java.util.Arrays;
+
 //64. Minimum Path Sum
 //https://leetcode.com/problems/minimum-path-sum/
 public class MinimumPathSum {
@@ -34,6 +36,27 @@ public class MinimumPathSum {
         dp[r][c] = sum + grid[r][c];
 
         return dp[r][c];
+    }
+
+    //Recursion with Memoization sol2 from n to 0 Top-Down approach
+    public int minPathSum2(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        int[][] dp = new int[r][c];
+        for(int[] row : dp) Arrays.fill(row,-1);
+        return rec(grid, r-1, c-1, dp);
+    }
+
+    public int rec(int[][] grid, int i, int j, int[][] dp){
+        if(i < 0 || j < 0) return 8000000;
+        if(i == 0 && j == 0) return grid[i][j];
+
+        if(dp[i][j] != -1) return dp[i][j];
+
+        int up = grid[i][j] + rec(grid, i-1, j, dp);
+        int left = grid[i][j] + rec(grid, i, j-1, dp);
+        dp[i][j] = Math.min(up,left);
+        return dp[i][j];
     }
 
     //Tabulation
