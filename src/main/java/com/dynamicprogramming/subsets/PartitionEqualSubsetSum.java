@@ -206,7 +206,6 @@ public class PartitionEqualSubsetSum {
                 dp[i][target] = notPick || pick ? 1 : 0;
             }
         }
-
         return dp[nums.length-1][sum/2]==1;
     }
 }
