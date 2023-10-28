@@ -35,4 +35,29 @@ public class MinimumPathSum {
 
         return dp[r][c];
     }
+
+    //Tabulation
+    public int minPathSumTabulation(int[][] grid) {
+        int r = grid.length;
+        int c = grid[0].length;
+        int[][] dp = new int[r][c];
+
+        for(int i=0;i<r;i++){
+            for(int j=0;j<c;j++){
+                if(i==0 && j==0){
+                    dp[i][j] = grid[i][j];
+                    continue;
+                }
+                int up = -1;
+                if(i > 0) up = grid[i][j] + dp[i-1][j];
+                int left = -1;
+                if(j > 0) left = grid[i][j] + dp[i][j-1];
+
+                if(up == -1 && left != -1) dp[i][j] = left;
+                else if(up != -1 && left == -1) dp[i][j] = up;
+                else dp[i][j] =  Math.min(up,left);
+            }
+        }
+        return dp[r-1][c-1];
+    }
 }
