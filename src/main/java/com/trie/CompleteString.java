@@ -2,6 +2,7 @@ package com.trie;
 
 //Complete String
 //Longest String with all prefixes
+//https://www.codingninjas.com/studio/problems/complete-string_2687860?utm_source=youtube&utm_medium=affiliate&utm_campaign=striver_tries_videos
 public class CompleteString {
     public static String completeString(int n, String[] a) {
         Trie trie = new Trie();
