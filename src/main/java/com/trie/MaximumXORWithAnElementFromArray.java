@@ -5,7 +5,7 @@ import java.util.*;
 //1707. Maximum XOR With an Element From Array
 //https://leetcode.com/problems/maximum-xor-with-an-element-from-array/description/
 public class MaximumXORWithAnElementFromArray {
-    //Sol using offlineQueries ArrayList with TC = O(Q + N)
+    //Sol using offlineQueries ArrayList with TC = O(Q*32 + N*32)
     public int[] maximizeXor(int[] nums, int[][] queries) {
         int[] ans = new int[queries.length];
         Arrays.sort(nums);
