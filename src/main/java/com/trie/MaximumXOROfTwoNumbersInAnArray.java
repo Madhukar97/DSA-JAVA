@@ -1,6 +1,6 @@
 package com.trie;
 
-//Maximum XOR of Two Numbers in an Array
+//421. Maximum XOR of Two Numbers in an Array
 //https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/
 public class MaximumXOROfTwoNumbersInAnArray {
     public static void main(String[] args) {
