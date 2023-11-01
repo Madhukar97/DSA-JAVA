@@ -3,6 +3,9 @@ package com.trie;
 //Maximum XOR of Two Numbers in an Array
 //https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/
 public class MaximumXOROfTwoNumbersInAnArray {
+    public static void main(String[] args) {
+        System.out.println("NUM : " + (3 >> 0 & 1)); // we are right shifting num by i times and doing & 1 because : >> 0 will give the num instead of bit
+    }
     //Brute Force
     public int findMaximumXOR(int[] nums) {
         int ans = 0;
