@@ -177,9 +177,59 @@ Graphs:
 3.BFS in Graph - use iteration and Queue - If adjacency list is not given create it using edges list, if graph is disconnected do bfs for every index in adj list and store the graphs into ans
 4.Cycle Detection In Undirected Graph Using BFS(iteration and Queue and Pair(node, parent) class) - If adjacency list is not given create it using edges list, if graph is disconnected do bfs for every index in adj list, and check for every index if its neighbours is already visited and not equal to node.parent then return true
 5.Cycle Detection In Undirected Graph Using DFS(recursion) - If adjacency list is not given create it using edges list, if graph is disconnected do DFS for every index in adj list, and check for every index, parent if its neighbours are already visited and not equal to parent then return true
-6.Detect Cycle In Directed Graph using DFS(recursion) - If adjacency list is not given create it using edges list, carry two arrays vis[] and dfsVis[] and do dfs for every index in adj list, and check for every index if its neighbour is already visited and part of current dfs path then return true
+6.Detect Cycle In Directed Graph using DFS(recursion) - If adjacency list is not given create it using edges list, carry two arrays vis[] and dfsVis[] and do dfs for every index in adj list, and check for every index if its neighbour is already visited as part of current dfs path then return true
 7.Topological sort(only valid for DAG) using DFS(recursion) - use DFS(recursion) and stack and vis[], If adjacency list is not given create it using edges list, for every index do dfs and for every neighbour do dfs and after coming out of recursion add index to stack and return the ans popping the stack
 8.Topological sort(only valid for DAG) using BFS(iteration) (Kahn's Algo) - use BFS(iteration) and stack and inDegree[], If adjacency list is not given create it using edges list, Use iteration and inDegree[] array, form the inDegree array using adj list, add all nodes with inDegree=0 to q and for every node in q(add node to topoSort[]) iterate all neighbours and decrement the inDegree of each neighbour by 1 and if for any neighbour inDegree==0 add neighbour node to q
 9.Detect Cycle In Directed Graph using BFS - use Iteration and Queue and TopoSort with BFS, inDegree[]: If adjacency list is not given create it using edges list, create inDegree[] and add all nodes with inDegree=0 to q and for every node in q (add it to topoSort[]) iterate all neighbours and decrement the inDegree[neighbour] by 1 and if for any neighbour inDegree==0 add that neighbour to q and finally if topoSort[].size() < n cycle is present else not
+10.Course Schedule - use Detect cycle in Directed Graph algo with DFS/BFS
+11.Course Schedule II - Return TopoSort if there is no Cycle present in Directed graph else empty array - use DFS/BFS
+12.Number of Islands - use BFS and Island{row,col} class and vis[] or DFS and vis[] array
+13.Surrounded Regions - use BFS and Island{row,col} class and vis[] or DFS and vis[] array : only do DFS/BFS for boundary cells having 'O' and mark them visited and replace all unvisited cells to 'X'
+14.Is Graph Bipartite? using DFS - use DFS(recursion) with colors[] array - for every index, color it and check if neighbours can be colored with alternating color if not check if the neighbour color is same as node color then return false
+15.Is Graph Bipartite? using BFS - use BFS(iteration) with Queue and colors[] array and Node{index,color} class - for every index, color it and check if neighbours can be colored with alternating color and add it into Queue, if not check if the neighbour color is same as node color then return false
+16.Strongly Connected Components (Tarjan’s Algorithm) / Kosarajus Algorithm - find toposort using DFS stack, reverse edges, do dfs on revAdj and add each dfs component to ans
+17.Dijkstra's shortest path - use BFS(Iteration) with dis[] and Node{i,wt} class and PriorityQueue<Node> - if adjacency list is not given create it using edges list, create dis[] and fill it with Integer.MAX_VALUE add source node to pq, And for every Node in pq check all neighbour.wt+node.wt < dis[neighbour.i] update the dis[neighbour.i] and add neighbour Node to pq and finally return dis[] as ans
+18.Network Delay Time(Dijkstra's shortest path) - Same as Dijkstras algorithm (find the Shortest path array and return max value)
+19.Shortest Distance from the Source (Bellman-Ford Algorithm) - relax the edges n-1 times to get the shortest dist[], and if the shortest dist changes for nth relaxation negative wt cycle exist
+20.Cheapest Flights Within K Stops - use modified Bellman-Ford Algorithm - use dis[] and tempDis[] to store the shortest paths, relax the edges k+1 times to calc for k stops
+21.Floyd Warshall - for given graph with n nodes generate n*n matrix and replace no edges to infinity(MAX_INT or 1e9) and self to 0, calc the matrix shortest paths for n times
+22.Prime Minimum Spanning Tree(Greedy BFS) - use BFS(Iteration) and PriorityQueue and Node{i,wt} class and vis[] - if adjacency list is not given create it from edges, add source to queue and iterate till q is empty, poll the min Node and check it its not visited and mark it as visited and add wt to ans, and check for all neighbour nodes if they are not visited add it to PriorityQueue
+23.Kruskals Algorithm Minimum Spanning Tree(Greedy BFS) - use disjoint Set and Union Find ??
+
+Dynamic Programming:
+1.Maximum Product Subarray - brute force: nested loops O(n^3), Better : nested loops O(n^2), Optimal : take prefProd and suffProd and calc it from left and right in single iteration
+2.Product of Array Except Self - Brute force : nested loops calc product for entire subArray skipping current element; Optimal : calc prefix product 1st and calc suffix product and multiply with prefixProduct values in ans[]
+3.House Robber - Brute Force : Recusrion, Optimal : Recursion with DP, Most Optimal : tabulation
+4.House Robber II - Optimal : Recursion with 1D dp, do recursion for both case1(0,n-2) and case2(1,n-1) and return max
+5.Longest Increasing Subsequence - DP on array use take/notTake approach : brute : recursion, Better : rec with memoization, Optimal : Tabulation, Most Optimal : Tabulation with Binary Search on dp[], use single dp[] array and replace/store the values using lowerBound BinarySearch on dp[]
+6.Longest Common Subsequence - (DP on Strings) match/notMatch approach : take 2 pointers i1,i2 and iterate both the strings if they match decrement both, if not consider max of 2 cases(i1-1,i2 | i1,i2-1), Brute(Recursion), Memoization, 2D array Tabulation, 2Arrays Space Optimization
+7.Edit Distance - (DP on Strings) match/notMatch approach : take 2 pointers i1,i2 and iterate both the strings if they match decrement both, if not take min of all 3 operations(insert(i2-1), delete(i1-1), replace(i1-1,i2-1), base case if(i1  < 0 return i2+1) if(i2 < 0 return i1+1)
+8.Maximum Sum Increasing Subsequence - (DP on Subsequence) pick/notPick approach : take i and prev indexes and pick if(arr[i] > arr[prev]) and consider max(pick/notPick)
+9.Matrix Chain Multiplication - (DP on Partitions) : partition can be done from 1st index(i) till (n-1)th index(j) and no.of steps = arr[i-1]*arr[k]*arr[j] + rec(i,k) + rec(k+1,j) and return the min steps
+10.Minimum Path Sum - (DP on Grids) : solve from n to 0 for recursion: Brute(Recursion), Memoization, Tabulation(Space Optimization), 2 Arrays Space Optimization
+11.Coin Change - (DP on subsequences) pick/notPick approach : solve from n to 0 recursion : take min of all possible cases (pick(i,amount-coins[i]), notPick(i-1,amount))
+12.Coin Change II - (DP on subsequences) pick/notPick approach : solve from n to 0 recursion : take sum of all possible cases (pick(i,amount-coins[i]), notPick(i-1,amount))
+13.Partition Equal Subset Sum - (DP on subsets) pick/notPick approach : solve from n to 0 recursion : take OR of all possible cases (pick(i-1,amount-coins[i]), notPick(i-1,amount))
+14.Minimum Cost to Cut a Stick (Rod cutting) (DP on partition) : take a new arr[cuts.length+2] and sort it, recursively iterate for all partitions possible and return min cuts
+15.Palindrome Partitioning II (DP on Partitions) : take start index and recursively check for all possible partitions if its palidrome then only partition it and return min cuts and minCuts-1 as ans because cut of length is considered as 1
+16.Word Break (DP on Partitions) : take start index and recursively iterate through all possible partitions and check if the substring is present in dictionary then only partition it and return (possible || partitionPossible) as ans
+
+Trie:
+1.Implement Trie (Prefix Tree) : implement Node{links Node[26], boolean flag, contains(), get(), put(), setEnd(), isEnd()} class in Trie and implement required methods
+2.Implement Trie ll - implement Node{links Node[26], int prefixCount, int endCount, contains(), get(), put(), increasePrefix(), inceaseEnd(), decreasePrefix(), decreaseEnd(), getPrefix(), getEnd()} class in Trie and implement required methods
+3.Longest String with all prefixes(Complete String) - implement Node{links[26], boolean flag, contains(), get(), put(), setEnd(), isEnd()} class and Trie Data Structure with basic methods() and then insert all words into trie DS and iterate every word and checkIfAllPrefixes() present if yes, compare the size and lexicographic order using String.compareTo() method
+4.Count Distinct Substrings - implement Node{links[26], contains(), get(), put()} and create Root Node and count=0 and iterate for every possible substring check if its present in Root (Trie) if not add the char and increment count else move to next and finally return count+1 as ans because to count empty subString ""
+5.Power Set ??
+6.Maximum XOR of Two Numbers in an Array - (Optimal sol using trie)Create Node{links[2], contains(), get(), put()} class and Trie{root, insert(), getMax()} class : insert all nums into the trie and iterate for every num in array and find Max possible XOR
+7.Maximum XOR With an Element From Array - (optimal using Trie) Create Node{links[2], contains(), get(), put()} class and Trie{root, insert(), getMax()} class and Query{x,m,index} class: Create OfflineQueries and sort it based on 'Query.m' and also sort the nums array, and iterate through every query and insert nums till nums[i] <= Query.m, and find maxXOR using trie.getMax(query.x)
+8.Design Add and Search Words Data Structure - Create Node{map<Character,Node>, boolean flag, setEnd(), isEnd()} class and implement addword() method and for search() method implement recursive function to recursively iterate all character present in the current node when that word.charAt(i) = '.' and return true if its found and false if the char is not present at current node
+
+
+
+
+
+
+
+
 
 
