@@ -3,8 +3,20 @@ package com.trie;
 //Maximum XOR of Two Numbers in an Array
 //https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/
 public class MaximumXOROfTwoNumbersInAnArray {
-    //Using Trie Datastructure with TC = O(n*32) + O(n*32) ans SC cant determined
+    //Brute Force
     public int findMaximumXOR(int[] nums) {
+        int ans = 0;
+        for(int i=0;i<nums.length;i++){
+            for(int j=i+1;j<nums.length;j++){
+                ans = Math.max(ans, nums[i] ^ nums[j]);
+            }
+        }
+        return ans;
+    }
+
+    //Optimal sol Using Trie Datastructure with TC = O(n*32) + O(n*32) ans SC = O(2^32-1) ~ O(1)
+    //A complete (in other words: full) binary tree has (2^h - 1) nodes, so our Trie here can have at most (2^32 - 1) nodes
+    public int findMaximumXORSol2(int[] nums) {
         Trie trie = new Trie();
         for(int n : nums) trie.insert(n);
 
