@@ -9,8 +9,7 @@ public class TopKFrequentElements {
         PriorityQueue<Element> pq = new PriorityQueue<>((e1, e2)->e2.freq-e1.freq);
         Map<Integer,Integer> map = new HashMap<>();
         for(int n : nums){
-            if(map.containsKey(n)) map.put(n, map.get(n)+1);
-            else map.put(n, 1);
+            map.put(n, map.getOrDefault(n, 0)+1);
         }
 
         for(int key : map.keySet()){
