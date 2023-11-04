@@ -31,4 +31,23 @@ public class FirstMissingPositive {
             if (arr[j] != j+1) return j+1;
         } return arr.length+1;
     }
+
+    //Most Optimal sol
+    public int firstMissingPositiveSol2(int[] nums) {
+        int n=nums.length;
+        int i=0;
+        while(i < n){
+            if(nums[i] <= 0 || nums[i] > n || nums[i] == nums[nums[i]-1]){
+                i++;
+                continue;
+            }
+            //swap to correct index
+            int correctIndex = nums[i]-1;
+            int temp = nums[i];
+            nums[i] = nums[correctIndex];
+            nums[correctIndex] = temp;
+        }
+        for(int j=0;j<n;j++) if(nums[j] != j+1) return j+1;
+        return n+1;
+    }
 }
