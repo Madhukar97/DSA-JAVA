@@ -21,7 +21,7 @@ public class IntersectionOfTwoArrays {
         return ans;
     }
 
-    //Optimal sol without Set, TC = O(n) and SC = O(n)
+    //Optimal sol without Set, TC = O(n) and SC = O(1)
     public int[] intersectionSol2(int[] nums1, int[] nums2) {
         int[] hashArray = new int[1000];
         List<Integer> list = new ArrayList<>();
