@@ -20,4 +20,11 @@ public class SingleNumber {
         }
         return ans;
     }
+
+    //Revision 2
+    public int singleNumberSol2(int[] nums) {
+        int ans = 0;
+        for(int n : nums) ans^=n;
+        return ans;
+    }
 }
