@@ -44,4 +44,41 @@ public class NextPermutation {
         }
         else Arrays.sort(nums);
     }
+
+    //Revision 2
+    public void nextPermutationR2(int[] nums) {
+        int pivot = -1;
+        int n=nums.length;
+
+        for(int i=n-1;i>0;i--){
+            if(nums[i-1] < nums[i]){
+                pivot = i-1;
+                break;
+            }
+        }
+        //If there is no pivot reverse the array and return
+        if(pivot == -1){
+            for(int i=0;i<n/2;i++){
+                int temp = nums[i];
+                nums[i] = nums[n-i-1];
+                nums[n-i-1] = temp;
+            }
+            return;
+        }
+        //find the min element from right which is just greater than pivot
+        int minInd = n-1;
+        int min = Integer.MAX_VALUE;
+        for(int i=n-1;i>pivot;i--){
+            if(nums[i] > nums[pivot] && nums[i] < min){
+                min = nums[i];
+                minInd = i;
+            }
+        }
+        //swap with the min element from right which is just greater than pivot
+        int temp = nums[pivot];
+        nums[pivot] = nums[minInd];
+        nums[minInd] = temp;
+        //sort the right part and return
+        Arrays.sort(nums, pivot+1, n);
+    }
 }
