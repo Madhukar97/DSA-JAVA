@@ -57,4 +57,24 @@ public class LongestCommonSubsequence {
         }
         return dp[n][m];
     }
+
+    //Tabulation with Space Optimization with TC O(n*m) and SC = O(2m)
+    public int longestCommonSubsequenceWith2ArraySpaceOptimization(String text1, String text2) {
+        int n1=text1.length();
+        int n2=text2.length();
+        int[] prev = new int[n2+1];
+        int[] curr = new int[n2+1];
+
+        for(int i1=1;i1<=n1;i1++){
+            for(int i2=1;i2<=n2;i2++){
+                if(text1.charAt(i1-1) == text2.charAt(i2-1)) {
+                    curr[i2] = 1+prev[i2-1];
+                }
+                else curr[i2] = Math.max(prev[i2],curr[i2-1]);
+            }
+            prev = curr;
+            curr = new int[n2+1];
+        }
+        return prev[n2];
+    }
 }

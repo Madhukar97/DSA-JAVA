@@ -41,4 +41,31 @@ public class CoinChange {
         dp[amount] = ans;
         return ans;
     }
+
+    //Recursion with memoization sol 2
+    public int coinChangeMem(int[] coins, int amount) {
+        int[][] dp = new int[coins.length][amount+1];
+        for(int[] row : dp) Arrays.fill(row,-1);
+
+        int ans = rec(coins,coins.length-1,amount,dp);
+        if(ans >= 100000) return -1;
+        return ans;
+    }
+
+    public int rec(int[] coins, int i, int amount, int[][] dp){
+        if(amount == 0) return 0;
+        if(i < 0) return 100000;
+
+        if(dp[i][amount] != -1) return dp[i][amount];
+
+        if(coins[i] <= amount){
+            int pick = 1 + rec(coins, i, amount-coins[i],dp);
+            int notPick = rec(coins, i-1, amount,dp);
+
+            dp[i][amount] = Math.min(pick, notPick);
+            return dp[i][amount];
+        }
+        dp[i][amount] = rec(coins, i-1, amount,dp);
+        return dp[i][amount];
+    }
 }

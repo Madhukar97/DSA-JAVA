@@ -1,5 +1,7 @@
 package com.dynamicprogramming.subsets;
 
+import java.util.Arrays;
+
 //https://leetcode.com/problems/partition-equal-subset-sum/description/
 //416. Partition Equal Subset Sum
 public class PartitionEqualSubsetSum {
@@ -123,5 +125,87 @@ public class PartitionEqualSubsetSum {
             curr=new boolean[sum/2+1];
         }
         return prev[sum/2];
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //second revision
+    //Recursion
+    public boolean canPartition2(int[] nums) {
+        int sum=0;
+        for(int n : nums) sum+=n;
+        if(sum%2 ==1 ) return false;
+        return rec(nums, nums.length-1, sum/2);
+    }
+
+    public boolean rec(int[] nums, int i, int target){
+        if(target == 0) return true;
+        if(i < 0) return false;
+
+        boolean notPick = rec(nums, i-1, target);
+        boolean pick = false;
+        if(nums[i] <= target){
+            pick = rec(nums, i-1, target-nums[i]);
+        }
+        return notPick || pick;
+    }
+
+    //Memoization
+    public boolean canPartition2Mem(int[] nums) {
+        int sum=0;
+        for(int n : nums) sum+=n;
+        if(sum%2 ==1 ) return false;
+
+        int[][] dp = new int[nums.length][sum/2+1];
+        for(int[] row : dp) Arrays.fill(row, -1);
+
+        return rec(nums, nums.length-1, sum/2,dp);
+    }
+
+    public boolean rec(int[] nums, int i, int target, int[][] dp){
+        if(target == 0) return true;
+        if(i < 0) return false;
+
+        if(dp[i][target] != -1) return dp[i][target] == 1;
+
+        boolean notPick = rec(nums, i-1, target,dp);
+        boolean pick = false;
+        if(nums[i] <= target){
+            pick = rec(nums, i-1, target-nums[i],dp);
+        }
+        dp[i][target] = notPick || pick ? 1 : 0;
+        return notPick || pick;
+    }
+
+    //Tabulation
+    public boolean canPartition2Tabulation(int[] nums) {
+        int sum=0;
+        for(int n : nums) sum+=n;
+        if(sum%2 ==1 ) return false;
+
+        int[][] dp = new int[nums.length][sum/2+1];
+        for(int i=0;i<nums.length;i++)  dp[i][0] = 1;
+
+        for(int i=1;i<nums.length;i++){
+            for(int target=1;target<=sum/2;target++){
+                boolean notPick = dp[i-1][target]==1;
+                boolean pick = false;
+                if(nums[i] <= target){
+                    pick = dp[i-1][target-nums[i]]==1;
+                }
+                dp[i][target] = notPick || pick ? 1 : 0;
+            }
+        }
+        return dp[nums.length-1][sum/2]==1;
     }
 }

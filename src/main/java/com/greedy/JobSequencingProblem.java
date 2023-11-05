@@ -41,4 +41,30 @@ public class JobSequencingProblem {
         }
         return new int[]{count,profit};
     }
+
+    //Revision 2
+    //Function to find the maximum profit and the number of jobs done.
+    int[] JobSchedulingSol2(Job arr[], int n)
+    {
+        int maxDeadLine = 0;
+        for(Job job : arr) maxDeadLine = Math.max(maxDeadLine, job.deadline);
+
+        int[] jobSeq = new int[maxDeadLine+1];
+        Arrays.fill(jobSeq, -1);
+        Arrays.sort(arr, (j1,j2)-> j2.profit-j1.profit);
+
+        int profit=0, noOfJobs=0;
+
+        for(int i=0;i<arr.length;i++){
+            for(int j=arr[i].deadline;j>0;j--){
+                if(jobSeq[j] == -1 ){
+                    jobSeq[j] = arr[i].id;
+                    profit+=arr[i].profit;
+                    noOfJobs+=1;
+                    break;
+                }
+            }
+        }
+        return new int[]{noOfJobs, profit};
+    }
 }

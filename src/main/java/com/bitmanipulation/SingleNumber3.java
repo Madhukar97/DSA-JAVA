@@ -9,6 +9,12 @@ public class SingleNumber3 {
     public static void main(String[] args) {
         int[] nums = {1,2,1,3,2,5};
         System.out.println(Arrays.toString(singleNumber3(nums)));
+        System.out.println("res : " + (4 & -4));
+        System.out.println("res2 : " + (4 & (4-1) ^ 4));
+        System.out.println("res : " + (5 & -5));
+        System.out.println("res2 : " + (5 & (5-1) ^ 5));
+        System.out.println("res : " + (5 & 5));
+        System.out.println("res : " + (5 & 5));
     }
 
     //  method for O(n) time complexity and O(n) space complexity
@@ -49,6 +55,24 @@ public class SingleNumber3 {
         ans[0] = num1;
         ans[1] = num1 ^ xor;
 
+        return ans;
+    }
+
+    //Revision 2
+    //Optimal sol
+    public int[] singleNumberSol2(int[] nums) {
+        int xor = 0;
+        int[] ans = new int[2];
+        for(int i=0; i< nums.length; i++) {
+            xor = xor ^ nums[i];
+        }
+        // Get its last set bit
+        xor = xor & -xor;
+
+        for(int n : nums){
+            if((n & xor) == 0) ans[0]^=n;
+            else ans[1]^=n;
+        }
         return ans;
     }
 }
