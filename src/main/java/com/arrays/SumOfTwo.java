@@ -1,7 +1,6 @@
 package com.arrays;
 
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class SumOfTwo {
 
@@ -43,5 +42,34 @@ public class SumOfTwo {
             else map.put(target-nums[i], i);
         }
         return ans;
+    }
+
+    //Optimal sol 2 using sorting and Node class and arrayList
+    public int[] twoSum3(int[] nums, int target) {
+        List<Node> list = new ArrayList<>();
+        for(int i=0;i<nums.length;i++){
+            list.add(new Node(i, nums[i]));
+        }
+
+        Collections.sort(list, (o1,o2)->o1.val-o2.val);
+        int i=0;
+        int j=nums.length-1;
+        while(i < j){
+            int sum = list.get(i).val+list.get(j).val;
+            if(sum == target) return new int[]{list.get(i).i,list.get(j).i};
+            else if(sum > target) j--;
+            else i++;
+        }
+        return new int[]{0,0};
+    }
+
+    public class Node{
+        int i;
+        int val;
+
+        public Node(int i, int v){
+            this.i=i;
+            this.val=v;
+        }
     }
 }
