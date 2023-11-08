@@ -85,4 +85,36 @@ public class PalindromeLinkedList {
         }
         return pre;
     }
+
+    //Most optimal sol with TC = O(n) and SC = O(1)
+    //Revision 2
+    public boolean isPalindromeR2(ListNode head) {
+        if(head.next == null) return true;
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+
+        ListNode prev=null;
+        ListNode curr=slow;
+        if(fast != null) curr = slow.next;
+        ListNode next = curr.next;
+        while(curr != null){
+            curr.next=prev;
+            prev=curr;
+            curr=next;
+            if(next != null) next=next.next;
+        }
+
+        ListNode start = head;
+        ListNode end = prev;
+        while(end != null){
+            if(start.val != end.val) return false;
+            start=start.next;
+            end=end.next;
+        }
+        return true;
+    }
 }
