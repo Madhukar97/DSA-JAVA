@@ -64,4 +64,39 @@ public class FlattenALinkedList {
         }
         return curr;
     }
+
+    //Most Optimal sol using Iteration
+    Node flatten(Node root){
+        Node head = new Node(0);
+        head.next = root;
+
+        Node next = root.next;
+
+        while(next != null){
+            head.next = mergeSortedLists(head.next, next);
+            next=next.next;
+        }
+        return head.next;
+    }
+
+    Node mergeSortedLists(Node a, Node b){
+        Node head = new Node(0);
+        Node prev = head;
+
+        while(a != null && b != null){
+            if(a.data <= b.data){
+                prev.bottom=a;
+                prev=prev.bottom;
+                a=a.bottom;
+            }else{
+                prev.bottom=b;
+                prev=prev.bottom;
+                b=b.bottom;
+            }
+        }
+
+        if(a != null) prev.bottom = a;
+        if(b != null) prev.bottom = b;
+        return head.bottom;
+    }
 }
