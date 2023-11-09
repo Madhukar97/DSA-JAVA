@@ -4,6 +4,13 @@ package com.linkedlistproblems;
 //https://leetcode.com/problems/reverse-nodes-in-even-length-groups/description/
 public class ReverseNodesInEvenLengthGroups {
     //sol similar to Reverse Nodes in K Groups
+    /*
+    Intuition
+    Similar to Reverse Nodes In K Groups, except that here k starts with k=1 and keeps incrementing by 1 after every iteration,
+    for last iteration k(nth) can be <= 1+k((n-1)th) group, so we need to calc the count of nodes in every group and update k accordingly.
+    And for last group if calculated K comes to be positive, even though it should be a odd length group, we should perform the reverse operation.
+    We need to perform this iterations till next or prev pointer is null because end might become null in last group of node.
+     */
     public static class ListNode {
         int val;
         ListNode next;
