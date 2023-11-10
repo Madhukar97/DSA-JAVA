@@ -47,4 +47,38 @@ public class CopyListWithRandomPointer {
         }
         return res;
     }
+
+    //Optimal sol
+    //Revision 2
+    public Node copyRandomListR2(Node head) {
+        Node originalHead = head;
+
+        //Step 1 insert clone nodes
+        Node curr = head;
+        while(curr != null){
+            Node clone = new Node(curr.val);
+            clone.next=curr.next;
+            curr.next=clone;
+            curr = curr.next.next;
+        }
+
+        //Step 2 assign random pointers
+        curr = head;
+        while(curr != null ){
+            if(curr.random != null) curr.next.random = curr.random.next;
+            curr=curr.next.next;
+        }
+
+        //Step 3 seperate clone list
+        Node cloneHead = new Node(0);
+        Node cloneCurr = cloneHead;
+        curr=head;
+        while(curr != null){
+            cloneCurr.next=curr.next;
+            curr.next=curr.next.next;
+            curr=curr.next;
+            cloneCurr=cloneCurr.next;
+        }
+        return cloneHead.next;
+    }
 }
