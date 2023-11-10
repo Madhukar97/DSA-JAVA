@@ -32,4 +32,28 @@ public class Subsets {
         inner.remove(inner.size()-1);
         recFunc(nums, outer, s+1, e);
     }
+
+    //Revision 2
+    //Optimal sol
+    public List<List<Integer>> subsetsR2(int[] nums) {
+        List<List<Integer>> ans = new ArrayList<>();
+        rec(nums, 0, ans, new ArrayList<>());
+        return ans;
+    }
+
+    public void rec(int[] nums, int index, List<List<Integer>> ans, List<Integer> subset){
+        if(index == nums.length) {
+            List<Integer> sub = new ArrayList<>();
+            for(int i : subset) sub.add(i);
+            ans.add(sub);
+            return;
+        }
+
+        //pick
+        subset.add(nums[index]);
+        rec(nums, index+1, ans, subset);
+        //not pick
+        subset.remove(subset.size()-1);
+        rec(nums, index+1, ans, subset);
+    }
 }
