@@ -41,4 +41,24 @@ public class CombinationSumIV {
         dp[index][target] = pick+notPick;
         return dp[index][target];
     }
+
+    //Tabulation sol
+    public int combinationSum4Tab(int[] nums, int target) {
+        int[][] dp = new int[nums.length][target+1];
+        for(int i=0;i<nums.length;i++) dp[i][0] = 1;
+
+        for(int t=1;t<=target;t++){
+            for(int i=nums.length-1;i>=0;i--){
+                //pick
+                int pick = 0;
+                if(t-nums[i] >=0 ) pick = dp[0][t-nums[i]];
+                //not pick
+                int notPick = 0;
+                if(i+1 < nums.length) notPick = dp[i+1][t];
+                dp[i][t] = pick+notPick;
+            }
+        }
+
+        return dp[0][target];
+    }
 }
