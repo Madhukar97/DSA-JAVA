@@ -1,4 +1,4 @@
-package com.strings;
+package com.dynamicprogramming.partitionDP;
 
 import java.util.ArrayList;
 import java.util.List;

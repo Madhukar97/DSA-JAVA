@@ -114,4 +114,53 @@ public class NQueens {
         }
         return true;
     }
+
+    //Optimal sol
+    //Revision 2
+    public List<List<String>> solveNQueensR2(int n) {
+        int[][] board = new int[n][n];
+        List<List<String>> ans = new ArrayList<>();
+        rec(board, 0, ans);
+        return ans;
+    }
+
+    public void rec(int[][] board, int r, List<List<String>> ans){
+        if(r == board.length){
+            List<String> sol = new ArrayList<>();
+            for(int i=0;i<board.length;i++){
+                StringBuilder sb = new StringBuilder();
+                for(int j=0;j<board.length;j++){
+                    if(board[i][j] == 1) sb.append("Q");
+                    else sb.append(".");
+                }
+                sol.add(sb.toString());
+            }
+            ans.add(sol);
+            return;
+        }
+
+        for(int j=0;j<board.length;j++){
+            if(isValid(board, r, j)){
+                board[r][j] = 1;
+                rec(board, r+1, ans);
+                board[r][j] = 0;
+            }
+        }
+    }
+
+    public boolean isValid(int[][] board, int r, int c){
+        int i=r;
+        int j=c;
+        //check column
+        while(i>=0) if(board[i--][c] == 1) return false;
+        //check left diagonal
+        i=r;
+        j=c;
+        while(i>=0 && j>=0) if(board[i--][j--] == 1) return false;
+        //check right diagonal
+        i=r;
+        j=c;
+        while(i>=0 && j<board.length) if(board[i--][j++] == 1) return false;
+        return true;
+    }
 }

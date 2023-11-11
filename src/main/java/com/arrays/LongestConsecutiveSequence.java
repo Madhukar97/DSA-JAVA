@@ -34,4 +34,24 @@ public class LongestConsecutiveSequence {
         ans = Math.max(ans, count);
         return ans;
     }
+
+    //Optimal sol 2
+    //Revision 2
+    public int longestConsecutiveR2(int[] nums) {
+        if(nums.length < 2) return nums.length;
+        Arrays.sort(nums);
+
+        int ans=1;
+        int count=1;
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i] == nums[i+1]-1) {
+                count++;
+                ans = Math.max(ans,count);
+            }else if(nums[i] == nums[i+1]){
+                continue;
+            }
+            else count=1;
+        }
+        return ans;
+    }
 }

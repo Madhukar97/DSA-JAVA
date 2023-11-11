@@ -67,4 +67,29 @@ public class RotateList {
         }
         return res.next;
     }
+
+    //Revision 2
+    public ListNode rotateRightR2(ListNode head, int k) {
+        if(k == 0 || head == null || head.next==null) return head;
+        int len = 1;
+        ListNode end = head;
+
+        while(end.next != null){
+            end=end.next;
+            len++;
+        }
+
+        k=k%len;
+        ListNode root = new ListNode();
+        root.next = head;
+
+        ListNode start = head;
+        for(int i=1;i<len-k;i++){
+            start = start.next;
+        }
+        end.next = head;
+        root.next = start.next;
+        start.next=null;
+        return root.next;
+    }
 }

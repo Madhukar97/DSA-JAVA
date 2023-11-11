@@ -67,4 +67,26 @@ public class JobSequencingProblem {
         }
         return new int[]{noOfJobs, profit};
     }
+
+    //Revision 3
+    int[] JobSchedulingR3(Job arr[], int n){
+        int[] jobs = new int[n];
+        Arrays.sort(arr, (j1,j2)->j2.profit-j1.profit);
+        int count = 0;
+        int profit=0;
+
+        for(Job j : arr){
+            int pointer=j.deadline-1;
+            while(pointer >=0){
+                if(jobs[pointer] == 0){
+                    jobs[pointer] = j.id;
+                    count++;
+                    profit+=j.profit;
+                    break;
+                }
+                pointer--;
+            }
+        }
+        return new int[]{count,profit};
+    }
 }

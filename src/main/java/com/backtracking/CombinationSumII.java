@@ -61,4 +61,28 @@ public class CombinationSumII {
             comb.remove(comb.size()-1);
         }
     }
+
+    //Revision 2
+    public List<List<Integer>> combinationSum2R2(int[] candidates, int target) {
+        Arrays.sort(candidates);
+        List<List<Integer>> ans = new ArrayList<>();
+        rec(candidates, 0, target, ans, new ArrayList<>());
+        return ans;
+    }
+
+    public void rec(int[] nums, int index, int target, List<List<Integer>> ans, List<Integer> comb){
+        if(target == 0) {
+            ans.add(new ArrayList<>(comb));
+            return;
+        }
+
+        if(index == nums.length || target < 0) return;
+
+        for(int i=index;i<nums.length;i++){
+            if(i > index && nums[i] == nums[i-1]) continue;
+            comb.add(nums[i]);
+            rec(nums, i+1, target-nums[i], ans, comb);
+            comb.remove(comb.size()-1);
+        }
+    }
 }
