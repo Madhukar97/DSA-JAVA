@@ -89,4 +89,28 @@ public class CombinationSum {
         //not pick
         recFuncSol2(i+1,candidates,target,comb,ans);
     }
+
+    //Optimal sol
+    //Revision 2
+    public List<List<Integer>> combinationSumR2(int[] candidates, int target) {
+        List<List<Integer>> ans = new ArrayList<>();
+        rec(candidates, 0, target, ans, new ArrayList<>());
+        return ans;
+    }
+
+    public void rec(int[] nums, int index, int target, List<List<Integer>> ans, List<Integer> comb){
+        if(target == 0){
+            ans.add(new ArrayList<>(comb));
+            return;
+        }
+
+        if(index == nums.length || target < 0) return;
+
+        //pick
+        comb.add(nums[index]);
+        rec(nums, index, target-nums[index], ans, comb);
+        //not pick
+        comb.remove(comb.size()-1);
+        rec(nums, index+1, target, ans, comb);
+    }
 }
