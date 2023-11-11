@@ -51,4 +51,35 @@ public class PalindromePartitioning {
         }
         return true;
     }
+
+    //Revision 2
+    public List<List<String>> partitionR2(String s) {
+        List<List<String>> ans = new ArrayList<>();
+        rec(s, 0, ans, new ArrayList<>());
+        return ans;
+    }
+
+    public void rec(String s, int index, List<List<String>> ans, List<String> pals){
+        if(index == s.length()){
+            ans.add(new ArrayList<>(pals));
+            return;
+        }
+
+        for(int i=index;i<s.length();i++){
+            if(isPalindromeR2(s, index, i)){
+                pals.add(s.substring(index,i+1));
+                rec(s, i+1, ans, pals);
+                pals.remove(pals.size()-1);
+            }
+        }
+    }
+
+    public boolean isPalindromeR2(String s, int i, int j){
+        while(i < j){
+            if(s.charAt(i) != s.charAt(j)) return false;
+            i++;
+            j--;
+        }
+        return true;
+    }
 }
