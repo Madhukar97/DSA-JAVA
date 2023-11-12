@@ -4,6 +4,7 @@ package com.binarysearch;
 //https://leetcode.com/problems/single-element-in-a-sorted-array/description/
 public class SingleElementInASortedArray {
     //Optimal sol 1 using binary search
+    //search the array based on even or odd indexes nums[i] == nums[i^1] and low will end up just right of the left half
     public int singleNonDuplicate(int[] nums) {
         int left = 0;
         int right = nums.length-2;
