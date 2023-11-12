@@ -1,4 +1,4 @@
-package com.arrays;
+package com.binarysearch;
 
 import java.util.Arrays;
 
@@ -59,5 +59,43 @@ public class MedianOfTwoSortedArrays {
             else s=mid1+1;
         }
         return 0;
+    }
+
+    //Most optimal sol
+    //Revision 2
+    public double findMedianSortedArraysR2(int[] nums1, int[] nums2) {
+        int n1=nums1.length;
+        int n2=nums2.length;
+        if(n1 > n2) return findMedianSortedArraysR2(nums2, nums1);
+        int n=n1+n2;
+        int leftCount = (n+1)/2;
+        double ans=0;
+        int s=0;
+        int e=n1-1;
+
+        while(true){
+            int mid1=0;
+            if(s==n1) mid1=s;
+            else mid1 = s+(e-s)/2;
+            int mid2 = leftCount-mid1;
+            int l1=Integer.MIN_VALUE;
+            int l2=Integer.MIN_VALUE;
+            int r1=Integer.MAX_VALUE;
+            int r2=Integer.MAX_VALUE;
+            if(mid1-1>=0) l1 = nums1[mid1-1];
+            if(mid1<n1) r1 = nums1[mid1];
+            if(mid2-1>=0) l2 = nums2[mid2-1];
+            if(mid2<n2) r2 = nums2[mid2];
+            // System.out.println("l1 : " +l1+", r1 : "+r1);
+            // System.out.println("l2 : " +l2+", r2 : "+r2);
+            if(l1 <= r2 && l2 <= r1) {
+                if(n%2 == 0) ans = (Math.max(l1,l2)+Math.min(r1,r2))/(double)2;
+                else ans = Math.max(l1,l2);
+                break;
+            }
+            else if(l1 > r2) e=mid1-1;
+            else s=mid1+1;
+        }
+        return ans;
     }
 }
