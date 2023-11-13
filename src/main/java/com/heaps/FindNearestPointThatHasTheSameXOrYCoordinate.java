@@ -39,4 +39,29 @@ public class FindNearestPointThatHasTheSameXOrYCoordinate {
             this.dist = Math.abs(x-x1)+Math.abs(y-y1);
         }
     }
+
+    //Optimal sol with TC = O(n) ans space = O(1)
+    public int nearestValidPointSol2(int x, int y, int[][] points) {
+        int sIndex = 100000;
+        int sDistance = 100000;
+
+        for (int i = 0; i < points.length; i++) {
+
+            // Check if is a valid point
+            if (points[i][0] == x || points[i][1] == y) {
+
+                // Check if it is better than the previous best
+                int distance = Math.abs(x - points[i][0]) + Math.abs(y - points[i][1]);
+                if (sDistance > distance) {
+                    sDistance = distance;
+                    sIndex = i;
+                }
+            }
+        }
+
+        // Check if we have a valid point to return
+        if (sIndex == 100000)
+            return -1;
+        return sIndex;
+    }
 }
