@@ -33,4 +33,22 @@ public class LongestCommonPrefix {
         }
         return ans.toString();
     }
+
+    //Optimal sol
+    //Revision 2
+    public String longestCommonPrefixR2(String[] strs) {
+        String ans="";
+        Arrays.sort(strs);
+        String s1 = strs[0];
+        String s2 = strs[strs.length-1];
+        int i=0;
+        while(i<s1.length()){
+            if(s1.charAt(i) != s2.charAt(i)){
+                break;
+            }
+            i++;
+        }
+        ans=s1.substring(0,i);
+        return ans;
+    }
 }
