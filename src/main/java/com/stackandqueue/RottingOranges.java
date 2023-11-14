@@ -64,4 +64,61 @@ public class RottingOranges {
             this.t=t;
         }
     }
+    //Most Optimal sol by me using BFS and Queue with TC = O(m*n) and SC = O(1)
+    class Solution {
+        public int orangesRotting(int[][] grid) {
+            int ans=0;
+            int freshCount=0;
+            int rottCount=0;
+            int m=grid.length;
+            int n=grid[0].length;
+            Queue<Orange> q = new LinkedList<>();
+
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(grid[i][j] == 2) {
+                        q.add(new Orange(i,j));
+                    }else if(grid[i][j] == 1) freshCount++;
+                }
+            }
+            q.add(null);
+
+            while(!q.isEmpty()){
+                Orange curr = q.poll();
+
+                if(curr == null && q.isEmpty()) break;
+                else if(curr == null) {
+                    ans++;
+                    q.add(null);
+                    continue;
+                }
+                //bfs
+                int[] rows = {-1,0,1,0};
+                int[] cols = {0,1,0,-1};
+                for(int i=0;i<4;i++){
+                    int newR = curr.x+rows[i];
+                    int newC = curr.y+cols[i];
+                    if(newR>=0 && newR<m && newC>=0 && newC<n && grid[newR][newC] == 1){
+                        grid[newR][newC] = 2;
+                        q.add(new Orange(newR,newC));
+                        rottCount++;
+                    }
+                }
+
+            }
+            // System.out.println("RC : " + rottCount + ", FC : " +  freshCount);
+            if(rottCount == freshCount) return ans;
+            return -1;
+        }
+
+        public class Orange{
+            int x;
+            int y;
+
+            public Orange(int x, int y){
+                this.x=x;
+                this.y=y;
+            }
+        }
+    }
 }
