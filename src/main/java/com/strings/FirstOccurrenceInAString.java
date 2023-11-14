@@ -1,5 +1,6 @@
 package com.strings;
 
+//28. Find the Index of the First Occurrence in a String
 //https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/submissions/
 public class FirstOccurrenceInAString {
     public static void main(String[] args) {
@@ -26,5 +27,19 @@ public class FirstOccurrenceInAString {
             p1++;
         }
         return -1;
+    }
+
+    //Optimal sol using substring method
+    public int strStrSol2(String haystack, String needle) {
+        if(haystack.length() < needle.length()) return -1;
+        int ans=-1;
+
+        for(int i=0;i<haystack.length()-needle.length()+1;i++){
+            if(haystack.substring(i,i+needle.length()).equals(needle)) {
+                ans=i;
+                break;
+            }
+        }
+        return ans;
     }
 }
