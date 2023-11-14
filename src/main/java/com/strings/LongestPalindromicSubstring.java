@@ -93,4 +93,37 @@ public class LongestPalindromicSubstring {
             }
         }
     }
+
+    //Optimal sol
+    //Revision 2
+    public String longestPalindromeR2(String s) {
+        int n = s.length();
+        String ans = "";
+
+        for(int i=0;i<n;i++){
+            int l=i;
+            int r=i;
+            while(l >=0 && r<n){
+                if(s.charAt(l) == s.charAt(r)){
+                    String newS = s.substring(l,r+1);
+                    if(ans.length() < newS.length()) ans = newS;
+                    l--;
+                    r++;
+                }else break;
+            }
+        }
+        for(int i=0;i<n-1;i++){
+            int l=i;
+            int r=i+1;
+            while(l >=0 && r<n){
+                if(s.charAt(l) == s.charAt(r)){
+                    String newS = s.substring(l,r+1);
+                    if(ans.length() < newS.length()) ans = newS;
+                    l--;
+                    r++;
+                }else break;
+            }
+        }
+        return ans;
+    }
 }
