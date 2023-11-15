@@ -20,7 +20,7 @@ public class VerticalOrderTraversalofaBinaryTree {
             this.right = right;
         }
     }
-
+    //Not working solution, since overlapping nodes has to be sorted by value
     public List<List<Integer>> verticalTraversal(TreeNode root) {
         Queue<Pair> queue = new LinkedList<>();
         List<List<Integer>> outer = new ArrayList<>();
