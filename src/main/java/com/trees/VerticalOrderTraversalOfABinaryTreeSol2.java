@@ -92,4 +92,44 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
             this.node=node;
         }
     }
+
+    //Optimal sol 2
+    //Revision 2
+    class Solution {
+        public List<List<Integer>> verticalTraversal(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+            Map<Integer, List<Tuple>> map = new TreeMap<>();
+            Queue<Tuple> q = new LinkedList<>();
+            q.add(new Tuple(root,0,0));
+
+            while(!q.isEmpty()){
+                Tuple curr = q.poll();
+
+                map.putIfAbsent(curr.x, new ArrayList<>());
+                map.get(curr.x).add(curr);
+                if(curr.node.left != null) q.add(new Tuple(curr.node.left, curr.x-1, curr.y+1));
+                if(curr.node.right != null) q.add(new Tuple(curr.node.right, curr.x+1, curr.y+1));
+            }
+            for(int k : map.keySet()) {
+                List<Tuple> tuples = map.get(k);
+                Collections.sort(tuples, (t1,t2) -> t1.y==t2.y ? t1.node.val-t2.node.val : t1.y-t2.y);
+                List<Integer> list = new ArrayList<>();
+                for(Tuple t  :tuples) list.add(t.node.val);
+                ans.add(list);
+            }
+            return ans;
+        }
+
+        public class Tuple{
+            TreeNode node;
+            int x;
+            int y;
+
+            public Tuple(TreeNode n, int x, int y){
+                node=n;
+                this.x=x;
+                this.y=y;
+            }
+        }
+    }
 }
