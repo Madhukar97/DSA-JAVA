@@ -42,4 +42,27 @@ public class CountAndSay {
         }
         return s;
     }
+
+    //Most optimal sol using Recursion and StringBuilder
+    //Revision 2
+    public String countAndSayR2(int n) {
+        return rec( "1", n);
+    }
+
+    public String rec(String n, int count){
+        if(count == 1) return n;
+        StringBuilder newN = new StringBuilder();
+        int i=0;
+        int j=0;
+        while(i<n.length() && j<=n.length()){
+            if(j<n.length() && n.charAt(i) == n.charAt(j)){
+                j++;
+            }else{
+                int len = j-i;
+                newN.append(len).append(n.charAt(i));
+                i=j;
+            }
+        }
+        return rec(newN.toString(), count-1);
+    }
 }
