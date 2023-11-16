@@ -15,8 +15,8 @@ public class AverageOfLevelsInBinaryTree {
           this.val = val;
           this.left = left;
           this.right = right;
-     }
- }
+      }
+    }
     //using level order traversal
     public List<Double> averageOfLevels(TreeNode root) {
         List<Double> ans = new ArrayList<>();
