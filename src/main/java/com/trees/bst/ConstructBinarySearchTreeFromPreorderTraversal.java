@@ -34,4 +34,24 @@ public class ConstructBinarySearchTreeFromPreorderTraversal {
         node.right = rec(preorder, mid+1, end);
         return node;
     }
+
+    //Revision 2
+    public TreeNode bstFromPreorderR2(int[] preorder) {
+        return recR2(preorder, 0, preorder.length-1);
+    }
+
+    public TreeNode recR2(int[] preorder, int preStart, int preEnd){
+        if(preStart > preEnd) return null;
+
+        TreeNode node = new TreeNode(preorder[preStart]);
+        int leftSubTree = 0;
+        for(int i=preStart+1;i<=preEnd;i++){
+            if(preorder[i] < preorder[preStart]) leftSubTree++;
+            else break;
+        }
+
+        node.left = recR2(preorder, preStart+1, preStart+leftSubTree);
+        node.right = recR2(preorder, preStart+leftSubTree+1, preEnd);
+        return node;
+    }
 }
