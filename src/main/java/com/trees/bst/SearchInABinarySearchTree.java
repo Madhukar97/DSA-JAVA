@@ -31,4 +31,19 @@ public class SearchInABinarySearchTree {
         if(left == null) return right;
         return left;
     }
+
+    //Revision 2
+    class Solution {
+        public TreeNode searchBST(TreeNode root, int val) {
+            return rec(root, val);
+        }
+
+        public TreeNode rec(TreeNode node, int val){
+            if(node == null) return null;
+            if(node.val == val) return node;
+
+            if(val < node.val) return rec(node.left,val);
+            return rec(node.right,val);
+        }
+    }
 }
