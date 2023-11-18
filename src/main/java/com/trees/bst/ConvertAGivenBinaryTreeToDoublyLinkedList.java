@@ -31,4 +31,27 @@ public class ConvertAGivenBinaryTreeToDoublyLinkedList {
         prev=node;
         rec(node.right);
     }
+
+    //Revision 2 without global variable
+    public class Solution {
+
+        public static BinaryTreeNode<Integer> BTtoDLL(BinaryTreeNode<Integer> root) {
+            BinaryTreeNode[] prev= new BinaryTreeNode[1];
+            rec(root, prev);
+            return prev[0];
+        }
+
+        public static void rec(BinaryTreeNode<Integer> node, BinaryTreeNode[] prev){
+            if(node == null) return;
+
+            rec(node.right,prev);
+            node.right = prev[0];
+            if(prev[0] != null) prev[0].left = node;
+            prev[0] = node;
+
+            rec(node.left,prev);
+        }
+
+
+    }
 }
