@@ -32,4 +32,29 @@ public class CeilFromBST {
         }
         return ceil;
     }
+
+    //Revision 2
+    public class Solution {
+
+        public  static int findCeil(TreeNode<Integer> node, int x) {
+            int[] ans = new int[1];
+            ans[0]=Integer.MAX_VALUE;
+            rec(node, x, ans);
+            if(ans[0] == Integer.MAX_VALUE) return -1;
+            return ans[0];
+        }
+
+        public static void rec(TreeNode<Integer> node, int x, int[] ans){
+            if(node == null) return;
+            if(node.data == x){
+                ans[0] = node.data;
+                return;
+            }
+
+            if(node.data < ans[0] && node.data > x) ans[0] = node.data;
+
+            if(x < node.data) rec(node.left,x, ans);
+            else rec(node.right,x, ans);
+        }
+    }
 }
