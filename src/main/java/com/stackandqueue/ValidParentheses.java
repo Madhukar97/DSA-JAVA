@@ -50,4 +50,18 @@ public class ValidParentheses {
         }
         return stack.size()==0;
     }
+
+    //Revision 2
+    public boolean isValidR2(String s) {
+        Stack<Character> stack = new Stack<>();
+
+        for(int i=0;i<s.length();i++){
+            char ch = s.charAt(i);
+            if(ch == ')' && !stack.isEmpty() && stack.peek() == '(') stack.pop();
+            else if(ch == '}' && !stack.isEmpty() && stack.peek() == '{') stack.pop();
+            else if(ch == ']' && !stack.isEmpty() && stack.peek() == '[') stack.pop();
+            else stack.push(ch);
+        }
+        return stack.isEmpty();
+    }
 }

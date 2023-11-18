@@ -25,4 +25,18 @@ public class CompareVersionNumbers {
         }
         return 0;
     }
+
+    //Most optimal sol by comparing each revision version without Split operation
+    //Revision 2
+    public int compareVersionSol2(String v1, String v2) {
+        for(int i=0,j=0,m=0,n=0;i<v1.length() || j<v2.length(); i++,j++){
+            m=0;
+            n=0;
+            while(i < v1.length() && v1.charAt(i) != '.') m=m*10+v1.charAt(i++)-'0';
+            while(j < v2.length() && v2.charAt(j) != '.') n=n*10+v2.charAt(j++)-'0';
+            if(m < n) return -1;
+            if(m > n) return 1;
+        }
+        return 0;
+    }
 }

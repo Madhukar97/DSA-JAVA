@@ -31,4 +31,16 @@ public class SymmetricTree {
         boolean right = rec(node1.right, node2.left);
         return left && right;
     }
+
+    //Revision 2
+    public boolean isSymmetricR2(TreeNode root) {
+        return recR2(root,root);
+    }
+
+    public boolean recR2(TreeNode n1, TreeNode n2){
+        if(n1 == null && n2 == null) return true;
+        if((n1 == null && n2 != null) || (n1 != null && n2==null) || n1.val != n2.val) return false;
+
+        return recR2(n1.left,n2.right) && rec(n1.right,n2.left);
+    }
 }

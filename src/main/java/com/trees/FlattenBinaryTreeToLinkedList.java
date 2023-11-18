@@ -30,4 +30,23 @@ public class FlattenBinaryTreeToLinkedList {
         node.left=null;
         prev=node;
     }
+
+    //Revision 2
+    class Solution {
+        public void flatten(TreeNode root) {
+            TreeNode[] prev = new TreeNode[1];
+            rec(root,prev);
+        }
+
+        public void rec(TreeNode node, TreeNode[] prev){
+            if(node == null) return;
+
+            rec(node.right,prev);
+            rec(node.left,prev);
+
+            node.right = prev[0];
+            node.left = null;
+            prev[0] = node;
+        }
+    }
 }

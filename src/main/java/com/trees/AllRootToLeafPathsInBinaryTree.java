@@ -41,4 +41,23 @@ public class AllRootToLeafPathsInBinaryTree {
         rec(node.right, list, ans);
         list.remove(list.size()-1);
     }
+
+    //Most Optimal sol with TC = O(n) and SC = O(1)
+    //Revision 2
+    public static List<String> allRootToLeafR2(BinaryTreeNode root) {
+        List<String> ans = new ArrayList<>();
+        rec(root,ans,"");
+        return ans;
+    }
+
+    public static void rec(BinaryTreeNode node, List<String> ans, String path){
+        if(node == null) return;
+        if(node.left == null && node.right == null){
+            ans.add(path+node.data);
+            return;
+        }
+
+        rec(node.left, ans, path+node.data+" ");
+        rec(node.right,ans, path+node.data+" ");
+    }
 }

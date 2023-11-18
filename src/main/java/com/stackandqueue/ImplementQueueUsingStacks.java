@@ -125,5 +125,35 @@ public class ImplementQueueUsingStacks {
         }
     }
 
+    //Revision 2
+    class MyQueueR2 {
+        Stack<Integer> s1;
+
+        public MyQueueR2() {
+            this.s1 = new Stack<>();
+        }
+
+        public void push(int x) {
+            Stack<Integer> s2 = new Stack<>();
+            while(!s1.isEmpty()) s2.push(s1.pop());
+            s1.add(x);
+            while(!s2.isEmpty()) s1.add(s2.pop());
+        }
+
+        public int pop() {
+            if(s1.isEmpty()) return -1;
+            return s1.pop();
+        }
+
+        public int peek() {
+            if(s1.isEmpty()) return -1;
+            return s1.peek();
+        }
+
+        public boolean empty() {
+            return s1.isEmpty();
+        }
+    }
+
 
 }
