@@ -120,4 +120,59 @@ public class DetectCycleInUndirectedGraph {
         }
         return false;
     }
+
+    //Revision 2
+    class Solution {
+        // Function to detect cycle in an undirected graph.
+        public boolean isCycle(int V, ArrayList<ArrayList<Integer>> adj) {
+            int[] vis = new int[V];
+
+            for(int i=0;i<V;i++){
+                if(vis[i] == 0){
+//                    if(dfs(adj, i, -1, vis)) return true;
+                    if(bfs(adj, i, -1, vis)) return true;
+                }
+            }
+            return false;
+        }
+
+        public boolean bfs(ArrayList<ArrayList<Integer>> adj, int node, int parent, int[] vis){
+            Queue<Node> q = new LinkedList<>();
+            q.add(new Node(node, parent));
+            vis[node] = 1;
+
+            while(!q.isEmpty()){
+                Node curr = q.poll();
+
+                for(int neighbour : adj.get(curr.val)){
+                    if(vis[neighbour] == 0){
+                        q.add(new Node(neighbour, curr.val));
+                        vis[neighbour]=1;
+                    }else if(neighbour != curr.parent) return true;
+                }
+            }
+            return false;
+        }
+
+        public class Node{
+            int val;
+            int parent;
+
+            public Node(int v, int p){
+                val=v;
+                parent=p;
+            }
+        }
+
+        public boolean dfs(ArrayList<ArrayList<Integer>> adj, int node, int parent, int[] vis){
+            vis[node] = 1;
+
+            for(int neighbour : adj.get(node)){
+                if(vis[neighbour] == 0){
+                    if(dfs(adj,neighbour,node,vis)) return true;
+                }else if(neighbour != parent) return true;
+            }
+            return false;
+        }
+    }
 }
