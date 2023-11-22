@@ -78,4 +78,67 @@ public class StronglyConnectedComponentsTarjansOrKosarajusAlgorithm {
         }
         stack.push(index);
     }
+
+    //Revision 2
+    public class Solution {
+
+        public static List<List<Integer>> stronglyConnectedComponents(int n, int[][] edges) {
+            List<List<Integer>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+
+            for(int[] edge : edges){
+                int x = edge[0];
+                int y = edge[1];
+                adj.get(x).add(y);
+            }
+            boolean[] vis = new boolean[n];
+            List<Integer> toposort = new ArrayList<>();
+
+            for(int i=0;i<n;i++){
+                if(!vis[i]){
+                    dfs(adj, vis, toposort, i);
+                }
+            }
+            Collections.reverse(toposort);
+
+            List<List<Integer>> revadj = new ArrayList<>();
+            for(int i=0;i<n;i++) revadj.add(new ArrayList<>());
+
+            for(int[] edge : edges){
+                int x = edge[0];
+                int y = edge[1];
+                revadj.get(y).add(x);
+            }
+
+            vis = new boolean[n];
+            List<List<Integer>> ans = new ArrayList<>();
+
+            for(int i : toposort){
+                if(!vis[i]){
+                    List<Integer> scc = new ArrayList<>();
+                    revdfs(revadj,vis,scc,i);
+                    ans.add(scc);
+                }
+            }
+            return ans;
+        }
+
+        public static void revdfs(List<List<Integer>> adj, boolean[] vis, List<Integer> scc, int node){
+            vis[node] = true;
+            scc.add(node);
+
+            for(int neighbour : adj.get(node)){
+                if(!vis[neighbour]) revdfs(adj,vis,scc,neighbour);
+            }
+        }
+
+        public static void dfs(List<List<Integer>> adj, boolean[] vis, List<Integer> toposort, int node){
+            vis[node] = true;
+
+            for(int neighbour : adj.get(node)){
+                if(!vis[neighbour]) dfs(adj,vis,toposort,neighbour);
+            }
+            toposort.add(node);
+        }
+    }
 }
