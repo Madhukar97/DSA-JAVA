@@ -105,4 +105,29 @@ public class NetworkDelayTime {
             }
         }
     }
+
+    //Using BellmanFord algo
+    class Solution2 {
+        public int networkDelayTime(int[][] times, int n, int k) {
+            //BellmanFord algo
+            int[] dis = new int[n];
+            Arrays.fill(dis, Integer.MAX_VALUE);
+            dis[k-1] = 0;
+
+            for(int i=0;i<n-1;i++){
+                for(int[] edge : times){
+                    int x = edge[0]-1;
+                    int y = edge[1]-1;
+                    int wt = edge[2];
+                    if(dis[x] != Integer.MAX_VALUE && dis[x]+wt < dis[y]) dis[y] = dis[x]+wt;
+                }
+            }
+            int max = 0;
+            for(int i : dis){
+                if(i == Integer.MAX_VALUE) return -1;
+                max = Math.max(i,max);
+            }
+            return max;
+        }
+    }
 }
