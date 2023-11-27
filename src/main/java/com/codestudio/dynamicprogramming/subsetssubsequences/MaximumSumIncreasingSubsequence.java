@@ -83,5 +83,29 @@ public class MaximumSumIncreasingSubsequence {
         // return rec(rack, n-1, n, dp);
     }
 
+    //Tabulation with space optimization
+    //Revision 2
+    public static int maxIncreasingDumbbellsSumTabWithSpace(ArrayList<Integer> rack, int n) {
+        int[] prev = new int[n+1];
+        int[] curr = new int[n+1];
 
+        for(int i=0;i<n;i++){
+            for(int next=i+1;next<=n;next++){
+                //notPick
+                int notPick = 0;
+                if(i-1 >=0 ) notPick = prev[next];
+                //pick
+                if(next == rack.size() || rack.get(i) < rack.get(next)){
+                    int pick = rack.get(i) ;
+                    if(i-1 >=0 ) pick += prev[i];
+                    curr[next] = Math.max(pick, notPick);
+                }
+                else curr[next] = notPick;
+            }
+            prev=curr;
+            curr= new int[n+1];
+        }
+        return prev[n];
+        // return rec(rack, n-1, n, dp);
+    }
 }
