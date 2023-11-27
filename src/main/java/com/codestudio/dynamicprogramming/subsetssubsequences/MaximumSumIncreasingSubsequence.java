@@ -58,4 +58,30 @@ public class MaximumSumIncreasingSubsequence {
         dp[i][prev+1] = rec(rack,i+1,prev,dp);
         return dp[i][prev+1];
     }
+
+    //Tabulation (Bottom up approach)
+    //Solving from left to right
+    //Revision 2
+    public static int maxIncreasingDumbbellsSumTab(ArrayList<Integer> rack, int n) {
+        int[][] dp = new int[n][n+1];
+
+        for(int i=0;i<n;i++){
+            for(int next=i+1;next<=n;next++){
+                //notPick
+                int notPick = 0;
+                if(i-1 >=0 ) notPick = dp[i-1][next];
+                //pick
+                if(next == rack.size() || rack.get(i) < rack.get(next)){
+                    int pick = rack.get(i) ;
+                    if(i-1 >=0 ) pick += dp[i-1][i];
+                    dp[i][next] = Math.max(pick, notPick);
+                }
+                else dp[i][next] = notPick;
+            }
+        }
+        return dp[n-1][n];
+        // return rec(rack, n-1, n, dp);
+    }
+
+
 }
