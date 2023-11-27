@@ -1,5 +1,7 @@
 package com.dynamicprogramming.strings;
 
+import java.util.Arrays;
+
 //72. Edit Distance
 //https://leetcode.com/problems/edit-distance/description/
 //Striver DP series vid 33 String matching not LCS
@@ -106,5 +108,63 @@ public class EditDistance {
             curr = new int[m + 1];
         }
         return prev[m];
+    }
+
+    //Revision 2
+    //Memoization from left to right (0 to n)
+    class Solution {
+        public int minDistance(String word1, String word2) {
+            int n1 = word1.length();
+            int n2 = word2.length();
+            int[][] dp = new int[n1][n2];
+            for(int[] row : dp) Arrays.fill(row, -1);
+            return rec(word1, word2, 0 ,0, dp);
+        }
+
+        public int rec(String s1, String s2, int i1, int i2, int[][] dp){
+            if(i1 == s1.length() && i2 == s2.length()) return 0;
+            else if(i1 == s1.length()) return s2.length()-i2;
+            else if(i2 == s2.length()) return s1.length()-i1;
+
+            if(dp[i1][i2] != -1 ) return dp[i1][i2];
+
+            if(s1.charAt(i1) == s2.charAt(i2)){
+                dp[i1][i2] = rec(s1,s2,i1+1,i2+1, dp);
+                return dp[i1][i2];
+            }
+            int insert = rec(s1,s2,i1,i2+1, dp);
+            int delete = rec(s1,s2,i1+1,i2, dp);
+            int replace = rec(s1,s2,i1+1,i2+1, dp);
+            dp[i1][i2] = 1+Math.min(insert, Math.min(delete, replace));
+            return dp[i1][i2];
+        }
+    }
+
+    //Revision 2
+    //Tabulation from right to left (n to 0)
+    public int minDistanceTab2(String word1, String word2) {
+        int n1 = word1.length();
+        int n2 = word2.length();
+        int[][] dp = new int[n1+1][n2+1];
+
+        for(int j=0;j<=n2;j++) dp[n1][j] = n2-j;
+        for(int i=0;i<=n1;i++) dp[i][n2] = n1-i;
+
+        for(int i1=n1-1;i1>=0;i1--){
+            for(int i2=n2-1;i2>=0;i2--){
+                if(word1.charAt(i1) == word2.charAt(i2)){
+                    dp[i1][i2] = dp[i1+1][i2+1];
+                }
+                else{
+                    int insert = dp[i1][i2+1];
+                    int delete = dp[i1+1][i2];
+                    int replace = dp[i1+1][i2+1];
+                    dp[i1][i2] = 1+Math.min(insert, Math.min(delete, replace));
+                }
+            }
+        }
+        return dp[0][0];
+
+        // return rec(word1, word2, 0 ,0, dp);
     }
 }
