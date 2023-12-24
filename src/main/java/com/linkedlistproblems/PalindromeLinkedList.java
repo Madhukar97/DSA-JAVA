@@ -117,4 +117,38 @@ public class PalindromeLinkedList {
         }
         return true;
     }
+
+    //Revision 3
+    //Most optimal sol
+    public boolean isPalindromeR3(ListNode head) {
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast.next != null && fast.next.next != null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        ListNode prev = slow;
+        ListNode curr = null;
+        if(prev != null) curr = prev.next;
+        ListNode next = null;
+        if(curr != null) next = curr.next;
+
+        while(next != null){
+            curr.next = next.next;
+            next.next = prev.next;
+            prev.next = next;
+            next = curr.next;
+        }
+
+        ListNode p1=head;
+        ListNode p2=slow.next;
+
+        while(p2 != null){
+            if(p1.val != p2.val) return false;
+            p1=p1.next;
+            p2=p2.next;
+        }
+        return true;
+    }
 }
