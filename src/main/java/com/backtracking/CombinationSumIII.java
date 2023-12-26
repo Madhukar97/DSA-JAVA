@@ -28,4 +28,31 @@ public class CombinationSumIII {
         inner.remove(inner.size()-1);
         recFunc(nums, k, target, inner, index+1, currentSum);
     }
+
+    //Revision 2
+    //Most optimal sol 0ms with TC = O(K*N) ans SC = O(K*N)
+    class Solution {
+        public List<List<Integer>> combinationSum3(int k, int n) {
+            int[] nums = {1,2,3,4,5,6,7,8,9};
+            List<List<Integer>> ans = new ArrayList<>();
+            rec(nums, 0, n, k, ans, new ArrayList<>());
+            return ans;
+        }
+
+        public void rec(int[] nums, int index, int target, int size, List<List<Integer>> ans, List<Integer> comb){
+            if(target == 0){
+                if(comb.size() == size) ans.add(new ArrayList<>(comb));
+                return;
+            }
+            if(index == nums.length) return;
+
+            for(int i=index;i<nums.length;i++){
+                if(nums[i] <= target){
+                    comb.add(nums[i]);
+                    rec(nums, i+1, target-nums[i], size, ans, comb);
+                    comb.remove(comb.size()-1);
+                }
+            }
+        }
+    }
 }
