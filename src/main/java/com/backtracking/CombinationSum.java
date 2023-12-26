@@ -113,4 +113,31 @@ public class CombinationSum {
         comb.remove(comb.size()-1);
         rec(nums, index+1, target, ans, comb);
     }
+
+    //Revision 3
+    //Most optimal sol with 1ms and TC = O(2 ^ target) and SC = O(1)
+    class Solution {
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> ans = new ArrayList<>();
+            rec(candidates, 0, target, ans, new ArrayList<>());
+            return ans;
+        }
+
+        public void rec(int[] nums, int index, int target, List<List<Integer>> ans, List<Integer> comb){
+            if(target == 0){
+                List<Integer> list = new ArrayList<>(comb);
+                ans.add(list);
+                return;
+            }
+            if(index == nums.length) return;
+
+            for(int i=index;i<nums.length; i++){
+                if(nums[i] <= target){
+                    comb.add(nums[i]);
+                    rec(nums, i, target-nums[i], ans, comb);
+                    comb.remove(comb.size()-1);
+                }
+            }
+        }
+    }
 }
