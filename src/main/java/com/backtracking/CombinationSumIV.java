@@ -61,4 +61,28 @@ public class CombinationSumIV {
 
         return dp[0][target];
     }
+
+    //Revision 2
+    //Optimal sol using memoization
+    class Solution {
+        public int combinationSum4(int[] nums, int target) {
+            int[][] dp = new int[nums.length][target+1];
+            for(int[] row : dp) Arrays.fill(row, -1);
+            return rec(nums, 0, target, dp);
+        }
+
+        public int rec(int[] nums, int index, int target, int[][] dp){
+            if(target == 0) return 1;
+            if(index == nums.length) return 0;
+
+            if(dp[index][target] != -1) return dp[index][target];
+
+            int combs = 0;
+            for(int i=0;i<nums.length;i++){
+                if(nums[i] <= target) combs+= rec(nums, i, target-nums[i], dp);
+            }
+            dp[index][target] = combs;
+            return dp[index][target];
+        }
+    }
 }
