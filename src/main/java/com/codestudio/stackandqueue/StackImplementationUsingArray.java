@@ -36,4 +36,35 @@ public class StackImplementationUsingArray {
             return top == arr.length-1 ? 1 : 0;
         }
     }
+
+    //Revision 2
+    public class Solution{
+        static class Stack {
+            int[] arr;
+            int index=0;
+
+            Stack(int capacity) {
+                arr = new int[capacity];
+            }
+            public void push(int num) {
+                if(index < arr.length){
+                    arr[index++] = num;
+                }
+            }
+            public int pop() {
+                if(index > 0) return arr[index--];
+                else return -1;
+            }
+            public int top() {
+                if(index > 0) return arr[index];
+                else return -1;
+            }
+            public int isEmpty() {
+                return index==0 ? 1 : 0;
+            }
+            public int isFull() {
+                return index == arr.length ? 1 : 0;
+            }
+        }
+    }
 }
