@@ -25,4 +25,24 @@ public class SortAStack {
             }
         }
     }
+
+    //Revision 2
+    public class Solution {
+
+        public static void sortStack(Stack<Integer> stack) {
+            int prev = stack.pop();
+            if(!stack.isEmpty()){
+                sortStack(stack);
+            }
+
+            if(stack.isEmpty()) stack.add(prev);
+            else{
+                Stack<Integer> temp = new Stack<>();
+                while(!stack.isEmpty() && stack.peek() > prev) temp.add(stack.pop());
+                stack.add(prev);
+                while(!temp.isEmpty()) stack.add(temp.pop());
+            }
+        }
+
+    }
 }
