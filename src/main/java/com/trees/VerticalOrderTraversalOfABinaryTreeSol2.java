@@ -94,7 +94,7 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
     }
 
     //Optimal sol 2
-    //Revision 2
+    //Revision 1
     class Solution {
         public List<List<Integer>> verticalTraversal(TreeNode root) {
             List<List<Integer>> ans = new ArrayList<>();
@@ -129,6 +129,56 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
                 node=n;
                 this.x=x;
                 this.y=y;
+            }
+        }
+    }
+
+    //Revision 2
+    //Optimal sol 3 using BFS Queue, Map and PriorityQueue
+    class Solution3 {
+        public List<List<Integer>> verticalTraversal(TreeNode root) {
+            Map<Integer, PriorityQueue<Pair>> map = new TreeMap<>();
+            Queue<Pair> q = new LinkedList<>();
+            q.add(new Pair(root, 0, 0));
+            int level=0;
+            while(!q.isEmpty()){
+                int size = q.size();
+
+                for(int i=0;i<size;i++){
+                    Pair pair = q.poll();
+                    TreeNode node = pair.node;
+
+
+                    map.putIfAbsent(pair.x, new PriorityQueue<>( (p1,p2) -> {
+                        if(p1.y != p2.y) return p1.y-p2.y;
+                        else return p1.node.val-p2.node.val;
+                    }));
+                    map.get(pair.x).add(pair);
+                    if(node.left != null) q.add(new Pair(node.left, pair.x-1, level+1));
+                    if(node.right != null) q.add(new Pair(node.right, pair.x+1, level+1));
+                }
+                level++;
+            }
+
+            List<List<Integer>> ans = new ArrayList<>();
+            for(int x : map.keySet()){
+                PriorityQueue<Pair> yList = map.get(x);
+                List<Integer> list = new ArrayList<>();
+                while(!yList.isEmpty()) list.add(yList.poll().node.val);
+                ans.add(list);
+            }
+            return ans;
+        }
+
+        public class Pair{
+            TreeNode node;
+            int x;
+            int y;
+
+            public Pair(TreeNode n, int h, int v){
+                node=n;
+                x=h;
+                y=v;
             }
         }
     }
