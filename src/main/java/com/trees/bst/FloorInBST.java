@@ -62,7 +62,7 @@ public class FloorInBST {
         return floor;
     }
 
-    //Revision 2
+    //Revision 1
     public class Solution {
 
         public static int floorInBST(TreeNode<Integer> root, int X) {
@@ -83,6 +83,28 @@ public class FloorInBST {
 
             if(x < node.data) rec(node.left,x,ans);
             else rec(node.right,x,ans);
+        }
+    }
+
+    //Revision 2
+    public class Solution2 {
+
+        public static int floorInBST(TreeNode<Integer> root, int X) {
+            int[] ans = new int[1];
+            rec(root, X, ans);
+            return ans[0];
+        }
+
+        public static void rec(TreeNode<Integer> node, int x, int[] ans){
+            if(node == null) return;
+            if(node.data <= x) ans[0] = node.data;
+            if(node.data == x) return;
+
+            if(x <= node.data){
+                rec(node.left, x, ans);
+            }else{
+                rec(node.right, x, ans);
+            }
         }
     }
 }
