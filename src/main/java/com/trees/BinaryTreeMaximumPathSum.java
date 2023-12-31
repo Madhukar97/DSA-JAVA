@@ -38,4 +38,27 @@ public class BinaryTreeMaximumPathSum {
         ans[0] = Math.max(ans[0],Math.max(case4,Math.max(case3, Math.max(case2, case1))));
         return Math.max(case4,Math.max(case1,case2));
     }
+
+    //Revision 2
+    //Most optimal sol beats 100%
+    class Solution {
+        public int maxPathSum(TreeNode root) {
+            int[] ans = {-1000};
+            rec(root, ans);
+            return ans[0];
+        }
+
+        public int rec(TreeNode node, int[] ans){
+            if(node == null) return -1000;
+
+            int left = rec(node.left, ans);
+            int right = rec(node.right, ans);
+            int max = Math.max(left, right);
+            int c1 = left+right+node.val;
+            int c2 = node.val;
+            int c3 = max+node.val;
+            ans[0] = Math.max(ans[0], Math.max(c1, Math.max(c2,c3)));
+            return Math.max(c2,c3);
+        }
+    }
 }
