@@ -86,7 +86,7 @@ public class TwoSumIVInputIsABST {
         return false;
     }
 
-    //Revision 2
+    //Revision 1
     class Solution {
         public boolean findTarget(TreeNode root, int k) {
             BSTIterator it = new BSTIterator(root);
@@ -148,6 +148,58 @@ public class TwoSumIVInputIsABST {
                 }
             }
 
+        }
+    }
+
+    //Revision 2
+    class Solution2 {
+        public boolean findTarget(TreeNode root, int k) {
+            BSTIterator it = new BSTIterator(root);
+            int left = it.next();
+            int right = it.prev();
+            while(left != right){
+                int sum = left+right;
+                if(sum == k) return true;
+                else if(sum < k) left = it.next();
+                else right = it.prev();
+            }
+            return false;
+        }
+
+        class BSTIterator{
+            Stack<TreeNode> stack = new Stack<>();
+            Stack<TreeNode> stack2 = new Stack<>();
+
+            public BSTIterator(TreeNode root){
+                pushAllLeft(root);
+                pushAllRight(root);
+            }
+
+            public int next(){
+                TreeNode node = stack.pop();
+                pushAllLeft(node.right);
+                return node.val;
+            }
+
+            public int prev(){
+                TreeNode node = stack2.pop();
+                pushAllRight(node.left);
+                return node.val;
+            }
+
+            public void pushAllLeft(TreeNode node){
+                while(node != null){
+                    stack.add(node);
+                    node=node.left;
+                }
+            }
+
+            public void pushAllRight(TreeNode node){
+                while(node != null){
+                    stack2.add(node);
+                    node=node.right;
+                }
+            }
         }
     }
 }
