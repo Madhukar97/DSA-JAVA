@@ -51,7 +51,7 @@ public class MaximumSumBSTInBinaryTree {
         }
     }
 
-    //Revision 2
+    //Revision 1
     class Solution {
         public int maxSumBST(TreeNode root) {
             int[] ans = new int[1];
@@ -80,6 +80,36 @@ public class MaximumSumBSTInBinaryTree {
                 maxNode=max;
                 maxSum=sum;
             }
+        }
+    }
+
+    //Revision 2
+    class Solution2 {
+        public int maxSumBST(TreeNode root) {
+            int[] ans = new int[1];
+            int[] curr = rec(root, ans);
+            return ans[0];
+        }
+
+        public int[] rec(TreeNode node, int[] ans){
+            if(node == null) return new int[]{Integer.MAX_VALUE, Integer.MIN_VALUE, 0};
+
+            int[] left = rec(node.left,ans);
+            int[] right = rec(node.right,ans);
+            int[] curr = new int[3];
+
+            if(left[1] < node.val && node.val < right[0]){
+                ans[0] = Math.max(node.val+left[2]+right[2], ans[0]);
+                curr[2] = node.val+left[2]+right[2];
+                curr[0] = Math.min(left[0], node.val);
+                curr[1] = Math.max(right[1], node.val);
+            }else {
+                curr[2] = Math.max(left[2], right[2]);
+                curr[0] = Integer.MIN_VALUE;
+                curr[1] = Integer.MAX_VALUE;
+            }
+            // System.out.println("Node : "+node.val+ " left : " + Arrays.toString(left) + " , right : " + Arrays.toString(right));
+            return curr;
         }
     }
 }
