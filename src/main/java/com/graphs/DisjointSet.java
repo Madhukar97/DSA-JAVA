@@ -1,6 +1,7 @@
 package com.graphs;
 
 //Striver Graph series G 46 video
+//Can only be used for undirected graph
 public class DisjointSet {
     int[] rank;
     int[] parent;
@@ -31,5 +32,12 @@ public class DisjointSet {
             parent[ultimateParentOfV] = ultimateParentOfU;
             rank[ultimateParentOfU] = rank[ultimateParentOfV]+1;
         }
+    }
+
+    public boolean detectCycle(int u, int v){
+        int ultimateParentOfU = findUltimateParent(u);
+        int ultimateParentOfV = findUltimateParent(v);
+        // System.out.println("upU of " + u+" : "+ ultimateParentOfU + ", upV "+v+ " : "+ ultimateParentOfV);
+        return  ultimateParentOfU == ultimateParentOfV;
     }
 }
