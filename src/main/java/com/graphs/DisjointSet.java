@@ -48,7 +48,7 @@ public class DisjointSet {
             size[ultimateParentOfV] = size[ultimateParentOfV] + size[ultimateParentOfU];
         }else{
             parent[ultimateParentOfV] = ultimateParentOfU;
-            size[ultimateParentOfV] = size[ultimateParentOfV] + size[ultimateParentOfU];
+            size[ultimateParentOfU] = size[ultimateParentOfU] + size[ultimateParentOfV];
         }
     }
 
