@@ -30,7 +30,7 @@ public class DisjointSet {
             parent[ultimateParentOfV] = ultimateParentOfU;
         }else{
             parent[ultimateParentOfV] = ultimateParentOfU;
-            rank[ultimateParentOfU] = rank[ultimateParentOfV]+1;
+            rank[ultimateParentOfU]++;
         }
     }
 
