@@ -3,13 +3,18 @@ package com.graphs;
 //Striver Graph series G 46 video
 //Can only be used for undirected graph
 public class DisjointSet {
-    int[] rank;
     int[] parent;
+    int[] rank;
+    int[] size;
 
-    public DisjointSet(int size){
-        rank = new int[size+1];
-        parent = new int[size+1];
-        for(int i=0;i<=size;i++) parent[i] = i;
+    public DisjointSet(int n){
+        rank = new int[n+1];
+        parent = new int[n+1];
+        size = new int[n+1];
+        for(int i=0;i<=n;i++) {
+            parent[i] = i;
+            size[i] = 1;
+        }
     }
 
     public int findUltimateParent(int node){
@@ -31,6 +36,19 @@ public class DisjointSet {
         }else{
             parent[ultimateParentOfV] = ultimateParentOfU;
             rank[ultimateParentOfU]++;
+        }
+    }
+
+    public void unionBySize(int u, int v){
+        int ultimateParentOfU = findUltimateParent(u);
+        int ultimateParentOfV = findUltimateParent(v);
+        if(ultimateParentOfU == ultimateParentOfV) return; //they belong to same component
+        if(size[ultimateParentOfU] < size[ultimateParentOfV]){
+            parent[ultimateParentOfU] = ultimateParentOfV;
+            size[ultimateParentOfV] = size[ultimateParentOfV] + size[ultimateParentOfU];
+        }else{
+            parent[ultimateParentOfV] = ultimateParentOfU;
+            size[ultimateParentOfV] = size[ultimateParentOfV] + size[ultimateParentOfU];
         }
     }
 
