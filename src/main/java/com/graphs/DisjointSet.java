@@ -4,6 +4,7 @@ package com.graphs;
 //Can only be used for undirected graph
 //Union By size is intuitive to understand
 //while implementing DisjointSet Data structure either use unionByRank or unionBySize
+//Time Complexity TC = O(4 alfa)
 public class DisjointSet {
     int[] parent;
     int[] rank;
