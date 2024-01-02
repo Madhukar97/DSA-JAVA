@@ -2,6 +2,7 @@ package com.graphs;
 
 //Striver Graph series G 46 video
 //Can only be used for undirected graph
+//Union By size is intuitive to understand
 public class DisjointSet {
     int[] parent;
     int[] rank;
