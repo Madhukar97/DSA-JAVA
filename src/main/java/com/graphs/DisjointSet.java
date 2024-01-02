@@ -23,7 +23,7 @@ public class DisjointSet {
     public void unionByRank(int u, int v){
         int ultimateParentOfU = findUltimateParent(u);
         int ultimateParentOfV = findUltimateParent(v);
-
+        if(ultimateParentOfU == ultimateParentOfV) return;
         if(rank[ultimateParentOfU] < rank[ultimateParentOfV]){
             parent[ultimateParentOfU] = ultimateParentOfV;
         }else if(rank[ultimateParentOfU] > rank[ultimateParentOfV]){
