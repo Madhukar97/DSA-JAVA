@@ -21,7 +21,7 @@ public class DisjointSet {
         if(node == parent[node]) return node;
 
         int ultimateParent = findUltimateParent(parent[node]);
-        parent[node] = ultimateParent;
+        parent[node] = ultimateParent; //Path compression or Collapsing Find
         return ultimateParent;
     }
 
