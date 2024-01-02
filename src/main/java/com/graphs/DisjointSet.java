@@ -8,6 +8,7 @@ public class DisjointSet {
     public DisjointSet(int size){
         rank = new int[size+1];
         parent = new int[size+1];
+        for(int i=0;i<=size;i++) parent[i] = i;
     }
 
     public int findUltimateParent(int node){
