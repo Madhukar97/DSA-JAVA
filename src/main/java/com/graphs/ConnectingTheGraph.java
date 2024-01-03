@@ -2,6 +2,8 @@ package com.graphs;
 
 //Connecting the graph
 //https://www.geeksforgeeks.org/problems/connecting-the-graph/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=connecting-the-graph
+//1319. Number of Operations to Make Network Connected
+//https://leetcode.com/problems/number-of-operations-to-make-network-connected/description/
 public class ConnectingTheGraph {
     class Solution {
 
