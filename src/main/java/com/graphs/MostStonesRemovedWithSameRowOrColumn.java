@@ -4,6 +4,7 @@ import java.util.*;
 
 //947. Most Stones Removed with Same Row or Column
 //https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/description/
+//Maximum Stone Removal
 //https://www.geeksforgeeks.org/problems/maximum-stone-removal-1662179442/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=maximum-stone-removal
 public class MostStonesRemovedWithSameRowOrColumn {
     class Solution {
