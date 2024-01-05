@@ -1,6 +1,6 @@
 package com.graphs;
 
-import java.util.Arrays;
+import java.util.*;
 
 //787. Cheapest Flights Within K Stops
 //https://leetcode.com/problems/cheapest-flights-within-k-stops/description/
@@ -31,5 +31,54 @@ public class CheapestFlightsWithinKStops {
         int ans = dis[dst];
         if(ans == Integer.MAX_VALUE) return -1;
         return ans;
+    }
+
+    //Dijkstras algo
+    class Solution {
+        public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+            //Dijkstras shortest path algo
+            int[] dist = new int[n];
+            Arrays.fill(dist, Integer.MAX_VALUE);
+
+            List<List<Node>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+            for(int[] edge : flights){
+                int u = edge[0];
+                int v = edge[1];
+                int wt = edge[2];
+                adj.get(u).add(new Node(v, wt, Integer.MAX_VALUE));
+            }
+
+            Queue<Node> pq = new LinkedList<>();
+            pq.add(new Node(src, 0, 0));
+            dist[src]=0;
+
+            while(!pq.isEmpty()){
+                Node node = pq.poll();
+
+                if(node.stops > k ) continue;
+
+                for(Node neighbour : adj.get(node.index)){
+                    if(node.dist+neighbour.dist < dist[neighbour.index] && node.stops <=k){
+                        dist[neighbour.index] = node.dist + neighbour.dist;
+                        pq.add(new Node(neighbour.index, dist[neighbour.index],node.stops+1));
+                    }
+                }
+            }
+            if(dist[dst] == Integer.MAX_VALUE) return -1;
+            return dist[dst];
+        }
+
+        public class Node{
+            int index;
+            int dist;
+            int stops;
+
+            public Node(int i, int d, int s){
+                index=i;
+                dist=d;
+                stops=s;
+            }
+        }
     }
 }
