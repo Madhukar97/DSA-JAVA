@@ -31,4 +31,15 @@ public class FindDuplicateNumber {
         }
         return -1;
     }
+
+    //Revision 2
+    //Optimal sol O(n) time and O(1) space using -ve multiplication
+    public int findDuplicate3(int[] nums) {
+        for(int i : nums){
+            int abs = Math.abs(i);
+            if(nums[abs-1] > 0) nums[abs-1] = -nums[abs-1];
+            else return abs;
+        }
+        return 0;
+    }
 }

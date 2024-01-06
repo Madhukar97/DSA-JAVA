@@ -44,7 +44,7 @@ public class CountAndSay {
     }
 
     //Most optimal sol using Recursion and StringBuilder
-    //Revision 2
+    //Revision 1
     public String countAndSayR2(int n) {
         return rec( "1", n);
     }
@@ -64,5 +64,30 @@ public class CountAndSay {
             }
         }
         return rec(newN.toString(), count-1);
+    }
+
+    //Revision 2
+    class Solution {
+        public String countAndSay(int n) {
+            return rec("1", n);
+        }
+
+        public String rec(String num, int n){
+            if(n == 1) return num;
+
+            int count = 1;
+            char val = num.charAt(0);
+            StringBuilder next = new StringBuilder();
+            for(int i=1;i<num.length();i++){
+                if(num.charAt(i) == val) count++;
+                else{
+                    next.append(count).append(val);
+                    count=1;
+                    val = num.charAt(i);
+                }
+            }
+            next.append(count).append(val);
+            return rec(next.toString(), n-1);
+        }
     }
 }

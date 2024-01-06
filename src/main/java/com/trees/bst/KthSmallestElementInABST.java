@@ -52,4 +52,23 @@ public class KthSmallestElementInABST {
         if(left == null) return right;
         return left;
     }
+
+    //Revision 2
+    class Solution {
+        public int kthSmallest(TreeNode root, int k) {
+            int[] arr = new int[2];
+            arr[0] =k;
+            rec(root,arr);
+            return arr[1];
+        }
+
+        public void rec(TreeNode node, int[] arr){
+            if(node == null) return;
+
+            rec(node.left,arr);
+            arr[0]--;
+            if(arr[0] == 0) arr[1] = node.val;
+            rec(node.right,arr);
+        }
+    }
 }

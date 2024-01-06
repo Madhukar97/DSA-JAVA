@@ -26,4 +26,26 @@ public class NextGreaterElementII {
         }
         return nge;
     }
+
+    //Revision 2
+    //Optimal sol 2 using less easy code
+    class Solution {
+        public int[] nextGreaterElements(int[] nums) {
+            int[] nge = new int[nums.length];
+            Stack<Integer> stack = new Stack<>();
+
+            for(int i=nums.length-1;i>=0;i--) stack.add(nums[i]);
+
+            for(int i=nums.length-1;i>=0;i--){
+                while(!stack.isEmpty() && stack.peek() <= nums[i]){
+                    stack.pop();
+                }
+                if(stack.isEmpty()) nge[i] = -1;
+                else nge[i] = stack.peek();
+                stack.add(nums[i]);
+            }
+
+            return nge;
+        }
+    }
 }

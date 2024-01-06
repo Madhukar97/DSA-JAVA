@@ -6,6 +6,28 @@ import java.util.*;
 //https://leetcode.com/problems/maximum-product-subarray/description/
 public class MaximumProductSubarray {
     //Brute Sol will be O(n^3)
+    //Brute force using recuriosn
+    class Solution {
+        public int maxProduct(int[] nums) {
+            int[] ans = new int[1];
+            ans[0] = Integer.MIN_VALUE;
+
+            rec(nums, ans, 0);
+            return ans[0];
+        }
+
+        public void rec(int[] nums, int[] ans, int index){
+            if(index == nums.length) return;
+
+            int product = nums[index];
+            ans[0] = Math.max(ans[0], product);
+            for(int i=index+1;i<nums.length;i++){
+                product = product*nums[i];
+                rec(nums, ans, i);
+                ans[0] = Math.max(ans[0], product);
+            }
+        }
+    }
 
     //Better Sol using nested loops with time O(n^2) and space O(1)
     public int maxProduct(int[] nums) {

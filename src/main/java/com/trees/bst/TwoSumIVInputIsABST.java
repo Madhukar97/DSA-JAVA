@@ -85,4 +85,121 @@ public class TwoSumIVInputIsABST {
         }
         return false;
     }
+
+    //Revision 1
+    class Solution {
+        public boolean findTarget(TreeNode root, int k) {
+            BSTIterator it = new BSTIterator(root);
+            boolean ans=false;
+
+            int left = it.next();
+            int right = it.prev();
+
+            while(left < right){
+                int sum = left+right;
+                if(sum == k) return true;
+                else if(sum < k) left = it.next();
+                else right = it.prev();
+            }
+            return ans;
+        }
+
+
+        public class BSTIterator{
+            Stack<TreeNode> stack = new Stack<>();
+            Stack<TreeNode> stack2 = new Stack<>();
+
+            public BSTIterator(TreeNode node){
+                pushAllLeft(node);
+                pushAllRight(node);
+            }
+
+            public int next(){
+                TreeNode next = stack.pop();
+                pushAllLeft(next.right);
+                return next.val;
+            }
+
+            public boolean hasNext(){
+                return !stack.isEmpty();
+            }
+
+            public int prev(){
+                TreeNode prev = stack2.pop();
+                pushAllRight(prev.left);
+                return prev.val;
+            }
+
+            public boolean hasPrev(){
+                return !stack2.isEmpty();
+            }
+
+            public void pushAllLeft(TreeNode node){
+                while(node != null) {
+                    stack.add(node);
+                    node=node.left;
+                }
+            }
+
+            public void pushAllRight(TreeNode node){
+                while(node != null) {
+                    stack2.add(node);
+                    node=node.right;
+                }
+            }
+
+        }
+    }
+
+    //Revision 2
+    class Solution2 {
+        public boolean findTarget(TreeNode root, int k) {
+            BSTIterator it = new BSTIterator(root);
+            int left = it.next();
+            int right = it.prev();
+            while(left != right){
+                int sum = left+right;
+                if(sum == k) return true;
+                else if(sum < k) left = it.next();
+                else right = it.prev();
+            }
+            return false;
+        }
+
+        class BSTIterator{
+            Stack<TreeNode> stack = new Stack<>();
+            Stack<TreeNode> stack2 = new Stack<>();
+
+            public BSTIterator(TreeNode root){
+                pushAllLeft(root);
+                pushAllRight(root);
+            }
+
+            public int next(){
+                TreeNode node = stack.pop();
+                pushAllLeft(node.right);
+                return node.val;
+            }
+
+            public int prev(){
+                TreeNode node = stack2.pop();
+                pushAllRight(node.left);
+                return node.val;
+            }
+
+            public void pushAllLeft(TreeNode node){
+                while(node != null){
+                    stack.add(node);
+                    node=node.left;
+                }
+            }
+
+            public void pushAllRight(TreeNode node){
+                while(node != null){
+                    stack2.add(node);
+                    node=node.right;
+                }
+            }
+        }
+    }
 }

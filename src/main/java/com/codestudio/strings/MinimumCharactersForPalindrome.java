@@ -23,4 +23,22 @@ public class MinimumCharactersForPalindrome {
         }
         return true;
     }
+
+    //Revision 2
+
+    public class Solution {
+
+        public static int minCharsforPalindrome(String str) {
+            for(int i=str.length()-1;i>=0;i--){
+                if(isPal(str, 0, i)) return str.length()-i-1;
+            }
+            return -1;
+        }
+
+        public static boolean isPal(String str, int i, int j){
+            while(i<=j) if(str.charAt(i++) != str.charAt(j--)) return false;
+            return true;
+        }
+
+    }
 }

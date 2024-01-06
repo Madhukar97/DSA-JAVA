@@ -46,4 +46,18 @@ public class ChildrenSumProperty {
 
         return rec(node.left) && rec(node.right);
     }
+
+    //Revision 2
+    public static boolean isParentSumR2(Node root) {
+        return recR2(root);
+    }
+
+    public static boolean recR2(Node node){
+        if(node == null) return true;
+        else if(node.left != null && node.right != null && node.left.data+node.right.data != node.data) return false;
+        else if(node.left == null && node.right != null && node.data != node.right.data) return false;
+        else if(node.left != null && node.right == null && node.data != node.left.data) return false;
+
+        return recR2(node.left) && recR2(node.right);
+    }
 }

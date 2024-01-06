@@ -56,4 +56,55 @@ public class ReverseWordsInAString {
         if(s.charAt(0) == ' ') s=s.substring(1,s.length());
         return s;
     }
+
+    //Revision 2
+    //Optimal sol using 2 pointer and StringBuilder 3ms with TC = O(n) and space = O(n)
+    class Solution {
+        public String reverseWords(String s) {
+            int i=s.length()-1;
+            int j=s.length()-1;
+
+            StringBuilder sb = new StringBuilder();
+            while(j >=0){
+                while(j >=0 && s.charAt(j) == ' ') j--;
+                i=j;
+                while(i >= 0 && s.charAt(i) != ' ') i--;
+                sb.append(s.substring(i+1, j+1)).append(" ");
+
+                j=i;
+            }
+            String ans = sb.toString();
+            j=ans.length()-1;
+            while(j >= 0 && ans.charAt(j) == ' '){
+                j--;
+            }
+            return ans.substring(0, j+1);
+        }
+    }
+
+    //Revision 2
+    //Most Optimal sol using 2 pointer 11ms with TC = O(n) and space = O(1)
+    class Solution2 {
+        public String reverseWords(String s) {
+            int n=s.length();
+            int i=s.length()-1;
+            int j=s.length()-1;
+
+            // StringBuilder sb = new StringBuilder();
+            while(j >=0){
+                while(j >=0 && s.charAt(j) == ' ') j--;
+                i=j;
+                while(i >= 0 && s.charAt(i) != ' ') i--;
+                s=s+s.substring(i+1, j+1)+" ";
+
+                j=i;
+            }
+            String ans = s.substring(n);
+            j=ans.length()-1;
+            while(j >= 0 && ans.charAt(j) == ' '){
+                j--;
+            }
+            return ans.substring(0, j+1);
+        }
+    }
 }

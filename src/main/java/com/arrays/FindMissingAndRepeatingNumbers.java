@@ -27,4 +27,22 @@ public class FindMissingAndRepeatingNumbers {
         }
         return new int[]{missing,repeating};
     }
+
+    //Revision 2
+    //optimal sol using -ve multiplication
+    public static int[] missingAndRepeating2(ArrayList<Integer> arr, int n) {
+        int[] ans = new int[2];
+        for(int i : arr){
+            int abs = Math.abs(i);
+            if(arr.get(abs-1) > 0) arr.set(abs-1, arr.get(abs-1)*-1);
+            else{
+                ans[1] = abs;
+            }
+        }
+
+        for(int i=0;i<arr.size();i++){
+            if(arr.get(i) > 0) ans[0] = i+1;
+        }
+        return ans;
+    }
 }

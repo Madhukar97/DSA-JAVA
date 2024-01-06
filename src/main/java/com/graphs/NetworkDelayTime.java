@@ -53,4 +53,81 @@ public class NetworkDelayTime {
             this.wt=wt;
         }
     }
+
+    //Revision 2
+    //0 based indexing sol
+    class Solution {
+        public int networkDelayTime(int[][] times, int n, int k) {
+            //Dijkstras algo
+            PriorityQueue<Node> pq = new PriorityQueue<>((n1,n2)->n1.wt-n2.wt);
+            pq.add(new Node(k-1, 0));
+
+            List<List<Node>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+
+            for(int[] edge : times){
+                int x = edge[0]-1;
+                int y = edge[1]-1;
+                int wt = edge[2];
+                adj.get(x).add(new Node(y, wt));
+            }
+
+            int[] dist = new int[n];
+            Arrays.fill(dist, Integer.MAX_VALUE);
+            dist[k-1] = 0;
+
+            while(!pq.isEmpty()){
+                Node node = pq.poll();
+                int wt = node.wt;
+                int i = node.i;
+
+                for(Node neighbour : adj.get(i)){
+                    if(neighbour.wt + wt < dist[neighbour.i]){
+                        dist[neighbour.i] = neighbour.wt + wt;
+                        pq.add(new Node(neighbour.i, dist[neighbour.i]));
+                    }
+                }
+            }
+
+            for(int i : dist) if(i == Integer.MAX_VALUE) return -1;
+            int max = 0;
+            for(int i : dist) max=Math.max(max, i);
+            return max;
+        }
+
+        public class Node{
+            int i;
+            int wt;
+
+            public Node(int i, int w){
+                this.i=i;
+                wt=w;
+            }
+        }
+    }
+
+    //Using BellmanFord algo
+    class Solution2 {
+        public int networkDelayTime(int[][] times, int n, int k) {
+            //BellmanFord algo
+            int[] dis = new int[n];
+            Arrays.fill(dis, Integer.MAX_VALUE);
+            dis[k-1] = 0;
+
+            for(int i=0;i<n-1;i++){
+                for(int[] edge : times){
+                    int x = edge[0]-1;
+                    int y = edge[1]-1;
+                    int wt = edge[2];
+                    if(dis[x] != Integer.MAX_VALUE && dis[x]+wt < dis[y]) dis[y] = dis[x]+wt;
+                }
+            }
+            int max = 0;
+            for(int i : dis){
+                if(i == Integer.MAX_VALUE) return -1;
+                max = Math.max(i,max);
+            }
+            return max;
+        }
+    }
 }

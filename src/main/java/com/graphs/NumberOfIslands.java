@@ -82,4 +82,82 @@ public class NumberOfIslands {
         if(i+1 < grid.length && vis[i+1][j] == 0 && grid[i+1][j] == '1') dfs(grid,vis,i+1,j);
         if(j-1 >=0 && vis[i][j-1] == 0 && grid[i][j-1] == '1') dfs(grid,vis,i,j-1);
     }
+
+    //Using DisjointSet and UnionFind
+    class Solution {
+        public int numIslands(char[][] grid) {
+            int m=grid.length;
+            int n=grid[0].length;
+            DisjointSet djs = new DisjointSet(m*n);
+
+            // int count=0;
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(grid[i][j] == '1'){
+                        // count++;
+                        int[] rows = {-1,0,1,0};
+                        int[] cols = {0,1,0,-1};
+                        for(int k=0;k<4;k++){
+                            int nx = i+rows[k];
+                            int ny = j+cols[k];
+                            if(nx >=0 && nx<m && ny>=0 && ny<n && grid[nx][ny] == '1') {
+                                if(!djs.detectCycle(i*n+j, nx*n+ny)){
+                                    djs.unionBySize(i*n+j, nx*n+ny);
+                                    // count--;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            int ans=0;
+            for(int i=0;i<m*n;i++){
+                if(djs.parent[i] == i && grid[i/n][i%n]=='1') ans++;
+            }
+            return ans;
+        }
+
+        class DisjointSet{
+            int[] parent;
+            int[] size;
+
+            public DisjointSet(int n){
+                parent= new int[n+1];
+                size=new int[n+1];
+                for(int i=0;i<=n;i++){
+                    parent[i]=i;
+                    size[i]=1;
+                }
+            }
+
+            public int findUltimateParent(int node){
+                if(node == parent[node]) return node;
+
+                int ultimate = findUltimateParent(parent[node]);
+                parent[node] = ultimate;
+                return ultimate;
+            }
+
+            public void unionBySize(int u, int v){
+                int upU = findUltimateParent(u);
+                int upV = findUltimateParent(v);
+                if(upU==upV) return;
+                if(size[upU] < size[upV]){
+                    parent[upU] = upV;
+                    size[upV]+=size[upU];
+                }else{
+                    parent[upV] = upU;
+                    size[upU]+=size[upV];
+                }
+            }
+
+            public boolean detectCycle(int u, int v){
+                int ultimateParentOfU = findUltimateParent(u);
+                int ultimateParentOfV = findUltimateParent(v);
+                // System.out.println("upU of " + u+" : "+ ultimateParentOfU + ", upV "+v+ " : "+ ultimateParentOfV);
+                return  ultimateParentOfU == ultimateParentOfV;
+            }
+        }
+    }
 }

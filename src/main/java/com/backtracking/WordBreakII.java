@@ -27,4 +27,34 @@ public class WordBreakII {
             }
         }
     }
+
+    //Revision 2
+    //Most optimal sol with 0ms
+    class Solution {
+        public List<String> wordBreak(String s, List<String> wordDict) {
+            List<String> ans = new ArrayList<>();
+            rec(s, 0, wordDict, ans, new ArrayList<>());
+            return ans;
+        }
+
+        public static void rec(String s, int index, List<String> dictionary, List<String> ans, ArrayList<String> words){
+            if(index == s.length()){
+                StringBuilder sb = new StringBuilder();
+                for(String word : words){
+                    if(sb.length() == 0) sb.append(word);
+                    else sb.append(" ").append(word);
+                }
+                ans.add(sb.toString());
+                return;
+            }
+
+            for(int i=index;i<s.length();i++){
+                if(dictionary.contains(s.substring(index, i+1))){
+                    words.add(s.substring(index, i+1));
+                    rec(s, i+1, dictionary, ans, words);
+                    words.remove(words.size()-1);
+                }
+            }
+        }
+    }
 }
