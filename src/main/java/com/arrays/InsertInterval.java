@@ -113,7 +113,7 @@ public class InsertInterval {
                     i=endIndex-1;
                 }
             }
-            if(flag==0){
+            if(flag==0){    //If newInterval is not added or merged, then add last
                 List<Integer> list = new ArrayList<>();
                 list.add(newInterval[0]);
                 list.add(newInterval[1]);
