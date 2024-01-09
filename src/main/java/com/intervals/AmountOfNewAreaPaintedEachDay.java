@@ -1,4 +1,4 @@
-package com.arrays;
+package com.intervals;
 
 import java.util.Map;
 import java.util.Set;
