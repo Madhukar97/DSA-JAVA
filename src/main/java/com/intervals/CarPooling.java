@@ -1,6 +1,6 @@
-package com.problems;
+package com.intervals;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class CarPooling {
     public static void main(String[] args) {
@@ -37,6 +37,27 @@ public class CarPooling {
             this.pass = pass;
             this.from = from;
             this.to = to;
+        }
+    }
+
+    //Most optimal sol using TreeMap
+    class Solution2 {
+        public boolean carPooling(int[][] trips, int capacity) {
+            TreeMap<Integer,Integer> map = new TreeMap<>();
+            for(int[] trip : trips){
+                int start = trip[1];
+                int end = trip[2];
+                int pass = trip[0];
+                map.put(start, map.getOrDefault(start, 0)+pass);
+                map.put(end, map.getOrDefault(end, 0)-pass);
+            }
+
+            int passengers=0;
+            for(int val : map.values()){
+                passengers+=val;
+                if(passengers > capacity) return false;
+            }
+            return true;
         }
     }
 }
