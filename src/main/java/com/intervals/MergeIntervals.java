@@ -116,4 +116,29 @@ public class MergeIntervals {
         }
         return ans;
     }
+
+    //Revision 3
+    public int[][] merge3(int[][] intervals) {
+        Arrays.sort(intervals, (a1,a2) -> a1[0]-a2[0]);
+
+        List<List<Integer>> list = new ArrayList<>();
+        for(int[] interval : intervals){
+            if(list.size()==0 || list.get(list.size()-1).get(1) < interval[0]){
+                List<Integer> l1 = new ArrayList<>();
+                l1.add(interval[0]);
+                l1.add(interval[1]);
+                list.add(l1);
+            }else{
+                List<Integer> prev = list.get(list.size()-1);
+                prev.set(0, Math.min(prev.get(0), interval[0]));
+                prev.set(1, Math.max(prev.get(1), interval[1]));
+            }
+        }
+        int[][] ans = new int[list.size()][2];
+        for(int i=0;i<list.size();i++) {
+            ans[i][0] = list.get(i).get(0);
+            ans[i][1] = list.get(i).get(1);
+        }
+        return ans;
+    }
 }
