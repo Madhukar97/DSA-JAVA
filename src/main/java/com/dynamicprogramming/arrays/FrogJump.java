@@ -26,6 +26,23 @@ public class FrogJump {
         }
     }
 
+    //Brute force sol 2
+    class Solution11 {
+        int minCost(int[] height) {
+            int n = height.length;
+            return rec(n-1, height);
+        }
+        int rec(int stair, int[] height){
+            if(stair == 0) return 0;
+            if(stair < 0) return Integer.MAX_VALUE;
+
+            int jump1 = rec(stair-1, height) + Math.abs(height[stair] - height[stair-1]);
+            int jump2 = Integer.MAX_VALUE;
+            if(stair-2 >= 0) jump2 = rec(stair-2, height) + Math.abs(height[stair] - height[stair-2]);
+            return Math.min(jump1, jump2);
+        }
+    }
+
     // Better sol using Memoization sol giving TLE, TC=O(n) and SC=O(n) + O(n) : stack space and array length
     class Solution2 {
         int minCost(int[] height) {
