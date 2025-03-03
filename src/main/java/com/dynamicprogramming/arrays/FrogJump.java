@@ -81,9 +81,7 @@ public class FrogJump {
             for(int step=1;step<n;step++){
                 int jump1 = mem[step-1] + Math.abs(height[step] - height[step-1]);
                 int jump2 = Integer.MAX_VALUE;
-
                 if(step-2 >= 0) jump2 = mem[step-2] + Math.abs(height[step] - height[step-2]);
-
                 mem[step] = Math.min( jump1, jump2);
             }
             return mem[n-1];
@@ -101,7 +99,6 @@ public class FrogJump {
             for(int step=1;step<n;step++){
                 int jump1 = prev1 + Math.abs(height[step] - height[step-1]);
                 int jump2 = Integer.MAX_VALUE;
-
                 if(step-2 >= 0) jump2 = prev2 + Math.abs(height[step] - height[step-2]);
 
                 curr = Math.min( jump1, jump2);
