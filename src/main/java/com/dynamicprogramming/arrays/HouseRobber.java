@@ -68,4 +68,26 @@ public class HouseRobber {
         }
         return dp[0];
     }
+
+    // Space Optimization
+    class Solution {
+        public int rob(int[] nums) {
+            int n=nums.length;
+            int prev1 = 0;
+            int prev2 = 0;
+            int curr = 0;
+
+            for(int i=0;i<n;i++){
+                int rob = nums[i];
+                if(i-2 >= 0) rob += prev2;
+                //dont rob
+                int dontRob = 0;
+                if(i-1 >=0 ) dontRob = prev1;
+                curr = Math.max(rob, dontRob);
+                prev2 = prev1;
+                prev1 = curr;
+            }
+            return curr;
+        }
+    }
 }
