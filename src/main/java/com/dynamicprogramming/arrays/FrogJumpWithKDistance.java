@@ -129,4 +129,38 @@ public class FrogJumpWithKDistance {
             return dp[pos][lastJump] == 1;
         }
     }
+
+    // Tabulation sol
+    class Solution {
+        public boolean canCross(int[] stones) {
+            if (stones[1] - stones[0] != 1) return false;
+            int n = stones.length;
+            int[][] dp = new int[n][n];
+            // for(int[] row : dp) Arrays.fill(row, -1);
+            Map<Integer, Integer> map = new HashMap<>();
+            for (int i = 0; i < n; i++) map.put(stones[i], i);
+
+            for (int j = 0; j < n; j++) dp[n - 1][j] = 1; // base case
+
+            for (int i = n - 2; i > 0; i--) {
+                for (int k = 1; k < n; k++) {
+                    boolean k1 = false;
+                    boolean k2 = false;
+                    boolean k3 = false;
+
+                    if (map.containsKey(stones[i] + k - 1)) {
+                        k1 = dp[map.get(stones[i] + k - 1)][k - 1] == 1;
+                    }
+                    if (map.containsKey(stones[i] + k)) {
+                        k2 = dp[map.get(stones[i] + k)][k] == 1;
+                    }
+                    if (k + 1 < n && map.containsKey(stones[i] + k + 1)) {
+                        k3 = dp[map.get(stones[i] + k + 1)][k + 1] == 1;
+                    }
+                    dp[i][k] = k1 || k2 || k3 ? 1 : 0;
+                }
+            }
+            return dp[1][1] == 1;
+        }
+    }
 }
