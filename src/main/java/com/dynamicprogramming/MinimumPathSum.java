@@ -115,9 +115,7 @@ public class MinimumPathSum {
             int n=grid[0].length;
             int[] prevRow = new int[n];
             int[] currRow = new int[n];
-            int left = grid[0][0];
-            currRow[0] = left;
-
+            currRow[0] = grid[0][0];
 
             for(int i=0;i<m;i++){
                 for(int j=0;j<n;j++){
@@ -125,14 +123,13 @@ public class MinimumPathSum {
                     int p1 = Integer.MAX_VALUE;
                     int p2 = Integer.MAX_VALUE;
                     if(i-1 >=0) p1 = prevRow[j];
-                    if(j-1>=0) p2 = left;
+                    if(j-1>=0) p2 = currRow[j-1];
 
                     currRow[j] = grid[i][j] + Math.min(p1,p2);
-                    left=currRow[j];
                 }
                 prevRow = currRow;
             }
-            return left;
+            return currRow[n-1];
         }
     }
 }
