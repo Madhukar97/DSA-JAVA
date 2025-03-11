@@ -52,4 +52,27 @@ public class BFSInGraph {
         // System.out.println("ans : " + ans.toString());
         return ans;
     }
+
+    // Revision 3
+    class Solution {
+        // Function to return Breadth First Traversal of given graph.
+        public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+            ArrayList<Integer> ans = new ArrayList<>();
+            int[] vis = new int[V];
+
+            Queue<Integer> q = new LinkedList<>();
+            q.add(0);
+
+            while(!q.isEmpty()){
+                int curr = q.poll();
+                if(vis[curr] == 0) ans.add(curr);
+
+                for(int neighbour : adj.get(curr)){
+                    if(vis[neighbour] == 0) q.add(neighbour);
+                }
+                vis[curr]  = 1;
+            }
+            return ans;
+        }
+    }
 }
