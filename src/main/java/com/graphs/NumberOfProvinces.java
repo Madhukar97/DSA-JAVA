@@ -116,4 +116,43 @@ public class NumberOfProvinces {
             }
         }
     }
+
+    // DFS solution
+    // Do dfs on every index from 0 to n-1, since the graph may be disconnected and increment counter for every new province/ root node
+    class Solution3 {
+        public int findCircleNum(int[][] isConnected) {
+            int n=isConnected.length;
+            ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<Integer>());
+            for(int u=0;u<n;u++){
+                for(int v=0;v<n;v++){
+                    if(isConnected[u][v] == 1) {
+                        adj.get(u).add(v);
+                        adj.get(v).add(u);
+                    }
+                }
+            }
+
+            int[] vis = new int[n];
+            int provinces = 0;
+            for(int i=0;i<n;i++){
+                if(vis[i] == 0) {
+                    provinces++;
+                    dfs(i, vis, adj);
+                }
+            }
+            return provinces;
+        }
+
+        void dfs(int node, int[] vis, ArrayList<ArrayList<Integer>> adj) {
+            if(vis[node] == 1) return;
+            vis[node]=1;
+
+            for(int neighbour : adj.get(node)){
+                if(vis[neighbour] == 0){
+                    dfs(neighbour, vis, adj);
+                }
+            }
+        }
+    }
 }
