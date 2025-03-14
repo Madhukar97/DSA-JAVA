@@ -1,6 +1,6 @@
 package com.graphs;
 
-import java.util.ArrayList;
+import java.util.*;
 
 //Number of Provinces
 //https://www.geeksforgeeks.org/problems/number-of-provinces/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-provinces
@@ -151,6 +151,23 @@ public class NumberOfProvinces {
             for(int neighbour : adj.get(node)){
                 if(vis[neighbour] == 0){
                     dfs(neighbour, vis, adj);
+                }
+            }
+        }
+
+        //BFS is giving TLE on leetcode
+        void bfs(int node, int[] vis, ArrayList<ArrayList<Integer>> adj){
+            if(vis[node] == 1) return;
+
+            Queue<Integer> q = new LinkedList<>();
+            q.add(node);
+
+            while(!q.isEmpty()){
+                int curr = q.poll();
+                vis[curr]=1;
+
+                for(int neighbour : adj.get(curr)){
+                    if(vis[neighbour] == 0) q.add(neighbour);
                 }
             }
         }
