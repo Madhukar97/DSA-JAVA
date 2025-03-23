@@ -81,4 +81,49 @@ public class CheapestFlightsWithinKStops {
             }
         }
     }
+
+    // Revision 2 using BFS algo
+    class Solution3 {
+        public int findCheapestPrice(int n, int[][] flights, int src, int dst, int k) {
+            List<List<Node>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<>());
+            for(int[] edge : flights){
+                int u = edge[0];
+                int v = edge[1];
+                int price = edge[2];
+                adj.get(u).add(new Node(0, price, v));
+            }
+
+            int[] prices = new int[n];
+            Arrays.fill(prices, Integer.MAX_VALUE);
+            prices[src]=0;
+
+            Queue<Node> q = new LinkedList<>();
+            q.add(new Node(0, 0, src));
+
+            // BFS algo
+            while(!q.isEmpty()){
+                Node curr = q.poll();
+                for(Node neigh : adj.get(curr.index)){
+                    if(curr.price + neigh.price < prices[neigh.index] && curr.stops <= k){
+                        prices[neigh.index] = curr.price + neigh.price;
+                        q.add(new Node(curr.stops+1, prices[neigh.index], neigh.index));
+                    }
+                }
+            }
+            return prices[dst] == Integer.MAX_VALUE ? -1 : prices[dst];
+        }
+
+        class Node{
+            int stops;
+            int price;
+            int index;
+
+            public Node(int stops, int price, int index){
+                this.stops=stops;
+                this.price=price;
+                this.index=index;
+            }
+        }
+    }
 }
