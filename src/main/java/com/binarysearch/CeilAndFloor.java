@@ -15,6 +15,7 @@ public class CeilAndFloor {
             return new int[]{floor, ceil};
         }
         // Element less than or equal to target
+        // Note : whereas lowerBound is element just less than target
         int floor(int[] arr, int x){
             int s=0;
             int e=arr.length-1;
@@ -30,6 +31,7 @@ public class CeilAndFloor {
             return index;
         }
         // Element grater than or equal to target
+        // Note : whereas upperBound is element just greater than target
         int ceil(int[] arr, int x){
             int s=0;
             int e=arr.length-1;
