@@ -34,4 +34,25 @@ public class FindPeakElement {
             return 0;
         }
     }
+
+    // Revision 5
+    class Solution3 {
+        public int findPeakElement(int[] nums) {
+            int[] arr = new int[nums.length+2];
+            for(int i=0;i<nums.length;i++) arr[i+1] = nums[i];
+            arr[0] = Integer.MIN_VALUE;
+            arr[arr.length-1] = Integer.MIN_VALUE;
+
+            int s=1;
+            int e=arr.length-2;
+
+            while(s<=e){
+                int mid = s+(e-s)/2;
+                if(arr[mid-1] < arr[mid] && arr[mid+1] < arr[mid]) return mid-1;
+                if(arr[mid-1] > arr[mid]) e=mid-1;
+                else s=mid+1;
+            }
+            return 0;
+        }
+    }
 }
