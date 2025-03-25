@@ -46,6 +46,33 @@ public class CeilAndFloor {
             }
             return index;
         }
+
+        // Return the first index where the value is greater than target.
+        int upperBound(int[] arr, int target){
+            int s=0;
+            int e=arr.length-1;
+
+            while(s<=e){
+                int mid = s+(e-s)/2;
+                if(arr[mid] <= target) s=mid+1;
+                else {
+                    e=mid-1;
+                }
+            }
+            return s;
+        }
+        // Return the first index where the value is equal to or greater than target.
+        int lowerBound(int[] arr, int target){
+            int s=0;
+            int e=arr.length-1;
+
+            while(s<=e){
+                int mid = s+(e-s)/2;
+                if(arr[mid] < target) s=mid+1;
+                else e=mid-1;
+            }
+            return s;
+        }
     }
 
 }
