@@ -34,4 +34,33 @@ public class CapacityToShipPackagesWithinDDays {
             return minCap;
         }
     }
+
+    // Revision 5
+    class Solution2 {
+        public int shipWithinDays(int[] weights, int days) {
+            int min=1;
+            int max=0;
+            for(int wt : weights) {
+                max+=wt;
+                min=Math.max(min,wt);
+            }
+
+            while(min<=max){
+                int mid = min+(max-min)/2;
+                int totalDays = 0;
+                int totalWt=0;
+                for(int wt : weights){
+                    totalWt += wt;
+                    if(totalWt > mid){
+                        totalDays++;
+                        totalWt = wt;
+                    }
+                }
+                if(totalWt > 0) totalDays++;
+                if(totalDays <= days) max=mid-1;
+                else min=mid+1;
+            }
+            return min;
+        }
+    }
 }
