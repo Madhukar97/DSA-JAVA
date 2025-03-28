@@ -61,4 +61,21 @@ public class BinaryTreeMaximumPathSum {
             return Math.max(c2,c3);
         }
     }
+
+    // Revision 5
+    class Solution3 {
+        public int maxPathSum(TreeNode root) {
+            int[] ans = {Integer.MIN_VALUE};
+            checkSum(root, ans);
+            return ans[0];
+        }
+
+        private int checkSum(TreeNode node, int[] ans){
+            if(node == null) return 0;
+            int left = checkSum(node.left, ans);
+            int right = checkSum(node.right, ans);
+            ans[0] = Math.max(node.val, Math.max(ans[0], Math.max(node.val+left, Math.max(node.val+right, node.val+left+right))));
+            return Math.max(node.val, node.val + Math.max(left, right));
+        }
+    }
 }
