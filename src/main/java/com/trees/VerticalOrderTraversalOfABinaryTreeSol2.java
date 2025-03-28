@@ -182,4 +182,46 @@ public class VerticalOrderTraversalOfABinaryTreeSol2 {
             }
         }
     }
+
+    // Revision 5
+    class Solution5 {
+        public List<List<Integer>> verticalTraversal(TreeNode root) {
+            List<List<Integer>> ans = new ArrayList<>();
+            PriorityQueue<Integer> pq = new PriorityQueue<>();
+            Map<Integer, PriorityQueue<Node>> map = new HashMap<>();
+            postOrder(root, 0, 0, map, pq);
+            while(!pq.isEmpty()){
+                PriorityQueue<Node> column = map.get(pq.poll());
+                List<Integer> col = new ArrayList<>();
+                while(!column.isEmpty()) col.add(column.poll().node.val);
+                if(col.size() > 0) ans.add(col);
+            }
+            return ans;
+        }
+
+        private void postOrder(TreeNode node, int x, int y, Map<Integer, PriorityQueue<Node>> map, PriorityQueue<Integer> xs){
+            if(node == null) return;
+            postOrder(node.left, x-1, y+1, map, xs);
+            postOrder(node.right, x+1, y+1, map, xs);
+            Node curr = new Node(node, x, y);
+            if(map.containsKey(x)) map.get(x).add(curr);
+            else{
+                PriorityQueue<Node> pq = new PriorityQueue<>((n1,n2) -> n1.y != n2.y ? n1.y-n2.y : n1.node.val-n2.node.val);
+                pq.add(curr);
+                map.put(x, pq);
+            }
+            xs.add(x);
+        }
+
+        class Node {
+            TreeNode node;
+            int x;
+            int y;
+            public Node(TreeNode node, int x, int y){
+                this.node = node;
+                this.x=x;
+                this.y=y;
+            }
+        }
+    }
 }
