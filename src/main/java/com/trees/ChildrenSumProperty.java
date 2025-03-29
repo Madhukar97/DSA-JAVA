@@ -1,6 +1,7 @@
 package com.trees;
 
 //Children Sum Property
+//https://www.geeksforgeeks.org/problems/children-sum-parent/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=hildren-sum-parent
 //https://www.codingninjas.com/studio/problems/children-sum-property_8357239?utm_source=striver&utm_medium=website&utm_campaign=a_zcoursetuf&leftPanelTab=0
 public class ChildrenSumProperty {
     class Node {
@@ -59,5 +60,31 @@ public class ChildrenSumProperty {
         else if(node.left != null && node.right == null && node.data != node.left.data) return false;
 
         return recR2(node.left) && recR2(node.right);
+    }
+
+    // Revision 5
+    class Solution
+    {
+        //Function to check whether all nodes of a tree have the value
+        //equal to the sum of their child nodes.
+        public static int isSumProperty(Node root)
+        {
+            // add your code here
+            return dfs(root);
+
+        }
+
+        public static int dfs(Node node){
+            if(node == null || (node.left == null && node.right == null)) return 1;
+            int left=0;
+            int right=0;
+            if(node.left != null) left=node.left.data;
+            if(node.right != null) right = node.right.data;
+            if(node.data != left+right) return 0;
+            int lst = dfs(node.left);
+            int rst = dfs(node.right);
+            if(lst==0 || rst ==0) return 0;
+            return 1;
+        }
     }
 }
