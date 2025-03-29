@@ -55,4 +55,38 @@ public class MaximumWidthOfBinaryTree {
             this.node=node;
         }
     }
+
+    // Revision 5
+    class Solution {
+        public int widthOfBinaryTree(TreeNode root) {
+            int ans=0;
+            Queue<Node> q = new LinkedList<>();
+            q.add(new Node(root, 0));
+
+            while(!q.isEmpty()){
+                int n = q.size();
+                Node node = q.peek();
+                int minIndex = node.x;
+                int maxIndex = minIndex;
+
+                for(int i=0;i<n;i++){
+                    Node curr = q.poll();
+                    maxIndex = Math.max(maxIndex, curr.x);
+                    if(curr.node.left != null) q.add(new Node(curr.node.left, (curr.x - minIndex)*2+1 ));
+                    if(curr.node.right != null) q.add(new Node(curr.node.right, (curr.x - minIndex)*2+2 ));
+                }
+                ans = Math.max(ans, maxIndex-minIndex+1);
+            }
+            return ans;
+        }
+
+        public class Node {
+            TreeNode node;
+            int x;
+            public Node(TreeNode node, int x){
+                this.node=node;
+                this.x=x;
+            }
+        }
+    }
 }
