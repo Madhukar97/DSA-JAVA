@@ -108,6 +108,47 @@ public class BoundaryTraversalOfBinaryTree {
             }
             for(int i=list.size()-1;i>=0;i--) ans.add(list.get(i));
         }
+    }
 
+    // Revision 5
+    public class Solution5 {
+        public static List<Integer> traverseBoundary(TreeNode root){
+            // Write your code here.
+            List<Integer> ans = new ArrayList<>();
+            leftBoundary(root, ans);
+            leaves(root, ans);
+            rightboundary(root, ans);
+            return ans;
+        }
+
+        public static void leftBoundary(TreeNode node, List<Integer> ans){
+            if(!isLeaf(node)) ans.add(node.data);
+            node=node.left;
+            while(node != null && !isLeaf(node)){
+                ans.add(node.data);
+                if(node.left != null) node=node.left;
+                else node=node.right;
+            }
+        }
+
+        public static void leaves(TreeNode node, List<Integer> ans){
+            if(node == null) return;
+            leaves(node.left, ans);
+            if(isLeaf(node)) ans.add(node.data);
+            leaves(node.right, ans);
+        }
+
+        public static void rightboundary(TreeNode node, List<Integer> ans){
+            node = node.right;
+            List<Integer> rb = new ArrayList<>();
+            while(node != null && !isLeaf(node)){
+                rb.add(node.data);
+                if(node.right != null) node = node.right;
+                else node=node.left;
+            }
+            for(int i=0;i<rb.size();i++) ans.add(rb.get(rb.size()-i-1));
+        }
+
+        public static boolean isLeaf(TreeNode node) {return node.left==null && node.right==null;}
     }
 }
