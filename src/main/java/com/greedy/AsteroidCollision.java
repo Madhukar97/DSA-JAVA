@@ -39,4 +39,26 @@ public class AsteroidCollision {
             return res;
         }
     }
+
+    // Sol 2 using stack
+    class Solution2 {
+        public int[] asteroidCollision(int[] asteroids) {
+            Stack<Integer> stack = new Stack<>();
+
+            for(int a : asteroids){
+                if(a > 0) stack.push(a);
+                else{
+                    while(!stack.isEmpty() && stack.peek() > 0 && stack.peek() < -a){
+                        stack.pop();
+                    }
+                    if(stack.isEmpty() || stack.peek() < 0) stack.push(a);
+                    else if(stack.peek() == -a) stack.pop();
+                }
+            }
+            int n = stack.size();
+            int[] res = new int[stack.size()];
+            for(int i=0;i<n;i++) res[n-i-1] = stack.pop();
+            return res;
+        }
+    }
 }
