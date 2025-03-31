@@ -1,6 +1,7 @@
 package com.greedy;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 //N meetings in one room
@@ -37,5 +38,36 @@ public class NMeetingsInOneRoom {
             }
         }
         return ans;
+    }
+
+    // Revision 5
+    class Solution {
+        // Function to find the maximum number of meetings that can
+        // be performed in a meeting room.
+        public int maxMeetings(int start[], int end[]) {
+            // add your code here
+            List<Meeting> list = new ArrayList<>();
+            for(int i=0;i<end.length;i++) list.add(new Meeting(start[i], end[i]));
+            Collections.sort(list, (m1, m2) -> m1.end-m2.end);
+            int count = 0;
+            int prevEnd=-1;
+            for(Meeting meeting : list){
+                if(meeting.start > prevEnd){
+                    count++;
+                    prevEnd = meeting.end;
+                }
+            }
+            return count;
+        }
+
+        class Meeting {
+            int start;
+            int end;
+
+            public Meeting(int s, int e){
+                start=s;
+                end=e;
+            }
+        }
     }
 }
