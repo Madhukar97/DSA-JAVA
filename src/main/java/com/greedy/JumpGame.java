@@ -16,7 +16,8 @@ public class JumpGame {
         }
     }
 
-    // Better sol using Recursion and Memoization
+    // Better sol using Recursion and Memoization TC = O(n*n) SC = O(n)
+    // For only recursion TC = O(n^n) and SC = O(1)
     class Solution2 {
         public boolean canJump(int[] nums) {
             int[] validJumps = new int[nums.length];
