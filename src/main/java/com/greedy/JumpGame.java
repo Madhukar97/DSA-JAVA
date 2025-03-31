@@ -5,7 +5,7 @@ import java.util.Arrays;
 //55. Jump Game
 //https://leetcode.com/problems/jump-game/description/
 public class JumpGame {
-    // Greedy sol : most optimal
+    // Greedy sol : most optimal , TC = O(n) , SC = O(1)
     class Solution {
         public boolean canJump(int[] nums) {
             int max=0;
