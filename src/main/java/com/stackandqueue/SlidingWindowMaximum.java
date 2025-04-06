@@ -30,4 +30,25 @@ public class SlidingWindowMaximum {
         }
         return msw;
     }
+
+    // Revision 5
+    class Solution {
+        public int[] maxSlidingWindow(int[] nums, int k) {
+            int n=nums.length;
+            int[] swm = new int[n-k+1];
+            Deque<Integer> dq = new ArrayDeque<>();
+
+            for(int i=0;i<n;i++){
+                // remove out of range elements from left
+                if(i-k+1 > 0 && !dq.isEmpty() && dq.peek() < i-k+1) dq.poll();
+                // remove smaller elements from right
+                while(!dq.isEmpty() && nums[dq.peekLast()] <= nums[i]) dq.pollLast();
+                if(i-k+1 >= 0){
+                    swm[i-k+1] = dq.isEmpty() ? nums[i] : nums[dq.peek()];
+                }
+                dq.add(i);
+            }
+            return swm;
+        }
+    }
 }
