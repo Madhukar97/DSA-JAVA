@@ -41,7 +41,7 @@ public class MaxConsecutiveOnesIII {
         }
     }
 
-    // Revision 5
+    // Revision 5 TC = O(2N)
     class Solution5 {
         public int longestOnes(int[] nums, int k) {
             int l=0,r=0,maxLength=0,zeros=0;
