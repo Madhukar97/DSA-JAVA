@@ -40,4 +40,20 @@ public class MaxConsecutiveOnesIII {
             return j-i;
         }
     }
+
+    // Revision 5
+    class Solution5 {
+        public int longestOnes(int[] nums, int k) {
+            int l=0,r=0,maxLength=0,zeros=0;
+            while(r<nums.length){
+                if(nums[r] == 0) {
+                    zeros++;
+                    while(zeros > k)if(nums[l++] == 0) zeros--;
+                }
+                maxLength = Math.max(maxLength, r-l+1);
+                r++;
+            }
+            return maxLength;
+        }
+    }
 }
