@@ -14,17 +14,38 @@ public class SubsetSum {
             return ans;
         }
 
-        public static void rec(int[] nums, int index, ArrayList<Integer> ans, int subset){
+        public static void rec(int[] nums, int index, ArrayList<Integer> ans, int subsetSum){
             if(index == nums.length) {
-                ans.add(subset);
+                ans.add(subsetSum);
                 return;
             }
 
             //not pick
-            rec(nums, index+1, ans, subset);
+            rec(nums, index+1, ans, subsetSum);
             //pick
-            rec(nums, index+1, ans, subset+nums[index]);
+            rec(nums, index+1, ans, subsetSum+nums[index]);
+        }
+    }
+    // Revision 5
+    class Solution2 {
+        public ArrayList<Integer> subsetSums(int[] arr) {
+            // code here
+            ArrayList<Integer> ans = new ArrayList<>();
+            findAllCombinations(0, arr, ans, 0);
+            return ans;
         }
 
+        private void findAllCombinations(int index, int[] nums, ArrayList<Integer> ans, int sum){
+            if(index == nums.length){
+                ans.add(sum);
+                return;
+            }
+
+            // not pick
+            findAllCombinations(index+1, nums, ans, sum);
+            // pick
+            findAllCombinations(index+1, nums, ans, sum+nums[index]);
+        }
     }
+
 }
