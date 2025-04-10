@@ -1,4 +1,4 @@
-package com.backtracking;
+package com.recursion.backtracking;
 
 //37. Sudoku Solver
 //https://leetcode.com/problems/sudoku-solver/

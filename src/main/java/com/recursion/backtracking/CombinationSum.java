@@ -1,4 +1,4 @@
-package com.backtracking;
+package com.recursion.backtracking;
 
 import java.util.*;
 
@@ -138,6 +138,30 @@ public class CombinationSum {
                     comb.remove(comb.size()-1);
                 }
             }
+        }
+    }
+
+    // Revision 5
+    class Solution5 {
+        public List<List<Integer>> combinationSum(int[] candidates, int target) {
+            List<List<Integer>> ans = new ArrayList<>();
+            findCombinations(0, candidates, target, ans, new ArrayList<>());
+            return ans;
+        }
+
+        public void findCombinations(int index, int[] nums, int target, List<List<Integer>> ans, List<Integer> combination){
+            if(target == 0) {
+                ans.add(new ArrayList<>(combination));
+                return;
+            }
+            if(index == nums.length || target < 0) return;
+
+            // not pick
+            findCombinations(index+1, nums, target, ans, combination);
+            // pick
+            combination.add(nums[index]);
+            findCombinations(index, nums, target-nums[index], ans, combination);
+            combination.remove(combination.size()-1);
         }
     }
 }
