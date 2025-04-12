@@ -83,4 +83,53 @@ public class MinimumPathSum {
         }
         return dp[r-1][c-1];
     }
+
+    // Tabulation revision 4
+    class Solution3 {
+        public int minPathSum(int[][] grid) {
+            int m=grid.length;
+            int n=grid[0].length;
+            int[][] minSum = new int[m][n];
+            // for(int[] row : minSum) Arrays.fill(row, -1);
+            minSum[0][0] = grid[0][0];
+
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(i==0 && j==0) continue;
+                    int p1 = Integer.MAX_VALUE;
+                    int p2 = Integer.MAX_VALUE;
+                    if(i-1 >=0) p1 = minSum[i-1][j];
+                    if(j-1>=0) p2 = minSum[i][j-1];
+
+                    minSum[i][j] = grid[i][j] + Math.min(p1,p2);
+                }
+            }
+            return minSum[m-1][n-1];
+        }
+    }
+
+    // Space Optimization
+    class Solution {
+        public int minPathSum(int[][] grid) {
+            int m=grid.length;
+            int n=grid[0].length;
+            int[] prevRow = new int[n];
+            int[] currRow = new int[n];
+            currRow[0] = grid[0][0];
+
+            for(int i=0;i<m;i++){
+                for(int j=0;j<n;j++){
+                    if(i==0 && j==0) continue;
+                    int p1 = Integer.MAX_VALUE;
+                    int p2 = Integer.MAX_VALUE;
+                    if(i-1 >=0) p1 = prevRow[j];
+                    if(j-1>=0) p2 = currRow[j-1];
+
+                    currRow[j] = grid[i][j] + Math.min(p1,p2);
+                }
+                prevRow = currRow;
+            }
+            return currRow[n-1];
+        }
+    }
 }

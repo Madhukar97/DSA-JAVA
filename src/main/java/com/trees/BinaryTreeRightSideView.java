@@ -58,4 +58,28 @@ public class BinaryTreeRightSideView {
         rec(root.right,ans,lvl+1);
         rec(root.left,ans,lvl+1);
     }
+
+    // Revision 5
+    // Sol using lvl order traversal/BFS
+    class Solution {
+        public List<Integer> rightSideView(TreeNode root) {
+            List<Integer> ans = new ArrayList<>();
+            if(root == null) return ans;
+            Queue<TreeNode> q = new LinkedList<>();
+            q.add(root);
+
+            while(!q.isEmpty()){
+                int n=q.size();
+                int currVal=0;
+                for(int i=0;i<n;i++){
+                    TreeNode curr = q.poll();
+                    currVal = curr.val;
+                    if(curr.left != null) q.add(curr.left);
+                    if(curr.right != null) q.add(curr.right);
+                }
+                ans.add(currVal);
+            }
+            return ans;
+        }
+    }
 }

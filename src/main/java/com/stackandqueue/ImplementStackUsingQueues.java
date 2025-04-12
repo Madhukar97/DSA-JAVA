@@ -54,31 +54,72 @@ public class ImplementStackUsingQueues {
  */
 
     //Sol 2
-class MyStack2 {
-    Queue<Integer> queue;
+    class MyStack2 {
+        Queue<Integer> queue;
 
 
-    public MyStack2() {
-        queue= new LinkedList<>();
-    }
+        public MyStack2() {
+            queue= new LinkedList<>();
+        }
 
-    public void push(int x) {
-        queue.add(x);
-        for(int i=0;i<queue.size()-1;i++){
-            queue.add(queue.poll());
+        public void push(int x) {
+            queue.add(x);
+            for(int i=0;i<queue.size()-1;i++){
+                queue.add(queue.poll());
+            }
+        }
+
+        public int pop() {
+            return queue.remove();
+        }
+
+        public int top() {
+            return queue.peek();
+        }
+
+        public boolean empty() {
+            return queue.isEmpty();
         }
     }
 
-    public int pop() {
-        return queue.remove();
-    }
+    // Revision 5
+    class MyStack5 {
+        Queue<Integer> q1;
+        Queue<Integer> q2;
 
-    public int top() {
-        return queue.peek();
-    }
+        public MyStack5() {
+            q1 = new LinkedList<>();
+            q2 = new LinkedList<>();
+        }
 
-    public boolean empty() {
-        return queue.isEmpty();
+        public void push(int x) {
+            q1.add(x);
+        }
+
+        public int pop() {
+            int ans = -1;
+            while(q1.size() > 1) q2.add(q1.poll());
+            if(q1.size() == 1) ans = q1.poll();
+            q1 = q2;
+            q2 = new LinkedList<>();
+            return ans;
+        }
+
+        public int top() {
+            if(q1.isEmpty()) return -1;
+            while(q1.size() > 1) q2.add(q1.poll());
+            int ans = -1;
+            if(q1.size() == 1) {
+                ans = q1.peek();
+                q2.add(q1.poll());
+            }
+            q1 = q2;
+            q2 = new LinkedList<>();
+            return ans;
+        }
+
+        public boolean empty() {
+            return q1.isEmpty();
+        }
     }
-}
 }

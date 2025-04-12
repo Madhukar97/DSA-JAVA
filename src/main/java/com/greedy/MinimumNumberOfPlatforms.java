@@ -27,4 +27,26 @@ public class MinimumNumberOfPlatforms {
         }
         return maxPlatforms;
     }
+
+    // Revision 5
+    class Solution {
+        // Function to find the minimum number of platforms required at the
+        // railway station such that no train waits.
+        static int findPlatform(int arr[], int dep[]) {
+            // add your code here
+            Arrays.sort(arr);
+            Arrays.sort(dep);
+            int max =0;
+            int i=0,j=0;
+            while(j<dep.length){
+                if(i<arr.length && arr[i] <= dep[j]){
+                    i++;
+                }else {
+                    max = Math.max(max, i-j);
+                    j++;
+                }
+            }
+            return max;
+        }
+    }
 }

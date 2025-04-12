@@ -20,4 +20,19 @@ public class KthLargestElementInAnArray {
         }
         return minHeap.peek();
     }
+
+
+     //Revision 5
+     class Solution2 {
+         public int findKthLargest(int[] nums, int k) {
+             PriorityQueue<Integer> maxHeap = new PriorityQueue<>((e1,e2) -> e2-e1);
+             for(int i : nums) maxHeap.add(i);
+             while(!maxHeap.isEmpty()){
+                 int ans = maxHeap.poll();
+                 k--;
+                 if(k==0) return ans;
+             }
+             return -1;
+         }
+     }
 }

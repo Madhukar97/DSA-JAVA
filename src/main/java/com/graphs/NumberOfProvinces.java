@@ -1,6 +1,6 @@
 package com.graphs;
 
-import java.util.ArrayList;
+import java.util.*;
 
 //Number of Provinces
 //https://www.geeksforgeeks.org/problems/number-of-provinces/1?utm_source=youtube&utm_medium=collab_striver_ytdescription&utm_campaign=number-of-provinces
@@ -112,6 +112,62 @@ public class NumberOfProvinces {
                 }else{
                     parent[upv]=upu;
                     size[upu]+=size[upv];
+                }
+            }
+        }
+    }
+
+    // DFS solution
+    // Do dfs on every index from 0 to n-1, since the graph may be disconnected and increment counter for every new province/ root node
+    class Solution3 {
+        public int findCircleNum(int[][] isConnected) {
+            int n=isConnected.length;
+            ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
+            for(int i=0;i<n;i++) adj.add(new ArrayList<Integer>());
+            for(int u=0;u<n;u++){
+                for(int v=0;v<n;v++){
+                    if(isConnected[u][v] == 1) {
+                        adj.get(u).add(v);
+                        adj.get(v).add(u);
+                    }
+                }
+            }
+
+            int[] vis = new int[n];
+            int provinces = 0;
+            for(int i=0;i<n;i++){
+                if(vis[i] == 0) {
+                    provinces++;
+                    dfs(i, vis, adj);
+                }
+            }
+            return provinces;
+        }
+
+        void dfs(int node, int[] vis, ArrayList<ArrayList<Integer>> adj) {
+            if(vis[node] == 1) return;
+            vis[node]=1;
+
+            for(int neighbour : adj.get(node)){
+                if(vis[neighbour] == 0){
+                    dfs(neighbour, vis, adj);
+                }
+            }
+        }
+
+        //BFS is giving TLE on leetcode
+        void bfs(int node, int[] vis, ArrayList<ArrayList<Integer>> adj){
+            if(vis[node] == 1) return;
+
+            Queue<Integer> q = new LinkedList<>();
+            q.add(node);
+
+            while(!q.isEmpty()){
+                int curr = q.poll();
+                vis[curr]=1;
+
+                for(int neighbour : adj.get(curr)){
+                    if(vis[neighbour] == 0) q.add(neighbour);
                 }
             }
         }

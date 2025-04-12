@@ -202,4 +202,18 @@ public class TwoSumIVInputIsABST {
             }
         }
     }
+
+    // Revision 5
+    class Solution5 {
+        public boolean findTarget(TreeNode root, int k) {
+            HashSet<Integer> set = new HashSet<>();
+            return findSum(root, k, set);
+        }
+        private boolean findSum(TreeNode node, int k, HashSet<Integer> set){
+            if(node == null) return false;
+            if(set.contains(node.val)) return true;
+            if(set.add(k-node.val));
+            return findSum(node.left, k, set) || findSum(node.right, k, set);
+        }
+    }
 }

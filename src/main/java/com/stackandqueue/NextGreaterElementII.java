@@ -48,4 +48,22 @@ public class NextGreaterElementII {
             return nge;
         }
     }
+
+    // Revision 5
+    class Solution5 {
+        public int[] nextGreaterElements(int[] nums) {
+            int n=nums.length;
+            int[] nge = new int[n];
+            Stack<Integer> stack = new Stack<>();
+            for(int i=n-1;i>=0;i--) stack.push(nums[i]);
+
+            for(int i=n-1;i>=0;i--){
+                while(!stack.isEmpty() && stack.peek() <= nums[i]) stack.pop();
+                if(stack.isEmpty()) nge[i] = -1;
+                else nge[i] = stack.peek();
+                stack.push(nums[i]);
+            }
+            return nge;
+        }
+    }
 }
