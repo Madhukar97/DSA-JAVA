@@ -45,4 +45,36 @@ public class NumberOfOccurrence {
         }
     }
 
+    // Revision 5
+    public class Solution2 {
+        public static int count(int arr[], int n, int x) {
+            //Your code goes here
+            int startIndex = floor(arr, n, x);
+            int endIndex = ceil(arr, n, x);
+            // System.out.println("S : " + startIndex +", E : " + endIndex);
+            return startIndex == n ? 0 : endIndex-startIndex+1;
+        }
+
+        private static int floor(int[] nums, int n, int x){
+            int s=0,e=n-1,index=n;
+            while(s<=e){
+                int mid = s+(e-s)/2;
+                if(nums[mid] == x) index=mid;
+                if(nums[mid] < x) s=mid+1;
+                else e=mid-1;
+            }
+            return index;
+        }
+        private static int ceil(int[] nums, int n, int x){
+            int s=0,e=n-1,index=n;
+            while(s<=e){
+                int mid = s+(e-s)/2;
+                if(nums[mid] == x) index=mid;
+                if(nums[mid] > x) e=mid-1;
+                else s=mid+1;
+            }
+            return index;
+        }
+    }
+
 }
