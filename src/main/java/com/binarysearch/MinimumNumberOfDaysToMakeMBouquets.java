@@ -33,4 +33,31 @@ public class MinimumNumberOfDaysToMakeMBouquets {
             return minDays == Integer.MAX_VALUE ? -1 : minDays;
         }
     }
+
+    // Revision 5
+    class Solution2 {
+        public int minDays(int[] bloomDay, int m, int k) {
+            int n=bloomDay.length;
+            int min=1;
+            int max=0;
+            for(int d : bloomDay) max = Math.max(max, d);
+            int maxDays=max;
+            while(min <= max){
+                int mid = max-(max-min)/2;
+                int boqs = 0;
+                int flows = 0;
+                for(int i=0;i<n;i++){
+                    if(bloomDay[i] <= mid) flows++;
+                    else flows=0;
+                    if(flows == k) {
+                        boqs++;
+                        flows=0;
+                    }
+                }
+                if(boqs >= m) max=mid-1;
+                else min=mid+1;
+            }
+            return min > maxDays ? -1 : min; // if no ans is possible the min will end up right of max which is max+1 {1........10} min=11
+        }
+    }
 }
