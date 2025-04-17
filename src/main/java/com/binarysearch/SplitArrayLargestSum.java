@@ -34,4 +34,31 @@ public class SplitArrayLargestSum {
             return low;
         }
     }
+    // Revision 5
+    class Solution2 {
+        public int splitArray(int[] nums, int k) {
+            int min=0;
+            int max=0;
+            for(int i : nums){
+                min = Math.max(min, i);
+                max += i;
+            }
+            while(min <= max){
+                int mid= min+(max-min)/2;
+                int arrays=0;
+                int sum=0;
+                for(int i : nums){
+                    sum+=i;
+                    if(sum > mid){
+                        arrays++;
+                        sum=i;
+                    }
+                }
+                if(sum > 0) arrays++;
+                if(arrays > k) min=mid+1;
+                else max=mid-1;
+            }
+            return min;
+        }
+    }
 }
