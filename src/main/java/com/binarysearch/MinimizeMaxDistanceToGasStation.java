@@ -38,4 +38,41 @@ public class MinimizeMaxDistanceToGasStation {
         }
         return maxDist;
     }
+
+    // Revision 5
+    public class Solution {
+        public static double MinimiseMaxDistance(int []arr, int K){
+            int n=arr.length;
+            int[] sections = new int[n-1];
+            PriorityQueue<Section> pq = new PriorityQueue<>((s1,s2) -> {
+                double d1 = s1.dist;
+                double d2 = s2.dist;
+                if(d1 == d2) return 0;
+                if(d2 > d1) return 1;
+                else return -1;
+            });
+            for(int i=0;i<sections.length;i++){
+                pq.add(new Section(i, arr[i+1]-arr[i]));
+            }
+            for(int i=0;i<K;i++){
+                Section curr = pq.poll();
+                sections[curr.index]++;
+                curr.dist = (double)(arr[curr.index+1]-arr[curr.index])/(double)(sections[curr.index]+1);
+                pq.add(curr);
+            }
+            double maxDist = 0;
+            for(int i=0;i<n-1;i++){
+                maxDist = Math.max((double)(arr[i+1]-arr[i])/(double)(sections[i]+1), maxDist);
+            }
+            return maxDist;
+        }
+        static class Section{
+            int index;
+            double dist;
+            public Section(int i, double d){
+                index=i;
+                dist=d;
+            }
+        }
+    }
 }
