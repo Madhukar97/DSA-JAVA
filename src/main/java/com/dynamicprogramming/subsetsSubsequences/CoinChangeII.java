@@ -1,4 +1,4 @@
-package com.dynamicprogramming.subsets;
+package com.dynamicprogramming.subsetsSubsequences;
 
 import java.util.Arrays;
 
