@@ -94,4 +94,27 @@ public class SubsetSumEqualToK {
         }
         return prev[k];
     }
+
+    // Revision 5
+    // Memoization
+    public class Solution {
+        public static boolean subsetSumToK(int n, int k, int arr[]){
+            int total=0;
+            for(int i : arr) total+=i;
+            Boolean[][] sums = new Boolean[n][total+1];
+            return checkSubsetSum(n-1, k, arr, 0, sums);
+        }
+
+        private static boolean checkSubsetSum(int index, int k, int[] arr, int sum, Boolean[][] sums){
+            if(sum == k) return true;
+            if(index < 0) return false;
+            if(sums[index][sum] != null) return sums[index][sum];
+
+            // pick
+            boolean pick = checkSubsetSum(index-1, k, arr, sum+arr[index], sums);
+            // not pick
+            boolean notPick = checkSubsetSum(index-1, k, arr, sum, sums);
+            return sums[index][sum] = pick || notPick;
+        }
+    }
 }
