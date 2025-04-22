@@ -149,4 +149,58 @@ public class MaximumProfitInJobScheduling {
             }
         }
     }
+
+    // Revision 5
+    class Solution5 {
+        public int jobScheduling(int[] startTime, int[] endTime, int[] profit) {
+            List<Job> jobs = new ArrayList<>();
+            int n=startTime.length;
+            for(int i=0;i<n;i++) jobs.add(new Job(startTime[i], endTime[i], profit[i]));
+            jobs.sort((j1,j2)->j1.end-j2.end);
+            int[] maxProfits = new int[n];
+            Arrays.fill(maxProfits, -1);
+            return findMaxProfit(n-1, jobs, maxProfits);
+        }
+        private int findMaxProfit(int index, List<Job> jobs, int[] maxProfits){
+            if(index < 0) return 0;
+            if(maxProfits[index] != -1) return maxProfits[index];
+
+            // notPick
+            int notPick = findMaxProfit(index-1, jobs, maxProfits);
+            // pick
+            int pick = jobs.get(index).profit;
+            int leftIndex = binarySearch(0, index-1, jobs, jobs.get(index).start);
+            // for(int i=index-1;i>=0;i--) {
+            //     if(jobs.get(i).end <= jobs.get(index).start) {
+            //         leftIndex = i;
+            //         break;
+            //     }
+            // }
+            pick += findMaxProfit(leftIndex, jobs, maxProfits);
+            return maxProfits[index] = Math.max(pick, notPick);
+        }
+        private int binarySearch(int s, int e, List<Job> jobs, int start){
+            int lowerBound=-1;
+            while(s <= e){
+                int mid = s+(e-s)/2;
+                if(jobs.get(mid).end > start) e=mid-1;
+                else {
+                    s=mid+1;
+                    lowerBound=mid;
+                }
+            }
+            return lowerBound;
+        }
+
+        class Job{
+            int start;
+            int end;
+            int profit;
+            public Job(int s, int e, int p){
+                start=s;
+                end=e;
+                profit=p;
+            }
+        }
+    }
 }
