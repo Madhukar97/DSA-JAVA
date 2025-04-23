@@ -68,4 +68,50 @@ public class AmountOfTimeForBinaryTreeToBeInfected {
         findAdj(node.left,adj);
         findAdj(node.right,adj);
     }
+
+    // Revision 5
+    class Solution {
+        public int amountOfTime(TreeNode root, int start) {
+            Map<TreeNode, TreeNode> map = new HashMap<>();
+            TreeNode[] startNode = new TreeNode[1];
+            findParents(root, map, startNode, start);
+
+            int[] vis = new int[100001];
+            vis[start]=1;
+            int time=0;
+            Queue<TreeNode> q = new LinkedList<>();
+            q.add(startNode[0]);
+            while(!q.isEmpty()){
+                int size = q.size();
+                for(int i=0;i<size;i++){
+                    TreeNode curr = q.poll();
+                    TreeNode parent = map.get(curr);
+                    if(parent != null && vis[parent.val] == 0) {
+                        q.add(parent);
+                        vis[parent.val]=1;
+                    }
+                    if(curr.left != null && vis[curr.left.val]==0) {
+                        q.add(curr.left);
+                        vis[curr.left.val]=1;
+                    }
+                    if(curr.right != null && vis[curr.right.val]==0) {
+                        q.add(curr.right);
+                        vis[curr.right.val]=1;
+                    }
+                }
+                time++;
+            }
+            return time-1;
+        }
+
+        public void findParents(TreeNode root, Map<TreeNode, TreeNode> map, TreeNode[] startNode, int start){
+            if(root == null) return;
+            if(root.val == start) startNode[0] = root;
+
+            if(root.left != null) map.put(root.left, root);
+            if(root.right != null) map.put(root.right, root);
+            findParents(root.left, map, startNode, start);
+            findParents(root.right, map, startNode, start);
+        }
+    }
 }
